@@ -9,5 +9,8 @@ Tampereen Yliopistossa toteutettu harjoitustyö keväällä 2020.
 - Alkuperäinen [versionhallinta](https://github.com/Soleez/tiko_ht_2020)
 
 ```
-Tämä voi auttaa readme:n kirjoituksessa [dokumentaatio](https://help.github.com/en/github/writing-on-github/basic-writing-and-formatting-syntax)
+Tähän voi kirjoittaa ohjeet miten repon saa omalle koneelle.
 ```
+
+Tämä voi auttaa readme:n kirjoituksessa [dokumentaatio](https://help.github.com/en/github/writing-on-github/
+basic-writing-and-formatting-syntax).s
