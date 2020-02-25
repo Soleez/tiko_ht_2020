@@ -1,0 +1,8 @@
+INSERT INTO Contractor VALUES (DEFAULT, 'Reijo Rakentaja', 'Reijon sähkö', 'Sähkö');
+INSERT INTO Contractor VALUES (DEFAULT, 'Inka Insinööri', 'Sähkösuunnittelu Oy', 'Suunnittelu');
+INSERT INTO Contractor VALUES (DEFAULT, 'Sami Salama', 'Samin Sähkö & Elektroniikka', 'Sähkö');
+
+INSERT INTO Customer VALUES (DEFAULT, DEFAULT, 'Kalle Korhonen', 'Kotikatu 2', TRUE);
+INSERT INTO Customer VALUES (DEFAULT, DEFAULT, 'Olga Onkinen', 'Hämeenkatu 56 a 2', TRUE);
+INSERT INTO Customer VALUES (DEFAULT, DEFAULT, 'Katin Kahvila', 'Keskuskatu 20', FALSE);
+INSERT INTO Customer VALUES (DEFAULT, 1, 'Riston Ravintola', 'Bulevardi 3', FALSE);
