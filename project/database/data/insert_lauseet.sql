@@ -2,7 +2,8 @@
 -- Marika Lähteenmäki, Jani Mäkelä, Otto Thitz
 -- Testi data
 
-INSERT INTO Contractor(contractor_name, company_name, industry VALUES ('Seppo Tärsky', 'Tmi Sähkötärsky', 'sähköala');
+INSERT INTO Contractor(contractor_name, company_name, industry) VALUES
+('Seppo Tärsky', 'Tmi Sähkötärsky', 'sähköala');
 
 INSERT INTO Customer(contractor_id, customer_name, customer_address, bool_tax_credit) VALUES 
 (1, 'Tiina Mäkelä', 'Rapakatu 2, Tampere', true),
@@ -44,7 +45,7 @@ INSERT INTO Vat_type(vat_type_name, vat_rate) VALUES
 ('kirjat', 10);
 
 
-INSERT INTO Tool(tool_name, tool_purchase_price, availability, vat_type_id, tool_selling_price, unit, bool_in_use) values
+INSERT INTO Tool(tool_name, tool_purchase_price, availability, vat_type_id, tool_selling_price, unit, bool_in_use) VALUES
 ('pistorasia', 1.456, true, 2, 2.00, 'kpl', true),
 ('sähköjohto', 0.52, true, 2, 0.90, 'metri', true),
 ('opaskirja', 5.00, true, 3, 10.00, 'kpl', true),
@@ -82,4 +83,4 @@ INSERT INTO Payment(payment_amount, bill_id, payment_date) VALUES
 
 -- Muuttaa serial numeroinnin alkamaan arvosta 1
 -- (taulu_idnimi_seq)
-ALTER SEQUENCE Customer_customer_id_seq RESTART WITH 1;
+-- ALTER SEQUENCE Contractor_contractor_id_seq RESTART WITH 1;

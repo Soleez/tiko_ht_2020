@@ -1,6 +1,7 @@
 -- Tietokantaohjelmointi Harjoitustyö 2020 
 -- Marika Lähteenmäki, Jani Mäkelä, Otto Thitz 
 -- Tietokannan luontilauseet 
+
 CREATE TABLE Contractor (
     contractor_id SERIAL,
     contractor_name VARCHAR (60) NOT NULL,
@@ -24,7 +25,7 @@ CREATE TABLE Tax_credit_for_household (
     customer_id BIGINT NOT NULL,
     billing_date DATE,
     credit_amount NUMERIC(10,2),
-    tax_credit_notes VARCHAR,
+    tax_credit_notes VARCHAR (300),
     PRIMARY KEY (tax_credit_id),
     FOREIGN KEY (customer_id) REFERENCES Customer
 );
@@ -33,7 +34,7 @@ CREATE TABLE Project (
     project_id SERIAL,
     customer_id BIGINT NOT NULL,
     project_name VARCHAR (60) NOT NULL,
-    project_address VARCHAR (60) NOT NULL,
+    project_address VARCHAR (60),
     bool_tax_credit BOOLEAN,
     PRIMARY KEY (project_id),
     FOREIGN KEY (customer_id) REFERENCES Customer
@@ -59,7 +60,7 @@ CREATE TABLE Contract (
 CREATE TABLE Bill_status (
     bill_status_id SERIAL,
     bill_status_name VARCHAR (60) NOT NULL,
-    status_notes VARCHAR,
+    status_notes VARCHAR (300),
     PRIMARY KEY (bill_status_id)
 );
 
@@ -81,7 +82,7 @@ CREATE TABLE Tool (
     tool_id SERIAL,
     tool_name VARCHAR (60) NOT NULL,
     tool_purchase_price NUMERIC(10,2) NOT NULL,
-    availability BOOLEAN,
+    availability INT,
     vat_type_id BIGINT NOT NULL,
     tool_selling_price NUMERIC(10,2) NOT NULL,
     unit VARCHAR (10),
@@ -102,8 +103,8 @@ CREATE TABLE Work_type(
 CREATE TABLE Bill (
     bill_id SERIAL,
     contract_id BIGINT NOT NULL,
-    total_sum NUMERIC(10,2) NOT NULL,
-    billing_address VARCHAR (30),
+    total_sum NUMERIC(10,2),
+    billing_address VARCHAR (60) NOT NULL,
     bill_type_id BIGINT NOT NULL,
     bill_status_id BIGINT NOT NULL,
     date_added DATE,
@@ -142,7 +143,7 @@ CREATE TABLE Sold_tool(
 
 CREATE TABLE Payment (
     payment_id SERIAL,
-    payment_amount NUMERIC(2) NOT NULL,
+    payment_amount NUMERIC(10,2) NOT NULL,
     bill_id BIGINT NOT NULL,
     payment_date DATE,
     PRIMARY KEY (payment_id),
