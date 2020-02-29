@@ -12,7 +12,7 @@ CREATE TABLE Contractor (
 CREATE TABLE Customer (
     customer_id SERIAL,
     contractor_id BIGINT NOT NULL,
-    customer_name VARCHAR (60),
+    customer_name VARCHAR (60) NOT NULL,
     customer_address VARCHAR (60),
     bool_tax_credit BOOLEAN,
     PRIMARY KEY (customer_id),
@@ -32,8 +32,8 @@ CREATE TABLE Tax_credit_for_household (
 CREATE TABLE Project (
     project_id SERIAL,
     customer_id BIGINT NOT NULL,
-    project_name VARCHAR (60),
-    project_address VARCHAR (60),
+    project_name VARCHAR (60) NOT NULL,
+    project_address VARCHAR (60) NOT NULL,
     bool_tax_credit BOOLEAN,
     PRIMARY KEY (project_id),
     FOREIGN KEY (customer_id) REFERENCES Customer
@@ -41,7 +41,7 @@ CREATE TABLE Project (
 
 CREATE TABLE Contract_type (
     contract_type_id SERIAL,
-    contract_type_name VARCHAR (60),
+    contract_type_name VARCHAR (60) NOT NULL,
     amount_of_payments INT,
     PRIMARY KEY (contract_type_id) 
 );
@@ -58,28 +58,28 @@ CREATE TABLE Contract (
 
 CREATE TABLE Bill_status (
     bill_status_id SERIAL,
-    bill_status_name VARCHAR (60),
+    bill_status_name VARCHAR (60) NOT NULL,
     status_notes VARCHAR,
     PRIMARY KEY (bill_status_id)
 );
 
 CREATE TABLE Bill_type (
     bill_type_id SERIAL,
-    bill_type_name VARCHAR,
+    bill_type_name VARCHAR NOT NULL,
     handling_fee NUMERIC(10,2),
     PRIMARY KEY (bill_type_id)
 );
 
 CREATE TABLE Vat_type (
     vat_type_id SERIAL,
-    vat_type_name VARCHAR(60),
+    vat_type_name VARCHAR(60) NOT NULL,
     vat_rate INT NOT NULL,
     PRIMARY KEY (vat_type_id)
 );
 
 CREATE TABLE Tool (
     tool_id SERIAL,
-    tool_name VARCHAR (60),
+    tool_name VARCHAR (60) NOT NULL,
     tool_purchase_price NUMERIC(10,2) NOT NULL,
     availability BOOLEAN,
     vat_type_id BIGINT NOT NULL,
