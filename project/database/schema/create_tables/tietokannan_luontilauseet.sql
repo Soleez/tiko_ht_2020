@@ -66,7 +66,7 @@ CREATE TABLE Bill_status (
 
 CREATE TABLE Bill_type (
     bill_type_id SERIAL,
-    bill_type_name VARCHAR NOT NULL,
+    bill_type_name VARCHAR (60) NOT NULL,
     handling_fee NUMERIC(10,2),
     PRIMARY KEY (bill_type_id)
 );
@@ -93,7 +93,7 @@ CREATE TABLE Tool (
 
 CREATE TABLE Work_type(
     work_type_id SERIAL,
-    work_type_name VARCHAR NOT NULL,
+    work_type_name VARCHAR (60) NOT NULL,
     hourly_rate NUMERIC(10,2),
     vat_type_id BIGINT NOT NULL,
     PRIMARY KEY (work_type_id),
