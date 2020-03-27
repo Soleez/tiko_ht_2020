@@ -120,12 +120,12 @@ CREATE TABLE Bill (
 CREATE TABLE Billable_hour (
     billable_hour_id SERIAL,
     work_type_id BIGINT NOT NULL,
-    bill_id BIGINT NOT NULL,
+    contract_id BIGINT NOT NULL,
     date_added DATE NOT NULL,
     quantity INT, 
     sale_percentage INT,
     PRIMARY KEY (billable_hour_id),
-    FOREIGN KEY (bill_id) REFERENCES Bill,
+    FOREIGN KEY (contract_id) REFERENCES Contract,
     FOREIGN KEY (work_type_id) REFERENCES Work_type
 );
 
@@ -133,12 +133,12 @@ CREATE TABLE Sold_tool(
     sold_tool_id SERIAL,
     tool_id BIGINT NOT NULL,
     quantity INT NOT NULL,
-    bill_id BIGINT NOT NULL,
+    contract_id BIGINT NOT NULL,
     date_added DATE,
     sale_percentage INT,
     PRIMARY KEY (sold_tool_id),
     FOREIGN KEY (tool_id) REFERENCES Tool,
-    FOREIGN KEY (bill_id) REFERENCES Bill
+    FOREIGN KEY (contract_id) REFERENCES Contract
 );
 
 CREATE TABLE Payment (

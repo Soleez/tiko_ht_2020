@@ -44,7 +44,6 @@ INSERT INTO Vat_type(vat_type_name, vat_rate) VALUES
 ('työkalut', 24),
 ('kirjat', 10);
 
-
 INSERT INTO Tool(tool_name, tool_purchase_price, availability, vat_type_id, tool_selling_price, unit, bool_in_use) VALUES
 ('pistorasia', 1.456, true, 2, 2.00, 'kpl', true),
 ('sähköjohto', 0.52, true, 2, 0.90, 'metri', true),
@@ -64,17 +63,17 @@ INSERT INTO Bill(contract_id, total_sum, billing_address, bill_type_id, bill_sta
 (3,2, 'Holopaisenkatu 1, Tampere', 1, 3,'2019-07-25', null, '2019-07-27', '2019-08-27'),
 (4,3, 'Tallikuja 7, Tampere',1, 3, '2019-05-04', null, '2019-05-19', '2019-06-19');
 
-INSERT INTO Billable_hour(work_type_id, bill_id, date_added, quantity, sale_percentage) VALUES
-(1,1, '2019-01-19', 5, null),
-(2,1, '2018-12-30', 10, null),
-(3,3, '2018-09-13', 4, 10);
+INSERT INTO Billable_hour(work_type_id, contract_id, date_added, quantity, sale_percentage) VALUES
+(1, 1, '2019-01-19', 5, null),
+(2, 1, '2018-12-30', 10, null),
+(3, 2, '2018-09-13', 4, 10);
 
-INSERT INTO Sold_tool(tool_id, quantity, bill_id, date_added, sale_percentage) VALUES
+INSERT INTO Sold_tool(tool_id, quantity, contract_id, date_added, sale_percentage) VALUES
 (1, 4, 1, '2019-01-01', null),
-(1, 10, 4, '2019-01-01', 10),
-(3, 1, 4, '2019-01-01', null),
-(5, 2, 5, '2019-01-01', 5),
-(2, 11, 3, '2019-01-01', null);
+(1, 10, 3, '2019-01-01', 10),
+(3, 1, 3, '2019-01-01', null),
+(5, 2, 4, '2019-01-01', 5),
+(2, 11, 2, '2019-01-01', null);
 
 INSERT INTO Payment(payment_amount, bill_id, payment_date) VALUES
 (2.00, 3, null),
