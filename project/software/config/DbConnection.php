@@ -1,3 +1,4 @@
 <?php
-  $DbConnectionString = "";
+  // Lisää tähän yhteystiedot tietokantaan
+  $DbConnectionString = "test";
 ?>

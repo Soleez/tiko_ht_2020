@@ -9,14 +9,14 @@
 
   openConnection();
   
-  $opiskelijat = pg_query("SELECT * FROM opiskelija");
+  $bills = pg_query("SELECT * FROM Bill");
 
-  if (!$opiskelijat) {
+  if (!$bills) {
     echo "Virhe kyselyssä.\n";
     exit;
   }
-  while ($rivi = pg_fetch_row($opiskelijat)) {
-    echo "Opiskelijan $rivi[0]  numero on $rivi[1]";
+  while ($bill = pg_fetch_row($bills)) {
+    echo "Opiskelijan $bill[0]  numero on $bill[1]";
     echo "<br />\n";
   }
   
