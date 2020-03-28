@@ -34,10 +34,10 @@ INSERT INTO Bill_status(bill_status_name, status_notes) VALUES
 ('osa maksettu', null),
 ('peruttu', null);
 
-INSERT INTO Bill_type(bill_type_name, handling_fee) VALUES
-('lasku', 5),
-('maksumuistutus', null),
-('karhu', null);
+INSERT INTO Bill_type(bill_type_id, bill_type_name, handling_fee) VALUES
+(1, 'lasku', 5),
+(2, 'maksumuistutus', null),
+(3, 'karhu', null);
 
 INSERT INTO Vat_type(vat_type_name, vat_rate) VALUES
 ('työ', 24),

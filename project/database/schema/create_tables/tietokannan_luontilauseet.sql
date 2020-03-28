@@ -65,7 +65,7 @@ CREATE TABLE Bill_status (
 );
 
 CREATE TABLE Bill_type (
-    bill_type_id SERIAL,
+    bill_type_id INT NOT NULL,
     bill_type_name VARCHAR (60) NOT NULL,
     handling_fee NUMERIC(10,2),
     PRIMARY KEY (bill_type_id)
@@ -105,7 +105,7 @@ CREATE TABLE Bill (
     contract_id BIGINT NOT NULL,
     total_sum NUMERIC(10,2),
     billing_address VARCHAR (60) NOT NULL,
-    bill_type_id BIGINT NOT NULL,
+    bill_type_id INT NOT NULL default 1,
     bill_status_id BIGINT NOT NULL,
     date_added DATE,
     date_modified DATE,
@@ -149,3 +149,4 @@ CREATE TABLE Payment (
     PRIMARY KEY (payment_id),
     FOREIGN KEY (bill_id) REFERENCES Bill
 );
+ 
