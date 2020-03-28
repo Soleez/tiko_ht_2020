@@ -5,10 +5,12 @@ CREATE VIEW vw_hours
 AS
     SELECT Customer.customer_name, Contract.contract_id, Billable_hour.billable_hour_id, Work_type.work_type_name, Billable_hour.quantity, 
     Billable_hour.date_added, Work_type.hourly_rate, Billable_hour.sale_percentage, Vat_type.vat_rate
-    FROM Customer, Project, Contract, Billable_hour, Work_type, Vat_type
-    WHERE Customer.customer_id = Project.customer_id AND Project.project_id = Contract.project_id 
-    AND Contract.contract_id = Billable_hour.contract_id AND Billable_hour.work_type_id = Work_type.work_type_id
-    AND Vat_type.vat_type_id = Work_type.vat_type_id;
+    FROM (((((Customer JOIN Project ON Customer.customer_id = Project.customer_id)
+        JOIN Contract ON Project.project_id = Contract.project_id) 
+        JOIN Billable_hour ON Contract.contract_id = Billable_hour.contract_id)
+        JOIN Work_type ON Billable_hour.work_type_id = Work_type.work_type_id)
+        JOIN Vat_type ON Vat_type.vat_type_id = Work_type.vat_type_id);
+
     
 -- Kysely:
 SELECT *

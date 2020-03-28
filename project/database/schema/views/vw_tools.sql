@@ -5,11 +5,12 @@ CREATE VIEW vw_tools
 AS
     SELECT Customer.customer_name, Contract.contract_id, Sold_tool.sold_tool_id, Tool.tool_name, Sold_tool.quantity, 
     Tool.unit, Sold_tool.date_added, Tool.tool_selling_price, Sold_tool.sale_percentage, Vat_type.vat_rate
-    FROM Customer, Project, Contract, Sold_tool, Tool, Vat_type
-    WHERE Customer.customer_id = Project.customer_id AND Project.project_id = Contract.project_id 
-    AND Contract.contract_id = Sold_tool.contract_id AND Sold_tool.tool_id = Tool.tool_id 
-    AND Vat_type.vat_type_id = Tool.vat_type_id;
-    
+    FROM (((((Customer JOIN Project ON Customer.customer_id = Project.customer_id)
+        JOIN Contract ON Project.project_id = Contract.project_id) 
+        JOIN Sold_tool ON Contract.contract_id = Sold_tool.contract_id)
+        JOIN Tool ON Sold_tool.tool_id = Tool.tool_id)
+        JOIN Vat_type ON Vat_type.vat_type_id = Tool.vat_type_id);    
+
 -- Kysely:
 SELECT *
 FROM vw_tools;
