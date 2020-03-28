@@ -3,9 +3,21 @@
 -- Näkymän luonti:
 CREATE VIEW vw_tools
 AS
-    SELECT Customer.customer_name, Contract.contract_id, Sold_tool.sold_tool_id, Tool.tool_name, Sold_tool.quantity, 
-    Tool.unit, Sold_tool.date_added, Tool.tool_selling_price, Sold_tool.sale_percentage, Vat_type.vat_rate
-    FROM (((((Customer JOIN Project ON Customer.customer_id = Project.customer_id)
+    SELECT Contractor.Contractor_id, 
+    Customer.customer_name, 
+    Customer.customer_id,
+    Project.Project_id,
+    Contract.contract_id, 
+    Sold_tool.sold_tool_id, 
+    Sold_tool.quantity, 
+    Sold_tool.sale_percentage,
+    Sold_tool.date_added,
+    Tool.tool_name, 
+    Tool.unit, 
+    Tool.tool_selling_price AS tool_price, -- lyhenne jotta mahtuisi shell näkymään paremmin, 
+    Vat_type.vat_rate
+    FROM ((((((Contractor JOIN Customer ON Contractor.contractor_id = Customer.contractor_id)
+        JOIN Project ON Customer.customer_id = Project.customer_id)
         JOIN Contract ON Project.project_id = Contract.project_id) 
         JOIN Sold_tool ON Contract.contract_id = Sold_tool.contract_id)
         JOIN Tool ON Sold_tool.tool_id = Tool.tool_id)
@@ -19,11 +31,10 @@ FROM vw_tools;
 DROP VIEW vw_tools;
 
 -- Tulos nyt:
---
---  customer_name  | contract_id | sold_tool_id | tool_name  | quantity | unit  | date_added | tool_selling_price | sale_percentage | vat_rate
--------------------+-------------+--------------+------------+----------+-------+------------+--------------------+-----------------+----------
--- Tiina Mäkelä    |           1 |            1 | pistorasia |        4 | kpl   | 2019-01-01 |               2.00 |                 |       24
--- Heli Soininen   |           3 |            2 | pistorasia |       10 | kpl   | 2019-01-01 |               2.00 |              10 |       24
--- Heli Soininen   |           3 |            3 | opaskirja  |        1 | kpl   | 2019-01-01 |              10.00 |                 |       10
--- Pertti Manninen |           4 |            4 | sulake     |        2 | kpl   | 2019-01-01 |               2.00 |               5 |       24
--- Heli Soininen   |           2 |            5 | sähköjohto |       11 | metri | 2019-01-01 |               0.90 |                 |       24
+-- contractor_id |  customer_name  | customer_id | project_id | contract_id | sold_tool_id | quantity | sale_percentage | date_added | tool_name  | unit  | tool_price | vat_rate
+-----------------+-----------------+-------------+------------+-------------+--------------+----------+-----------------+------------+------------+-------+------------+----------
+--             1 | Tiina Mäkelä    |           1 |          1 |           1 |            1 |        4 |                 | 2019-01-01 | pistorasia | kpl   |       2.00 |       24
+--             1 | Heli Soininen   |           2 |          3 |           3 |            2 |       10 |              10 | 2019-01-01 | pistorasia | kpl   |       2.00 |       24
+--             1 | Heli Soininen   |           2 |          3 |           3 |            3 |        1 |                 | 2019-01-01 | opaskirja  | kpl   |      10.00 |       10
+--             1 | Pertti Manninen |           3 |          4 |           4 |            4 |        2 |               5 | 2019-01-01 | sulake     | kpl   |       2.00 |       24
+--             1 | Heli Soininen   |           2 |          2 |           2 |            5 |       11 |                 | 2019-01-01 | sähköjohto | metri |       0.90 |       24
