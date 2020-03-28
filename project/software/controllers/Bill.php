@@ -9,15 +9,28 @@
 
   openConnection();
   
-  $bills = pg_query("SELECT * FROM Bill");
+  // Talletetan kyselymuuttujaan
+  $toolsQuery = pg_query("SELECT * FROM vw_tools;");
 
-  if (!$bills) {
+  // Käsitellään virhe
+  if (!$toolsQuery) {
     echo "Virhe kyselyssä.\n";
     exit;
   }
-  while ($bill = pg_fetch_row($bills)) {
-    echo "Opiskelijan $bill[0]  numero on $bill[1]";
-    echo "<br />\n";
+  else {
+    // Talletetaan kyselyn tulos taulukkoon
+    $tools = pg_fetch_all($toolsQuery);
+  }
+
+
+  $hoursQuery = pg_query("SELECT * FROM vw_hours;");
+
+  if (!$hoursQuery) {
+    echo "Virhe kyselyssä.\n";
+    exit;
+  }
+  else {
+    $hours = pg_fetch_all($hoursQuery);
   }
   
   closeConnection();

@@ -3,6 +3,8 @@
   /** 
    * Asetetaan luokka, joka pitää kirjaa valinnoista, joiden perusteella ohjelmassa on
    * navigoitu, määreet on syytä asettaa priveteksi myöhemmin.
+   * 
+   * Katso mitä PHP monisteessa lukee Sessiosta kappale 12
    */
   
   class Session {
