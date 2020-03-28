@@ -60,7 +60,7 @@ INSERT INTO Work_type(work_type_name, hourly_rate, vat_type_id) VALUES
 INSERT INTO Bill(contract_id, total_sum, billing_address, bill_type_id, bill_status_id, date_added, date_modified, bill_due_date, bill_sending_date) VALUES
 (1, 400, 'Rapakatu 2, Tampere', 1, 2, '2019-04-04', null, '2019-04-05', '2019-05-05'),
 (1, 400, 'Rapakatu 2, Tampere', 1, 1, '2019-09-20', null, null, null),
-(2,2, 'Holopaisenkatu 1, Tampere)',1, 3,'2019-02-18', null, '2019-02-19', '2019-03-20'),
+(2,2, 'Holopaisenkatu 1, Tampere',1, 3,'2019-02-18', null, '2019-02-19', '2019-03-20'),
 (3,2, 'Holopaisenkatu 1, Tampere', 1, 3,'2019-07-25', null, '2019-07-27', '2019-08-27'),
 (4,3, 'Tallikuja 7, Tampere',1, 3, '2019-05-04', null, '2019-05-19', '2019-06-19');
 

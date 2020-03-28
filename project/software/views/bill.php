@@ -5,6 +5,7 @@
   <body>
 
     <h2>Laskun tiedot</h2>
+    <?php echo($contractor['contractor_name']); ?>
 
     <h2>Tunnit</h2>
     <table>
