@@ -16,10 +16,10 @@ INSERT INTO Project(customer_id, project_name, project_address, bool_tax_credit)
 (2, 'Mökin sähkötyöt', 'Kuusikuja 6', true),
 (3, 'Vanhempien sähkösaunan asennus', 'Sahakatu 46, Tampere', true);
 
-INSERT INTO Contract_type(contract_type_name, amount_of_payments) VALUES
-('tuntilaskutteinen', null),
-('urakka', null),
-('urakkatarjous', null);
+INSERT INTO Contract_type(contract_type_id, contract_type_name, amount_of_payments) VALUES
+(1, 'tuntilaskutteinen', null),
+(2, 'urakka', null),
+(3, 'urakkatarjous', null);
 
 INSERT INTO Contract(project_id, contract_type_id, bool_in_use) VALUES
 (1, 1, true),
@@ -27,22 +27,22 @@ INSERT INTO Contract(project_id, contract_type_id, bool_in_use) VALUES
 (3, 3, false),
 (4, 3, true);
 
-INSERT INTO Bill_status(bill_status_name, status_notes) VALUES
-('laskuttamatta', null),
-('laskutettu', null),
-('maksettu', null),
-('osa maksettu', null),
-('peruttu', null);
+INSERT INTO Bill_status(bill_status_id, bill_status_name, status_notes) VALUES
+(1, 'laskuttamatta', null),
+(2, 'laskutettu', null),
+(3, 'maksettu', null),
+(4, 'osa maksettu', null),
+(5, 'peruttu', null);
 
 INSERT INTO Bill_type(bill_type_id, bill_type_name, handling_fee) VALUES
 (1, 'lasku', 5),
 (2, 'maksumuistutus', null),
 (3, 'karhu', null);
 
-INSERT INTO Vat_type(vat_type_name, vat_rate) VALUES
-('työ', 24),
-('työkalut', 24),
-('kirjat', 10);
+INSERT INTO Vat_type(vat_type_id, vat_type_name, vat_rate) VALUES
+(1, 'työ', 24),
+(2, 'työkalut', 24),
+(3, 'kirjat', 10);
 
 INSERT INTO Tool(tool_name, tool_purchase_price, availability, vat_type_id, tool_selling_price, unit, bool_in_use) VALUES
 ('pistorasia', 1.456, 20, 2, 2.00, 'kpl', true),
@@ -51,10 +51,10 @@ INSERT INTO Tool(tool_name, tool_purchase_price, availability, vat_type_id, tool
 ('valaisinliitin', 0.15, 5, 2, 0.80, 'kpl', true),
 ('sulake', 1.50, 200, 2, 2.00, 'kpl', true);
 
-INSERT INTO Work_type(work_type_name, hourly_rate, vat_type_id) VALUES
-('suunnittelu', 55.00, 1),
-('työ', 45.00, 1),
-('aputyö', 35.00, 1);
+INSERT INTO Work_type(work_type_id, work_type_name, hourly_rate, vat_type_id) VALUES
+(1, 'suunnittelu', 55.00, 1),
+(2, 'työ', 45.00, 1),
+(3, 'aputyö', 35.00, 1);
 
 INSERT INTO Bill(contract_id, total_sum, billing_address, bill_type_id, bill_status_id, date_added, date_modified, bill_due_date, bill_sending_date) VALUES
 (1, 400, 'Rapakatu 2, Tampere', 1, 2, '2019-04-04', null, '2019-04-05', '2019-05-05'),
