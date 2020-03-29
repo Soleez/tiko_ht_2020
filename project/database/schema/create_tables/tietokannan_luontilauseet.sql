@@ -122,7 +122,7 @@ CREATE TABLE Billable_hour (
     work_type_id INT NOT NULL,
     contract_id BIGINT NOT NULL,
     date_added DATE NOT NULL,
-    quantity INT, 
+    quantity INT not null, 
     sale_percentage INT NOT NULL default 0,
     PRIMARY KEY (billable_hour_id),
     FOREIGN KEY (contract_id) REFERENCES Contract,
