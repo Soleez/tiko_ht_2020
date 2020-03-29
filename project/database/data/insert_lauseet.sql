@@ -16,16 +16,16 @@ INSERT INTO Project(customer_id, project_name, project_address, bool_tax_credit)
 (2, 'Mökin sähkötyöt', 'Kuusikuja 6', true),
 (3, 'Vanhempien sähkösaunan asennus', 'Sahakatu 46, Tampere', true);
 
-INSERT INTO Contract_type(contract_type_id, contract_type_name, amount_of_payments) VALUES
-(1, 'tuntilaskutteinen', null),
-(2, 'urakka', null),
-(3, 'urakkatarjous', null);
+INSERT INTO Contract_type(contract_type_id, contract_type_name) VALUES
+(1, 'tuntilaskutteinen'),
+(2, 'urakka'),
+(3, 'urakkatarjous');
 
-INSERT INTO Contract(project_id, contract_type_id, bool_in_use) VALUES
-(1, 1, true),
-(2, 2, true),
-(3, 3, false),
-(4, 3, true);
+INSERT INTO Contract(project_id, contract_type_id, bool_in_use, amount_of_payments) VALUES
+(1, 1, true, null),
+(2, 2, true, null),
+(3, 3, false, null),
+(4, 3, true, null);
 
 INSERT INTO Bill_status(bill_status_id, bill_status_name, status_notes) VALUES
 (1, 'laskuttamatta', null),
