@@ -123,7 +123,7 @@ CREATE TABLE Billable_hour (
     contract_id BIGINT NOT NULL,
     date_added DATE NOT NULL,
     quantity INT, 
-    sale_percentage INT,
+    sale_percentage INT NOT NULL default 0,
     PRIMARY KEY (billable_hour_id),
     FOREIGN KEY (contract_id) REFERENCES Contract,
     FOREIGN KEY (work_type_id) REFERENCES Work_type
@@ -135,7 +135,7 @@ CREATE TABLE Sold_tool(
     quantity INT NOT NULL,
     contract_id BIGINT NOT NULL,
     date_added DATE,
-    sale_percentage INT,
+    sale_percentage INT NOT NULL default 0,
     PRIMARY KEY (sold_tool_id),
     FOREIGN KEY (tool_id) REFERENCES Tool,
     FOREIGN KEY (contract_id) REFERENCES Contract
