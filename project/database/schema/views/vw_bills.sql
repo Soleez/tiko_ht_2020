@@ -1,4 +1,4 @@
--- Näkymä, jolla haetaan sopimuksiin liittyvät työkalut.
+-- Näkymä, jolla haetaan laskujen tiedot.
 
 -- Näkymän luonti:
 CREATE VIEW vw_bills
