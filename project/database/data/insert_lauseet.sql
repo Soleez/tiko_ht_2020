@@ -66,20 +66,20 @@ INSERT INTO Bill(contract_id, total_sum, billing_address, bill_type_id, bill_sta
 (4, 3, 'Tallikuja 7, Tampere',1, 3, '2019-05-04', null, '2019-05-19', '2019-06-19');
 
 INSERT INTO Billable_hour(work_type_id, contract_id, date_added, quantity, sale_percentage) VALUES
-(1, 1, '2019-01-19', 5, null),
-(2, 1, '2018-12-30', 10, null),
+(1, 1, '2019-01-19', 5),
+(2, 1, '2018-12-30', 10),
 (3, 2, '2018-09-13', 4, 10),
-(1, 5, '2020-03-29', 3, null),
-(2, 5, '2020-03-29', 12, null);
+(1, 5, '2020-03-29', 3),
+(2, 5, '2020-03-29', 12);
 
 INSERT INTO Sold_tool(tool_id, quantity, contract_id, date_added, sale_percentage) VALUES
-(1, 4, 1, '2019-01-01', null),
+(1, 4, 1, '2019-01-01'),
 (1, 10, 3, '2019-01-01', 10),
-(3, 1, 3, '2019-01-01', null),
+(3, 1, 3, '2019-01-01'),
 (5, 2, 4, '2019-01-01', 5),
-(2, 11, 2, '2019-01-01', null),
-(2, 3, 5, '2020-03-29', null),
-(1, 1, 5, '2020-03-29', null);
+(2, 11, 2, '2019-01-01'),
+(2, 3, 5, '2020-03-29'),
+(1, 1, 5, '2020-03-29');
 
 INSERT INTO Payment(payment_amount, bill_id, payment_date) VALUES
 (2.00, 3, null),
