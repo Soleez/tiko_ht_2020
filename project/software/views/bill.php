@@ -5,7 +5,10 @@
   <body>
 
     <h2>Laskun tiedot</h2>
-    <?php echo($contractor['contractor_name']); ?>
+    <?php 
+      print_r($contractor); 
+      echo($contractor[2]);
+    ?>
 
     <h2>Tunnit</h2>
     <table>

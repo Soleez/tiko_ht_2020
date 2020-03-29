@@ -16,6 +16,38 @@
     pg_close($connection);
   }
 
-  // ToDo Virheiden käsittely kyselyn aikana
+
+  /** Luodaan tietokantafunktio jolla saadaan haettua tietokantataulu 
+   * funktio pg_fetch_all() nimeäää taulukoiden sarakkeet samannimisiksi kuin
+   * ne ovat tietokannassa
+  */
+  function getTable($query) {
+    // Käsitellään virhe
+    if (!$query) {
+      echo "Virhe kyselyssä.\n";
+      return array();
+    }
+    else {
+      // Talletetaan kyselyn tulos taulukkoon
+      $table = pg_fetch_all($query);
+      return $table;
+    }
+  }
+
+  /** Luodaan tietokantafunktio jolla saadaan haettua tietokantataulun rivi 
+   * rivin arvoja ei ole nimetty, vaan niitä voidaan kutsua sarkkeen indeksillä
+  */
+  function getRow($query) {
+    // Käsitellään virhe
+    if (!$query) {
+      echo "Virhe kyselyssä.\n";
+      return array();
+    }
+    else {
+      // Talletetaan kyselyn tulos taulukkoon
+      $row = pg_fetch_row($query);
+      return $row;
+    }
+  }
 
 ?>
