@@ -41,38 +41,38 @@ CREATE TABLE Project (
 );
 
 CREATE TABLE Contract_type (
-    contract_type_id SERIAL,
+    contract_type_id INT NOT NULL,
     contract_type_name VARCHAR (60) NOT NULL,
-    amount_of_payments INT,
     PRIMARY KEY (contract_type_id) 
 );
 
 CREATE TABLE Contract (
     contract_id SERIAL,
     project_id BIGINT NOT NULL,
-    contract_type_id BIGINT NOT NULL,
+    contract_type_id INT NOT NULL,
     bool_in_use BOOLEAN,
+    amount_of_payments INT,
     PRIMARY KEY (contract_id),
     FOREIGN KEY (project_id) REFERENCES Project,
     FOREIGN KEY (contract_type_id) REFERENCES Contract_type
 );
 
 CREATE TABLE Bill_status (
-    bill_status_id SERIAL,
+    bill_status_id INT NOT NULL,
     bill_status_name VARCHAR (60) NOT NULL,
     status_notes VARCHAR (300),
     PRIMARY KEY (bill_status_id)
 );
 
 CREATE TABLE Bill_type (
-    bill_type_id SERIAL,
+    bill_type_id INT NOT NULL,
     bill_type_name VARCHAR (60) NOT NULL,
     handling_fee NUMERIC(10,2),
     PRIMARY KEY (bill_type_id)
 );
 
 CREATE TABLE Vat_type (
-    vat_type_id SERIAL,
+    vat_type_id INT NOT NULL,
     vat_type_name VARCHAR(60) NOT NULL,
     vat_rate INT NOT NULL,
     PRIMARY KEY (vat_type_id)
@@ -83,7 +83,7 @@ CREATE TABLE Tool (
     tool_name VARCHAR (60) NOT NULL,
     tool_purchase_price NUMERIC(10,2) NOT NULL,
     availability INT,
-    vat_type_id BIGINT NOT NULL,
+    vat_type_id INT NOT NULL,
     tool_selling_price NUMERIC(10,2) NOT NULL,
     unit VARCHAR (10),
     bool_in_use BOOLEAN,
@@ -92,10 +92,10 @@ CREATE TABLE Tool (
 );
 
 CREATE TABLE Work_type(
-    work_type_id SERIAL,
+    work_type_id INT NOT NULL,
     work_type_name VARCHAR (60) NOT NULL,
     hourly_rate NUMERIC(10,2),
-    vat_type_id BIGINT NOT NULL,
+    vat_type_id INT NOT NULL,
     PRIMARY KEY (work_type_id),
     FOREIGN KEY (vat_type_id) REFERENCES Vat_type
 );
@@ -105,8 +105,8 @@ CREATE TABLE Bill (
     contract_id BIGINT NOT NULL,
     total_sum NUMERIC(10,2),
     billing_address VARCHAR (60) NOT NULL,
-    bill_type_id BIGINT NOT NULL,
-    bill_status_id BIGINT NOT NULL,
+    bill_type_id INT NOT NULL default 1,
+    bill_status_id INT NOT NULL default 1,
     date_added DATE,
     date_modified DATE,
     bill_due_date DATE,
@@ -119,11 +119,11 @@ CREATE TABLE Bill (
 
 CREATE TABLE Billable_hour (
     billable_hour_id SERIAL,
-    work_type_id BIGINT NOT NULL,
+    work_type_id INT NOT NULL,
     contract_id BIGINT NOT NULL,
     date_added DATE NOT NULL,
-    quantity INT, 
-    sale_percentage INT,
+    quantity INT not null, 
+    sale_percentage INT NOT NULL default 0,
     PRIMARY KEY (billable_hour_id),
     FOREIGN KEY (contract_id) REFERENCES Contract,
     FOREIGN KEY (work_type_id) REFERENCES Work_type
@@ -135,7 +135,7 @@ CREATE TABLE Sold_tool(
     quantity INT NOT NULL,
     contract_id BIGINT NOT NULL,
     date_added DATE,
-    sale_percentage INT,
+    sale_percentage INT NOT NULL default 0,
     PRIMARY KEY (sold_tool_id),
     FOREIGN KEY (tool_id) REFERENCES Tool,
     FOREIGN KEY (contract_id) REFERENCES Contract
@@ -149,3 +149,4 @@ CREATE TABLE Payment (
     PRIMARY KEY (payment_id),
     FOREIGN KEY (bill_id) REFERENCES Bill
 );
+ 
