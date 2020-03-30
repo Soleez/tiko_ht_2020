@@ -1,3 +1,8 @@
+-- poistetaan viewit
+DROP VIEW vw_tools;
+DROP VIEW vw_hours;
+
+-- poistetaan taulut
 DROP TABLE Payment;
 DROP TABLE Sold_tool;
 DROP TABLE Billable_hour;
@@ -13,5 +18,3 @@ DROP TABLE Project;
 DROP TABLE Tax_credit_for_household;
 DROP TABLE Customer;
 DROP TABLE Contractor;
-
-

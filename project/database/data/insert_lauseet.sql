@@ -85,7 +85,3 @@ INSERT INTO Payment(payment_amount, bill_id, payment_date) VALUES
 (2.00, 3, null),
 (2.00, 4, null),
 (3.00, 4, null);
-
--- Muuttaa serial numeroinnin alkamaan arvosta 1
--- (taulu_idnimi_seq)
--- ALTER SEQUENCE Contractor_contractor_id_seq RESTART WITH 1;
