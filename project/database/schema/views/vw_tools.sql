@@ -3,7 +3,7 @@
 -- Näkymän luonti:
 CREATE VIEW vw_tools
 AS
-    SELECT Contractor.Contractor_id AS contr, 
+    SELECT Contractor.Contractor_id, 
     Customer.customer_name, 
     Customer.customer_id,
     Project.Project_id,

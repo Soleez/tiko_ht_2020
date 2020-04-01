@@ -3,7 +3,7 @@
 -- Näkymän luonti:
 CREATE VIEW vw_hours
 AS
-    SELECT Contractor.Contractor_id AS contractor, 
+    SELECT Contractor.Contractor_id, 
     Customer.customer_name, 
     Customer.customer_id, 
     Project.Project_id,
@@ -13,7 +13,7 @@ AS
     Billable_hour.quantity, 
     Billable_hour.date_added,
     CAST (Billable_hour.sale_percentage AS NUMERIC(10,2)), 
-    Work_type.work_type_name , 
+    Work_type.work_type_name, 
     Work_type.hourly_rate, 
     CAST (Vat_type.vat_rate AS NUMERIC(10,2)),
     CAST ((Billable_hour.quantity * Work_type.hourly_rate * (Vat_type.vat_rate/100.00)) AS NUMERIC(10,2)) AS tax_only,   --alvin määrä
