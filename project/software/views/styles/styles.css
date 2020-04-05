@@ -14,3 +14,15 @@ table, th, td {
     background-color: #f0f0b0;
     padding: 0.5em;
 }
+
+select {
+    margin: 0.5em;
+}
+
+input {
+    margin: 0.5em;
+}
+
+.textbox {
+    width: 200px;
+}
