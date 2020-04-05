@@ -1,6 +1,7 @@
 -- poistetaan viewit
 DROP VIEW vw_tools;
 DROP VIEW vw_hours;
+DROP VIEW vw_bills;
 
 -- poistetaan taulut
 DROP TABLE Payment;
