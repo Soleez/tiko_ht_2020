@@ -8,33 +8,30 @@
 
   // avataan funktiolla tietokantayhteys
   openConnection();
-  
-  
+  setContractor(1);
+
   // haetaan urakoitisijan tiedot
   $contractor = getContractor();
-  // haetaan sopimuksen tiedot
-  $customer = getCustomer();
-  // haetaan sopimuksen tiedot
-  $project = getProject();
-  // haetaan sopimuksen tiedot
-  $contract = getContract();
-  // haetaan sopimuksen tiedot
-  $bill = getBill();
   
 
   // Laskulle kuuluvat tunnit tietokannasta
-  $contractQuery = pg_query("SELECT * FROM contract
-     --WHERE project_id = {$project[0]}
+  $customerQuery = pg_query("SELECT * FROM customer
+   WHERE contractor_id = {$contractor[0]}
   ");
   // haetaan funktion avulla
-  $contracts = getTable($contractQuery);
+  $customers = getTable($customerQuery);
 
+  
   // Laskulle kuuluvat tunnit tietokannasta
-  $billQuery = pg_query("SELECT * FROM bill
-  -- WHERE contract_id = {$contract[0]}
+  $projectQuery = pg_query("SELECT * FROM project
+    WHERE customer_id IN (
+      SELECT customer_id FROM customer
+      WHERE contractor_id = {$contractor[0]}
+    )
   ");
   // haetaan funktion avulla
-  $bills = getTable($billQuery);
+  $projects = getTable($projectQuery);
+
 
   // suljetaan funktiolla tietokantayhteys
   closeConnection();

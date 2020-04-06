@@ -6,8 +6,8 @@
 
     <h2>Laskun tiedot</h2>
     <?php 
-      print_r($contracts[0]); 
-      echo($contractor[2]);
+      print_r($project);
+      print_r($contractor);
     ?>
 
     <h2>Sopimus</h2>
