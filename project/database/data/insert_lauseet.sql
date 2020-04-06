@@ -68,6 +68,7 @@ INSERT INTO Bill(contract_id, total_sum, billing_address, bill_type_id, bill_sta
 (2, 2, 'Holopaisenkatu 1, Tampere',1, 3,'2019-02-18', null, '2019-02-19', '2019-03-20'),
 (3, 2, 'Holopaisenkatu 1, Tampere', 1, 3,'2019-07-25', null, '2019-07-27', '2019-08-27'),
 (5, 3, 'Tallikuja 7, Tampere',1, 3, '2019-05-04', null, '2019-05-19', '2019-06-19');
+(6, null, 'Kaapankatu 7, Tampere', 1, 1, '2020-03-29', '2020-03-29', null, null);
 
 INSERT INTO Billable_hour(work_type_id, contract_id, date_added, quantity, sale_percentage) VALUES
 (1, 1, '2019-01-19', 5, default),

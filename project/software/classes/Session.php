@@ -7,9 +7,9 @@
   
   $_SESSION['contractor_id'] = 1;
   $_SESSION['customer_id'] = 3;
-  $_SESSION['project_id'] = 5;
-  $_SESSION['contract_id'] = 5;
-  $_SESSION['bill_id'] = 2;
+  $_SESSION['project_id'] = 6;
+  $_SESSION['contract_id'] = 6;
+  $_SESSION['bill_id'] = 6;
   
   class createSession {
     // haetaan urakoitisijan tiedot

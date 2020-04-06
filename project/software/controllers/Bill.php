@@ -35,12 +35,21 @@
   // haetaan funktion avulla
   $hours = getTable($hoursQuery);
 
+  // 
 
   // Talletetan kysely muuttujaan
   $toolsQuery = pg_query("SELECT * FROM vw_tools
     WHERE contract_id = {$contract[0]}
   ;");
   $tools = getTable($toolsQuery);
+
+  // Työkalujen summa
+  $toolsumQuery = pg_query("SELECT * FROM toolsum_function({$contract[0]});");
+  $toolsum = getRow($toolsumQuery);
+
+  // Työtuntien summa
+  $worksumQuery = pg_query("SELECT * FROM worksum_function({$contract[0]});");
+  $worksum = getRow($worksumQuery);  
 
   // suljetaan funktiolla tietokantayhteys
   closeConnection();
