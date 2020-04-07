@@ -12,6 +12,7 @@
       echo("Työkohde: " . $project[2] . "<br/>");
       echo("Työkohteen osoite: " . $project[3] . "<br/>");
       echo("Laskutusosoite: " . $bill[3] . "<br/>");
+      echo("Laskun tyyppi: " . $bills[0]['contract_type_name'] . "<br/>");
     ?>
 
     <h2>Tunnit</h2>
@@ -23,6 +24,7 @@
         <th> Tuntihinta </th>
         <th> Ale-prosentti </th>
         <th> Alv-prosentti </th>
+        <th> Hinta ennen alennuksia </th>
         <th> Verot </th>
         <th> Hinta ilman veroa alennusten kanssa </th>
         <th> Lopullinen hinta </th>
@@ -39,6 +41,7 @@
             echo"<td>" . $hours[$row]['hourly_rate'] . "</td>";
             echo"<td>" . $hours[$row]['sale_percentage'] . "</td>";
             echo"<td>" . $hours[$row]['vat_rate'] . "</td>";
+            echo"<td>" . $hours[$row]['total_before_sale'] . "</td>";
             echo"<td>" . $hours[$row]['tax_only'] . "</td>";
             echo"<td>" . $hours[$row]['price_wo_tax_w_sale'] . "</td>";
             echo"<td>" . $hours[$row]['total_sum'] . "</td>";
@@ -47,6 +50,7 @@
       ?>
         <tr>
           <td>Tunnit yhteensä</td>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -69,6 +73,7 @@
         <th> Yksikköhinta </th>
         <th> Ale-prosentti </th>
         <th> Alv-prosentti </th>
+        <th> Hinta ennen alennuksia </th>
         <th> Verot </th>
         <th> Hinta ilman veroa alennusten kanssa </th>
         <th> Lopullinen hinta </th>
@@ -82,6 +87,7 @@
             echo"<td>" . $tools[$row]['tool_price'] . "</td>";
             echo"<td>" . $tools[$row]['sale_percentage'] . "</td>";
             echo"<td>" . $tools[$row]['vat_rate'] . "</td>";
+            echo"<td>" . $tools[$row]['total_before_sale'] . "</td>";
             echo"<td>" . $tools[$row]['tax_only'] . "</td>";
             echo"<td>" . $tools[$row]['price_wo_tax_w_sale'] . "</td>";
             echo"<td>" . $tools[$row]['total_sum'] . "</td>";
@@ -91,6 +97,7 @@
 
         <tr>
           <td>Työkalut yhteensä</td>
+          <td></td>
           <td></td>
           <td></td>
           <td></td>
@@ -107,6 +114,7 @@
     <div>
       Alkuperäinen hinta: <br/>
       Verot: <br/>
+      Kotitalousvähennykseen kelpaava osuus: <br/>
       Lopullinen hinta: <?php echo($toolsum[0] + $worksum[0]); ?><br/>
     </div>
   </body>
