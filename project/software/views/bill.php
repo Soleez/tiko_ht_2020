@@ -49,15 +49,10 @@
         }
       ?>
         <tr>
-          <td>Tunnit yhteensä</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td colspan="6">Tunnit yhteensä</td>
           <td><?php echo($worksumNoSale[0]); ?></td>
-          <td>tähän verot</td>
-          <td>tähän veroton alennettu hinta</td>
+          <td><?php echo($worktaxsum[0]); ?></td>
+          <td><?php echo($worksum[0] - $worktaxsum[0]); ?></td>
           <td><?php echo($worksum[0]); ?></td>
         </tr>
       
@@ -96,15 +91,10 @@
       ?>
 
         <tr>
-          <td>Työkalut yhteensä</td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+          <td colspan="6">Työkalut yhteensä</td>
           <td><?php echo($toolsumNoSale[0]); ?></td>
-          <td>tähän verot</td>
-          <td>tähän veroton alennettu hinta</td>
+          <td><?php echo($tooltaxsum[0]); ?></td>
+          <td><?php echo($toolsum[0] - $tooltaxsum[0]); ?></td>
           <td><?php echo($toolsum[0]); ?></td>
         </tr>
       <tbody>
@@ -113,8 +103,14 @@
     <h2> Yhteensä </h2>
     <div>
       Alkuperäinen hinta: <?php echo($toolsumNoSale[0] + $worksumNoSale[0]); ?><br/>
-      Verot: <br/>
-      Kotitalousvähennykseen kelpaava osuus: <br/>
+      Verot: <?php echo($tooltaxsum[0] + $worktaxsum[0]); ?><br/>
+      Kotitalousvähennykseen kelpaava osuus:
+      <?php if ($customer[4] != true) { echo("Asiakas ei ole kotitalousvähennyskelpoinen"); } 
+        else if ($project[4] != true) { echo("Työkohde ei ole kotitalousvähennyskelpoinen"); }
+        else { echo($worksum[0] * 0.40); }
+      ?>
+      <br/>
+      Kotitalousvähennys vuoden alusta: <br />
       Lopullinen hinta: <?php echo($toolsum[0] + $worksum[0]); ?><br/>
     </div>
   </body>

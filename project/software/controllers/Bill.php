@@ -51,6 +51,10 @@
   $toolsumNoSaleQuery = pg_query("SELECT * FROM toolsum_wo_discount_function({$contract[0]});");
   $toolsumNoSale = getRow($toolsumNoSaleQuery);
 
+  // Työkalujen verot
+  $tooltaxsumQuery = pg_query("SELECT * FROM tool_tax_sum_function({$contract[0]});");
+  $tooltaxsum = getRow($tooltaxsumQuery);  
+
   // Työkalujen summa
   $toolsumQuery = pg_query("SELECT * FROM toolsum_function({$contract[0]});");
   $toolsum = getRow($toolsumQuery);
@@ -58,6 +62,10 @@
   // Työtuntien summa ennen alennusta
   $worksumNoSaleQuery = pg_query("SELECT * FROM worksum_wo_discount_function({$contract[0]});");
   $worksumNoSale = getRow($worksumNoSaleQuery);
+
+  // Työtuntien verot
+  $worktaxsumQuery = pg_query("SELECT * FROM work_tax_sum_function({$contract[0]});");
+  $worktaxsum = getRow($worktaxsumQuery);    
 
   // Työtuntien summa
   $worksumQuery = pg_query("SELECT * FROM worksum_function({$contract[0]});");
