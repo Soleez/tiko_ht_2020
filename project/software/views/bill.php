@@ -55,9 +55,9 @@
           <td></td>
           <td></td>
           <td></td>
-          <td></td>
+          <td><?php echo($worksumNoSale[0]); ?></td>
           <td>tähän verot</td>
-          <td></td>
+          <td>tähän veroton alennettu hinta</td>
           <td><?php echo($worksum[0]); ?></td>
         </tr>
       
@@ -102,9 +102,9 @@
           <td></td>
           <td></td>
           <td></td>
-          <td></td>
+          <td><?php echo($toolsumNoSale[0]); ?></td>
           <td>tähän verot</td>
-          <td></td>
+          <td>tähän veroton alennettu hinta</td>
           <td><?php echo($toolsum[0]); ?></td>
         </tr>
       <tbody>
@@ -112,7 +112,7 @@
 
     <h2> Yhteensä </h2>
     <div>
-      Alkuperäinen hinta: <br/>
+      Alkuperäinen hinta: <?php echo($toolsumNoSale[0] + $worksumNoSale[0]); ?><br/>
       Verot: <br/>
       Kotitalousvähennykseen kelpaava osuus: <br/>
       Lopullinen hinta: <?php echo($toolsum[0] + $worksum[0]); ?><br/>
