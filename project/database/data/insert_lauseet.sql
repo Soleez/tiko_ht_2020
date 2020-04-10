@@ -49,7 +49,7 @@ INSERT INTO Vat_type(vat_type_id, vat_type_name, vat_rate) VALUES
 
 INSERT INTO Tool(tool_name, tool_purchase_price, availability, vat_type_id, tool_selling_price, unit, bool_in_use) VALUES
 ('pistorasia', 1.456, 20, 2, 2.00, 'kpl', true),
-('sähköjohto', 0.52, 50, 2, 0.90, 'metri', true),
+('sähköjohto', 0.52, 50, 2, 0.90, 'm', true),
 ('opaskirja', 5.00, 5, 3, 10.00, 'kpl', true),
 ('valaisinliitin', 0.15, 5, 2, 0.80, 'kpl', true),
 ('sulake', 1.50, 200, 2, 2.00, 'kpl', true),
