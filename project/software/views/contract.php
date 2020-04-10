@@ -7,42 +7,54 @@
     <h2>Laskun tiedot</h2>
     <?php 
       print_r($contracts[0]);
+      print_r($bills[0]);
     ?>
 
-    <h2>Sopimus</h2>
+  <h2>Sopimuksen tiedot</h2>
     <table>
       <thead><tr>
-        <th> Sopimus </th>
+        <th> Sopimuksen tunniste </th>
         <th> Työn typpi </th>
-        <th> Määrä </th>
-        <th> Tuntihinta </th>
-        <th> Ale-prosentti </th>
-        <th> Linkki </th> 
       </tr></thead>
       <tbody><?php 
         $billLink = './bill.php';
         // Haetaan taulukon arvot rivi kerrallaan
         for ($row = 0; $row < count($contracts); $row++ ) {
           echo "<tr>";
-            // Kutsutaan sarakkeita nimeltä, ne ovat samannimisiä kuin tietokannassa,
-            // ja asetetaan arvot omiin soluihin html taulussa
             echo"<td>" . $contracts[$row]['contract_id'] . "</td>";
-            echo"<td>" . $contracts[$row]['work_type_name'] . "</td>";
-            echo"<td>" . $contracts[$row]['quantity'] . "</td>";
-            echo"<td>" . $contracts[$row]['hourly_rate'] . "</td>";
-            echo"<td>" . $contracts[$row]['sale_percentage'] . "</td>";
-            echo"<td>" . $contracts[$row]['vat_rate'] . "</td>";
+            echo"<td>" . $contracts[$row]['contract_type_id'] . "</td>";
           echo "</tr>";
+        }
+        ?></tbody>
+        </table>
+
+    <h2>Sopimukseen liittyvät laskut</h2>
+    <table>
+      <thead><tr>
+        <th> Laskun tunniste </th>
+        <th> Lähetyspäivä </th>
+        <th> Eräpäivä </th>
+        <th> total_sum </th>
+        <th> bill_status_id </th>
+        <th> bill_type_id </th> 
+      </tr></thead>
+      <tbody><?php 
+        $billLink = './bill.php';
+        // Haetaan taulukon arvot rivi kerrallaan
+        for ($row = 0; $row < count($contracts); $row++ ) {
           for ($billRow = 0; $billRow < count($bills); $billRow++ ) {
             if($bills[$billRow]['contract_id'] == $contracts[$row]['contract_id']) {
               echo "<tr>";
-                echo"<td>" . "Lasku" . "</td>";
-                echo"<td>" . $bills[$billRow]['bill_id'] . "</td>";
-                echo"<td>" . $bills[$billRow]['quantity'] . "</td>";
-                echo"<td>" . $bills[$billRow]['hourly_rate'] . "</td>";
-                echo"<td>" . $bills[$billRow]['hourly_rate'] . "</td>";
-                echo"<td> <a href='$billLink?bill=". $bills[$billRow]['bill_id'] ."'> 
-                <div> Laskulle " . $bills[$billRow]['bill_id'] . "</div> </a> </td>";
+                echo"<td> <a href='$billLink"
+                  ."?contract=". $contracts[$row]['contract_id'] 
+                  ."&bill=". $bills[$billRow]['bill_id'] 
+                  ."'> <div>" . $bills[$billRow]['bill_id'] 
+                  . "</div> </a> </td>";
+                echo"<td>" . $bills[$billRow]['bill_sending_date'] . "</td>";
+                echo"<td>" . $bills[$billRow]['bill_due_date'] . "</td>";
+                echo"<td>" . $bills[$billRow]['total_sum'] . "</td>";
+                echo"<td>" . $bills[$billRow]['bill_status_id'] . "</td>";
+                echo"<td>" . $bills[$billRow]['bill_type_id'] . "</td>";
               echo "</tr>";
             }
           }

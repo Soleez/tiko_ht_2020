@@ -11,6 +11,8 @@
 
   // haetaan urlista
   setContract($_GET['contract']);
+  setBill($_GET['bill']);
+
   
   // haetaan urakoitisijan tiedot
   $contractor = getContractor();
