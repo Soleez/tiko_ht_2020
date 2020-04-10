@@ -1,32 +1,11 @@
 <?php
   /** 
    * Asetetaan luokka, joka pitää kirjaa valinnoista, joiden perusteella ohjelmassa on navigoitu
+   * luokalla voi asettaa sessiolle muuttujia, sekä hakea sessioon liittyiä rivitietoja tietokannasta
    */
 
-  session_start();
-  
-  $_SESSION['contractor_id'] = 1;
-  $_SESSION['customer_id'] = 3;
-  $_SESSION['project_id'] = 6;
-  $_SESSION['contract_id'] = 6;
-  $_SESSION['bill_id'] = 6;
-  
-  class createSession {
-    // haetaan urakoitisijan tiedot
-    //var $sContractor = getContractor();
-    //// haetaan asiakkaan tiedot
-    //var $customer = getCustomer();
-    //// haetaan projektin tiedot
-    //var $project = getProject();
-    //// haetaan sopimuksen tiedot
-    //var $contract = getContract();
-    //// haetaan laskun tiedot
-    //var $bill = getBill();
-  } 
 
-
-  //$_SESSION['contract_id'] = $_POST['contract_id'];
-
+  session_start();  
 
   /** Haetaan tietokannasta contractorin tiedot */
   function getContractor() {
@@ -40,6 +19,11 @@
     return $contractor;
   }
 
+  /** asettaa urakoitsijan */
+  function setContractor($id) {
+    $_SESSION['contractor_id'] = $id;
+  }
+
   /** Haetaan tietokannasta asiakkaan tiedot */
   function getCustomer() {
     $customerQuery = pg_query("SELECT * 
@@ -48,6 +32,10 @@
     ");
     $customer = getRow($customerQuery);
     return $customer;
+  }
+  /** asettaa asiakkaan ID:n sessiolle */
+  function setCustomer($id) {
+    $_SESSION['customer_id'] = $id;
   }
 
   /** Haetaan tietokannasta projektin tiedot */
@@ -60,6 +48,11 @@
     return $project;
   }
 
+  /** asettaa asiakkaan ID:n sessiolle */
+  function setProject($id) {
+    $_SESSION['project_id'] = $id;
+  }
+
   /** Haetaan tietokannasta spimuksen tiedot */
   function getContract() {
     $contractQuery = pg_query("SELECT * 
@@ -70,6 +63,11 @@
     return $contract;
   }
 
+  /** asettaa asiakkaan ID:n sessiolle */
+  function setContract($id) {
+    $_SESSION['contract_id'] = $id;
+  }
+
   /** Haetaan tietokannasta laskun tiedot */
   function getBill() {
     $billQuery = pg_query("SELECT * 
@@ -78,6 +76,11 @@
     ");
     $bill = getRow($billQuery);
     return $bill;
+  }
+
+  /** asettaa asiakkaan ID:n sessiolle */
+  function setBill($id) {
+    $_SESSION['bill_id'] = $id;
   }
 
 ?>

@@ -6,7 +6,6 @@
 
     <h2>Laskun tiedot</h2>
     <?php 
-      // print_r($contractor); 
       echo("Urakoitsija: " . $contractor[2] . "<br/>");
       echo("Asiakas: " . $customer[2] . "<br/>");
       echo("Työkohde: " . $project[2] . "<br/>");

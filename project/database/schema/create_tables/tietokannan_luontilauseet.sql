@@ -111,10 +111,12 @@ CREATE TABLE Bill (
     date_modified DATE,
     bill_due_date DATE,
     bill_sending_date DATE,
+    previous_bill_id BIGINT,
     PRIMARY KEY (bill_id),
     FOREIGN KEY (contract_id) REFERENCES Contract,
     FOREIGN KEY (bill_type_id) REFERENCES Bill_type,
-    FOREIGN KEY (bill_status_id) REFERENCES Bill_status
+    FOREIGN KEY (bill_status_id) REFERENCES Bill_status,
+    FOREIGN KEY (previous_bill_id) REFERENCES Bill
 );
 
 CREATE TABLE Billable_hour (
