@@ -8,7 +8,9 @@
 
   // avataan funktiolla tietokantayhteys
   openConnection();
-  setContractor(1);
+
+  // toistaiseksi tämä on kovakoodattu
+  setContractor($_GET['contractor']);
 
   // haetaan urakoitisijan tiedot
   $contractor = getContractor();

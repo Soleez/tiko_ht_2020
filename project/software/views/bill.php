@@ -6,11 +6,8 @@
 
     <h2>Laskun tiedot</h2>
     <?php 
-      print_r($contractor); 
-      echo($contractor[2]);
+      print_r($bills[0]); 
     ?>
-
-    
 
     <h2>Tunnit</h2>
     <table>

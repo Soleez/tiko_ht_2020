@@ -10,6 +10,7 @@
   openConnection();
   
   // haetaan sessiolle id url:n perusteella
+  setCustomer($_GET['customer']);
   setProject($_GET['project']);
 
   // haetaan urakoitisijan tiedot

@@ -1,16 +1,10 @@
 <?php
   /** 
    * Asetetaan luokka, joka pitää kirjaa valinnoista, joiden perusteella ohjelmassa on navigoitu
+   * luokalla voi asettaa sessiolle muuttujia, sekä hakea sessioon liittyiä rivitietoja tietokannasta
    */
 
-  session_start();
-  
-  //$_SESSION['contractor_id'] = 1;
-  //$_SESSION['customer_id'] = 3;
-  //$_SESSION['project_id'] = 5;
-  //$_SESSION['contract_id'] = 5;
-  //$_SESSION['bill_id'] = 2;
-  
+  session_start();  
 
   /** Haetaan tietokannasta contractorin tiedot */
   function getContractor() {
