@@ -9,13 +9,14 @@ AS
     Project.Project_id,
     Project.Project_name,
     Contract.contract_id, 
-    Billable_hour.billable_hour_id AS bh_id, -- lyhenne jotta mahtuisi shell näkymään paremmin
+    Billable_hour.billable_hour_id,
     Billable_hour.quantity, 
     Billable_hour.date_added,
     CAST (Billable_hour.sale_percentage AS NUMERIC(10,2)), 
     Work_type.work_type_name, 
     Work_type.hourly_rate, 
     CAST (Vat_type.vat_rate AS NUMERIC(10,2)),
+    CAST (Billable_hour.quantity * Work_type.hourly_rate AS NUMERIC(10,2)) AS total_before_sale, --alkuperäinen hinta veron kanssa ennen alennusta
     CAST ((Billable_hour.quantity * Work_type.hourly_rate * (Vat_type.vat_rate/100.00)) AS NUMERIC(10,2)) AS tax_only,   --alvin määrä
     CAST ((Billable_hour.quantity * Work_type.hourly_rate * ((100.00 - Vat_type.vat_rate)/100.00) * ((100.00 - Billable_hour.sale_percentage)/100.00)) AS NUMERIC(10,2)) AS price_wo_tax_w_sale,  --ilman alvia, alennus mukana
     CAST ((Billable_hour.quantity * Work_type.hourly_rate * (Vat_type.vat_rate/100.00)) AS NUMERIC(10,2)) + CAST ((Billable_hour.quantity * Work_type.hourly_rate * ((100.00 - Vat_type.vat_rate)/100.00) * ((100.00 - Billable_hour.sale_percentage)/100.00)) AS NUMERIC(10,2)) AS total_sum

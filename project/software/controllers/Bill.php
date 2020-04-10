@@ -31,12 +31,41 @@
   // haetaan funktion avulla
   $hours = getTable($hoursQuery);
 
+  // Haetaan laskujen tietoja
+  $billsQuery = pg_query("SELECT * FROM vw_bills
+    WHERE contract_id = {$bill[0]}
+  ;");
+  $bills = getTable($billsQuery);
 
   // Talletetan kysely muuttujaan
   $toolsQuery = pg_query("SELECT * FROM vw_tools
     WHERE contract_id = {$contract[0]}
   ;");
   $tools = getTable($toolsQuery);
+
+  // Työkalujen summa ennen alennusta
+  $toolsumNoSaleQuery = pg_query("SELECT * FROM toolsum_wo_discount_function({$contract[0]});");
+  $toolsumNoSale = getRow($toolsumNoSaleQuery);
+
+  // Työkalujen verot
+  $tooltaxsumQuery = pg_query("SELECT * FROM tool_tax_sum_function({$contract[0]});");
+  $tooltaxsum = getRow($tooltaxsumQuery);  
+
+  // Työkalujen summa
+  $toolsumQuery = pg_query("SELECT * FROM toolsum_function({$contract[0]});");
+  $toolsum = getRow($toolsumQuery);
+
+  // Työtuntien summa ennen alennusta
+  $worksumNoSaleQuery = pg_query("SELECT * FROM worksum_wo_discount_function({$contract[0]});");
+  $worksumNoSale = getRow($worksumNoSaleQuery);
+
+  // Työtuntien verot
+  $worktaxsumQuery = pg_query("SELECT * FROM work_tax_sum_function({$contract[0]});");
+  $worktaxsum = getRow($worktaxsumQuery);    
+
+  // Työtuntien summa
+  $worksumQuery = pg_query("SELECT * FROM worksum_function({$contract[0]});");
+  $worksum = getRow($worksumQuery);  
 
   // suljetaan funktiolla tietokantayhteys
   closeConnection();

@@ -4,6 +4,7 @@
    * luokalla voi asettaa sessiolle muuttujia, sekä hakea sessioon liittyiä rivitietoja tietokannasta
    */
 
+
   session_start();  
 
   /** Haetaan tietokannasta contractorin tiedot */
