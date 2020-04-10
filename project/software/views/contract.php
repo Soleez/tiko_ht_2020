@@ -1,6 +1,6 @@
 <?php include(__DIR__.'/../controllers/Contract.php'); ?>
 <?php include(__DIR__.'/general/header.php'); ?>
-<!-- https://www.sis.uta.fi/~jm98546/tiko/tiko_ht_2020/project/software/views/contract.php -->
+
 <html>
   <body>
 

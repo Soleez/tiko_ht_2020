@@ -5,12 +5,25 @@ h2 {
 body {
     background-color:  rgb(233, 243, 233);
     padding: 0.5em;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0.5em;
 }
 
 
 table, th, td {
     border: 1px solid rgb(31, 31, 31);
     border-collapse: collapse;
-    background-color: #f0f0b0;
+    background-color: #f0f0b08e;
     padding: 0.5em;
 }
+
+th {
+    background-color: #f0f0b0;
+}
+
+table {
+    display: table;
+    width: 100%;
+}
+
+
