@@ -10,11 +10,12 @@
       print_r($bills[0]);
     ?>
 
-  <h2>Sopimuksen tiedot</h2>
+  <h2>Projektiin liittyvät sopimukset</h2>
     <table>
       <thead><tr>
         <th> Sopimuksen tunniste </th>
-        <th> Työn typpi </th>
+        <th> Sopimustyyppi </th>
+        <th> Sopimuksen voimassaolo </th>
       </tr></thead>
       <tbody><?php 
         $billLink = './bill.php';
@@ -22,21 +23,23 @@
         for ($row = 0; $row < count($contracts); $row++ ) {
           echo "<tr>";
             echo"<td>" . $contracts[$row]['contract_id'] . "</td>";
-            echo"<td>" . $contracts[$row]['contract_type_id'] . "</td>";
+            echo"<td>" . $contracts[$row]['contract_type_name'] . "</td>";
+            echo"<td>" . $contracts[$row]['bool_in_use'] . "</td>";
           echo "</tr>";
         }
         ?></tbody>
         </table>
 
-    <h2>Sopimukseen liittyvät laskut</h2>
+    <h2>Projektiin liittyvät laskut</h2>
     <table>
       <thead><tr>
         <th> Laskun tunniste </th>
         <th> Lähetyspäivä </th>
         <th> Eräpäivä </th>
-        <th> total_sum </th>
-        <th> bill_status_id </th>
-        <th> bill_type_id </th> 
+        <th> Kokonaissumma </th>
+        <th> Laskun tila </th>
+        <th> Laskun tyyppi </th> 
+        <th> Sopimuksen tunniste </th> 
       </tr></thead>
       <tbody><?php 
         $billLink = './bill.php';
@@ -53,8 +56,9 @@
                 echo"<td>" . $bills[$billRow]['bill_sending_date'] . "</td>";
                 echo"<td>" . $bills[$billRow]['bill_due_date'] . "</td>";
                 echo"<td>" . $bills[$billRow]['total_sum'] . "</td>";
-                echo"<td>" . $bills[$billRow]['bill_status_id'] . "</td>";
-                echo"<td>" . $bills[$billRow]['bill_type_id'] . "</td>";
+                echo"<td>" . $bills[$billRow]['bill_status_name'] . "</td>";
+                echo"<td>" . $bills[$billRow]['bill_type_name'] . "</td>";
+                echo"<td>" . $contracts[$row]['contract_id'] . "</td>";
               echo "</tr>";
             }
           }

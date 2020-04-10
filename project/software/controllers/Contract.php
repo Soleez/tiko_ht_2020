@@ -27,15 +27,25 @@
 
   // Laskulle kuuluvat tunnit tietokannasta
   $contractQuery = pg_query("SELECT * FROM contract
-     WHERE project_id = {$project[0]}
+    LEFT OUTER JOIN contract_type 
+      ON contract.contract_type_id = contract_type.contract_type_id
+    WHERE project_id = {$project[0]}
   ");
   // haetaan funktion avulla
   $contracts = getTable($contractQuery);
 
   // Laskulle kuuluvat tunnit tietokannasta
   $billQuery = pg_query("SELECT * FROM bill
-  -- WHERE contract_id = {$contract[0]}
+    LEFT OUTER JOIN bill_type 
+      ON bill.bill_type_id = bill_type.bill_type_id
+    LEFT OUTER JOIN bill_status 
+      ON bill.bill_status_id = bill_status.bill_status_id
+    WHERE contract_id IN (
+      SELECT contract_id FROM contract
+      WHERE project_id = {$project[0]}
+    ) 
   ");
+
   // haetaan funktion avulla
   $bills = getTable($billQuery);
 
