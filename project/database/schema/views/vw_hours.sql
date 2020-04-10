@@ -9,7 +9,7 @@ AS
     Project.Project_id,
     Project.Project_name,
     Contract.contract_id, 
-    Billable_hour.billable_hour_id AS bh_id, -- lyhenne jotta mahtuisi shell näkymään paremmin
+    Billable_hour.billable_hour_id,
     Billable_hour.quantity, 
     Billable_hour.date_added,
     CAST (Billable_hour.sale_percentage AS NUMERIC(10,2)), 
