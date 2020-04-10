@@ -55,8 +55,7 @@
 
   /** asettaa asiakkaan ID:n sessiolle */
   function setProject($id) {
-    var_dump($id); die;
-    $_SESSION['project_id'] = $_POST[$id];
+    $_SESSION['project_id'] = $id;
   }
 
   /** Haetaan tietokannasta spimuksen tiedot */

@@ -45,7 +45,7 @@
                 echo"<td>" . $projects[$projectRow]['project_name'] . "</td>";
                 echo"<td>" . $projects[$projectRow]['customer_address'] . "</td>";
                 echo"<td>" . $projects[$projectRow]['bool_tax_credit'] . "</td>";
-                echo"<td> <a href='$contractLink' onclick='$_SESSION[project_id] = $projects[$projectRow]['project_id']'> 
+                echo"<td> <a href='$contractLink?project=". $projects[$projectRow]['project_id'] ."'> 
                 <div> Sopimukselle " . $projects[$projectRow]['project_id'] . "</div> </a> </td>";
               echo "</tr>";
             }
