@@ -12,7 +12,9 @@
       echo("Työkohde: " . $project[2] . "<br/>");
       echo("Työkohteen osoite: " . $project[3] . "<br/>");
       echo("Laskutusosoite: " . $bill[3] . "<br/>");
-      echo("Laskun tyyppi: " . $bills[0]['contract_type_name'] . "<br/>");
+      echo("Sopimuksen tyyppi: " . $bills[0]['contract_type_name'] . "<br/>");
+      echo("Laskun tyyppi: " . $bills[0]['bill_type_name'] . "<br/>");
+      echo("Laskun tila: " . $bills[0]['bill_status_name'] . "<br/>");
     ?>
 
     <h2>Tunnit</h2>
@@ -37,7 +39,7 @@
             // ja asetetaan arvot omiin soluihin html taulussa
             echo"<td>" . $hours[$row]['customer_name'] . "</td>";
             echo"<td>" . $hours[$row]['work_type_name'] . "</td>";
-            echo"<td>" . $hours[$row]['quantity'] . "</td>";
+            echo"<td>" . $hours[$row]['quantity'] . "h </td>";
             echo"<td>" . $hours[$row]['hourly_rate'] . "</td>";
             echo"<td>" . $hours[$row]['sale_percentage'] . "</td>";
             echo"<td>" . $hours[$row]['vat_rate'] . "</td>";
@@ -59,7 +61,7 @@
       </tbody>
     </table>
 
-    <h2>Työkalut</h2>
+    <h2>Tarvikkeet</h2>
     <table>
       <thead><tr>
         <th> Asiakas </th>
@@ -78,8 +80,8 @@
           echo"<tr>";
             echo"<td>" . $tools[$row]['customer_name'] . "</td>";
             echo"<td>" . $tools[$row]['tool_name'] . "</td>";
-            echo"<td>" . $tools[$row]['quantity'] . "</td>";
-            echo"<td>" . $tools[$row]['tool_price'] . "</td>";
+            echo"<td>" . $tools[$row]['quantity'] . " " . $tools[$row]['unit'] . "</td>";
+            echo"<td>" . $tools[$row]['tool_selling_price'] . "</td>";
             echo"<td>" . $tools[$row]['sale_percentage'] . "</td>";
             echo"<td>" . $tools[$row]['vat_rate'] . "</td>";
             echo"<td>" . $tools[$row]['total_before_sale'] . "</td>";
@@ -91,7 +93,7 @@
       ?>
 
         <tr>
-          <td colspan="6">Työkalut yhteensä</td>
+          <td colspan="6">Tarvikkeet yhteensä</td>
           <td><?php echo($toolsumNoSale[0]); ?></td>
           <td><?php echo($tooltaxsum[0]); ?></td>
           <td><?php echo($toolsum[0] - $tooltaxsum[0]); ?></td>
