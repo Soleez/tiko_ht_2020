@@ -9,7 +9,10 @@
   // avataan funktiolla tietokantayhteys
   openConnection();
   
-  
+  // haetaan sessiolle id url:n perusteella
+  setCustomer($_GET['customer']);
+  setProject($_GET['project']);
+
   // haetaan urakoitisijan tiedot
   $contractor = getContractor();
   // haetaan sopimuksen tiedot
@@ -22,15 +25,9 @@
   $bill = getBill();
   
 
-  /*
-  $sessionNow = new Session;
-  $sopimus = $sessionNow->$contract;
-  var_dump($sessionNow); die;
-  */
-
   // Laskulle kuuluvat tunnit tietokannasta
   $contractQuery = pg_query("SELECT * FROM contract
-    -- WHERE contract_id = {$contract[0]}
+     WHERE project_id = {$project[0]}
   ");
   // haetaan funktion avulla
   $contracts = getTable($contractQuery);

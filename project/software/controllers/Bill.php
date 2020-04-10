@@ -8,7 +8,9 @@
 
   // avataan funktiolla tietokantayhteys
   openConnection();
-  
+
+  // haetaan urlista
+  setContract($_GET['contract']);
   
   // haetaan urakoitisijan tiedot
   $contractor = getContractor();
@@ -21,12 +23,6 @@
   // haetaan sopimuksen tiedot
   $bill = getBill();
   
-
-  /*
-  $sessionNow = new Session;
-  $sopimus = $sessionNow->$contract;
-  var_dump($sessionNow); die;
-  */
 
   // Laskulle kuuluvat tunnit tietokannasta
   $hoursQuery = pg_query("SELECT * FROM vw_hours

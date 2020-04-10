@@ -6,8 +6,7 @@
 
     <h2>Laskun tiedot</h2>
     <?php 
-      print_r($contracts[0]); 
-      echo($contractor[2]);
+      print_r($contracts[0]);
     ?>
 
     <h2>Sopimus</h2>
@@ -21,7 +20,7 @@
         <th> Linkki </th> 
       </tr></thead>
       <tbody><?php 
-      $billLink = './bill.php';
+        $billLink = './bill.php';
         // Haetaan taulukon arvot rivi kerrallaan
         for ($row = 0; $row < count($contracts); $row++ ) {
           echo "<tr>";
@@ -42,7 +41,8 @@
                 echo"<td>" . $bills[$billRow]['quantity'] . "</td>";
                 echo"<td>" . $bills[$billRow]['hourly_rate'] . "</td>";
                 echo"<td>" . $bills[$billRow]['hourly_rate'] . "</td>";
-                echo"<td> <a href='$billLink'> <div> Laskulle " . $bills[$billRow]['bill_id'] . "</div> </a> </td>";
+                echo"<td> <a href='$billLink?bill=". $bills[$billRow]['bill_id'] ."'> 
+                <div> Laskulle " . $bills[$billRow]['bill_id'] . "</div> </a> </td>";
               echo "</tr>";
             }
           }
