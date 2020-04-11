@@ -9,8 +9,22 @@
   // avataan funktiolla tietokantayhteys
   openConnection();
 
+  /** Jätän otto sulle loput korjaukseen, varmisitn vain että tuo sessio toimii
+    * alla oleva vardump() die funktiot auttavat eniten PHP:ssa arvojen debuggaamisessa.
+    *
+    * var_dump($_GET['contract']); die;
+    *
+    * Lisäsin NULL tarkistuksen, tuohon Contractin asetukseen, sillä $_GET yrittää hakea sopimusta
+    * URL:sta, mutta se on NULL lomakkeen postauksen jälkeen. rivi 25
+    * 
+    * Lisäksi nuo Contractin Getterit palauttavat taulukon, joten asetan taulukon ensimmäisen arvon
+    * selected_contract muuttujaan. rivi 36
+    */
+
   // haetaan urlista
-  setContract($_GET['contract']);
+  if( isset($_GET['contract'])) {
+    setContract($_GET['contract']);
+  }
 
   // haetaan sopimuksen tiedot
   $contract = getContract();
@@ -19,7 +33,7 @@
   $toolsQuery = pg_query("SELECT tool_id, tool_name, unit FROM Tool WHERE Tool.bool_in_use = true;");
   $tools = getTable($toolsQuery);
 
-  $selected_contract = intval($contract);
+  $selected_contract = intval($contract[0]);
 
   /* Haetaan työtyypit
   $worktypesQuery = pg_query("SELECT work_type_id, work_type_name FROM Work_type;");
@@ -41,11 +55,14 @@ if (isset($_POST['formSubmit1']))
     $currentdate = pg_escape_string(date('Y-m-d'));
 
     // Tietojen tarkistus
-$valid_info = (($selected_tool1 != 0 && $amount_of_tools1 > 0) /*|| ($selected_work != 0 && $amount_of_work > 0)*/);
+    $valid_info = (($selected_tool1 != 0 && $amount_of_tools1 > 0) 
+/*|| ($selected_work != 0 && $amount_of_work > 0)*/);
 
     if ($valid_info) {
         if ($selected_tool1 != 0 && $amount_of_tools1 > 0) {
-            echo 'yritetään lisätä: selected_contract: ' . $selected_contract . ', selectedtool1: ' . $selected_tool1 . ', amount_of_tools1: ' . $amount_of_tools1;
+            echo 'yritetään lisätä: selected_contract: ' . $selected_contract 
+            . ', selectedtool1: ' . $selected_tool1 . ', amount_of_tools1: ' . $amount_of_tools1;
+            
 
             /*
             $query1 = "INSERT INTO Sold_tool VALUES (DEFAULT, '$selected_tool1', '$amount_of_tools1', '$selected_contract', '$currentdate', '$sale1');";
@@ -94,6 +111,7 @@ $valid_info = (($selected_tool1 != 0 && $amount_of_tools1 > 0) /*|| ($selected_w
         } */
         // $viesti3 = 'Annetut tiedot puutteelliset - tarkista, ole hyvä!';
         $viesti3 = 'Virhe. Contract: ' . $selected_contract . ',selectedtool1: ' . $selected_tool1 . ',amount_of_tools1: ' . $amount_of_tools1;
+        
     }
 }
 
