@@ -19,15 +19,21 @@
           <th> Sopimuksen tunniste </th>
           <th> Sopimustyyppi </th>
           <th> Sopimuksen voimassaolo </th>
+          <th> Tuntien ja tarvikkeiden kirjaus </th>
         </tr></thead>
         <tbody><?php 
           $billLink = './bill.php';
+          $addLink = './add_rows.php';
           // Haetaan taulukon arvot rivi kerrallaan
           for ($row = 0; $row < count($contracts); $row++ ) {
             echo "<tr>";
               echo"<td>" . $contracts[$row]['contract_id'] . "</td>";
               echo"<td>" . $contracts[$row]['contract_type_name'] . "</td>";
               echo"<td>" . $contracts[$row]['bool_in_use'] . "</td>";
+              echo"<td> <a href='$addLink"
+              ."?contract=". $contracts[$row]['contract_id'] 
+              ."'> <div>" . "Työtuntien ja tarvikkeiden kirjaus" 
+              . "</div> </a> </td>";
             echo "</tr>";
           }
           ?></tbody>
