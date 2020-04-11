@@ -9,21 +9,40 @@ body {
     margin: 0.5em;
 }
 
-
-table, th, td {
-    border: 1px solid rgb(31, 31, 31);
+table {
+    display: table;
+    width: 100%;
+    border-color: rgba(169, 169, 169, 0.76);
+    border-style: hidden;
+    box-shadow: 0 0 0 0.025em;
+    border-radius: 0.25em;
     border-collapse: collapse;
     background-color: #f0f0b08e;
-    padding: 0.5em;
+}
+
+th, td {
+    border: 0.02em;
+    border-style: solid;
+    border-color: rgba(169, 169, 169, 0.76);
+    padding: 0.4em;
+    
 }
 
 th {
     background-color: #f0f0b0;
 }
 
-table {
-    display: table;
-    width: 100%;
+td {
+    background-color: #f0f0b08e;
 }
 
+.mainDiv {
+    padding: 0.5em;
+    margin: 0.25em;
+    background-color: rgba(255, 255, 255, 0.719);
+    border-style: solid;
+    border-color: rgba(169, 169, 169, 0.76);
+    border-width: 0.05em;
+    border-radius: 0.5em;
+}
 
