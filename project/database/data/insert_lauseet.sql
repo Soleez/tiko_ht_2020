@@ -14,8 +14,8 @@ INSERT INTO Customer(contractor_id, customer_name, customer_address, bool_tax_cr
 
 INSERT INTO Project(customer_id, project_name, project_address, bool_tax_credit) VALUES
 (1, 'Autotallin sähköt (R1)', 'Rapakatu 2, Tampere', true),
-(2, 'Mökin sähkötyöt (R2)', 'Kuusikuja 6 (R2)', true),
-(2, 'Mökin sähkötyöt (R3)', 'Kuusikuja 6 (R3)', true),
+(2, 'Mökin sähkötyöt (R2)', 'Kuusikuja 6', true),
+(2, 'Mökin sähkötyöt (R3)', 'Kuusikuja 6', true),
 (3, 'Keittiön sähköasennus (R4)', 'Kaapankatu 7, Tampere', true);
 
 INSERT INTO Contract_type(contract_type_id, contract_type_name) VALUES
@@ -62,11 +62,11 @@ INSERT INTO Work_type(work_type_id, work_type_name, hourly_rate, vat_type_id) VA
 (2, 'asennustyö', 45.00, 1),
 (3, 'aputyö', 35.00, 1);
 
-INSERT INTO Bill(contract_id, total_sum, billing_address, bill_type_id, bill_status_id, date_added, date_modified, bill_due_date, bill_sending_date) VALUES
-(1, null, 'Rapakatu 2, Tampere', 1, 1, '2020-04-10', null, null, null),
-(2, null, 'Taapertajantie 56, Tampere', 1, 1,'2020-01-18', null, null, null),
-(3, null, 'Taapertajantie 56, Tampere', 1, 1,'2020-01-18', null, null, null),
-(4, null, 'Kaapankatu 7, Tampere', 1, 1, '2020-03-15', null, null, null);
+INSERT INTO Bill(contract_id, total_sum, billing_address, bill_type_id, bill_status_id, date_added, date_modified, bill_due_date, bill_sending_date, previous_bill_id) VALUES
+(1, null, 'Rapakatu 2, Tampere', 1, 1, '2020-04-10', null, null, null, null),
+(2, null, 'Taapertajantie 56, Tampere', 1, 1,'2020-01-18', null, null, null, null),
+(3, null, 'Taapertajantie 56, Tampere', 1, 1,'2020-01-18', null, null, null, null),
+(4, null, 'Kaapankatu 7, Tampere', 1, 1, '2020-03-15', null, null, null, null);
 
 INSERT INTO Billable_hour(work_type_id, contract_id, date_added, quantity, sale_percentage) VALUES
 (1, 1, '2020-04-10', 3, default),
