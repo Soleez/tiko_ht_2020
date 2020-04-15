@@ -75,110 +75,95 @@ if (isset($_POST['formSubmit1']))
             $t_query1 = "INSERT INTO Sold_tool VALUES (DEFAULT, '$selected_tool1', '$amount_of_tools1', '$selected_contract', '$currentdate', '$tool_sale1');";
             $t_update1 = pg_query($t_query1);
 
-            // asetetaan msg1-muuttuja lisäämisen onnistumisen mukaan
+            // asetetaan t_msg1-muuttuja lisäämisen onnistumisen mukaan
             // lisätään virheilmoitukseen myös virheen syy (pg_last_error)
     
             if ($t_update1 && (pg_affected_rows($t_update1) > 0)) {
-                $t_msg1 = 'Tarvike kirjattu!';
+                $t_msg1 = 'Tarvikerivi 1 kirjattu!';
             }
             else {
-                $t_msg1 = 'Tarvikkeita ei lisätty: ' . pg_last_error();
+                $t_msg1 = 'Tarvikerivi 1, ei lisätty: ' . pg_last_error();
             }
+        }
+        else if (($selected_tool1 != 0 && $amount_of_tools1 == 0) || ($selected_tool1 == 0 && $amount_of_tools1 > 0)) {
+            $t_msg1 = 'Tarvikerivi 1: tiedot puutteelliset!';
         }
 
         if ($selected_tool2 != 0 && $amount_of_tools2 > 0) {
 
             $t_query2 = "INSERT INTO Sold_tool VALUES (DEFAULT, '$selected_tool2', '$amount_of_tools2', '$selected_contract', '$currentdate', '$tool_sale2');";
             $t_update2 = pg_query($t_query2);
-
-            // asetetaan msg1-muuttuja lisäämisen onnistumisen mukaan
-            // lisätään virheilmoitukseen myös virheen syy (pg_last_error)
     
             if ($t_update2 && (pg_affected_rows($t_update2) > 0)) {
-                $t_msg2 = 'Tarvike kirjattu!';
+                $t_msg2 = 'Tarvikerivi 2 kirjattu!';
             }
             else {
-                $t_msg2 = 'Tarvikkeita ei lisätty: ' . pg_last_error();
+                $t_msg2 = 'Tarvikerivi 2, ei lisätty: ' . pg_last_error();
             }
+        }
+        else if (($selected_tool2 != 0 && $amount_of_tools2 == 0) || ($selected_tool2 == 0 && $amount_of_tools2 > 0)) {
+            $t_msg2 = 'Tarvikerivi 2: tiedot puutteelliset!';
         }
 
         if ($selected_tool3 != 0 && $amount_of_tools3 > 0) {
 
             $t_query3 = "INSERT INTO Sold_tool VALUES (DEFAULT, '$selected_tool3', '$amount_of_tools3', '$selected_contract', '$currentdate', '$tool_sale3');";
             $t_update3 = pg_query($t_query3);
-
-            // asetetaan msg1-muuttuja lisäämisen onnistumisen mukaan
-            // lisätään virheilmoitukseen myös virheen syy (pg_last_error)
     
             if ($t_update3 && (pg_affected_rows($t_update3) > 0)) {
-                $t_msg3 = 'Tarvike kirjattu!';
+                $t_msg3 = 'Tarvikerivi 3 kirjattu!';
             }
             else {
-                $t_msg3 = 'Tarvikkeita ei lisätty: ' . pg_last_error();
+                $t_msg3 = 'Tarvikerivi 3, ei lisätty: ' . pg_last_error();
             }
+        }
+        else if (($selected_tool3 != 0 && $amount_of_tools3 == 0) || ($selected_tool3 == 0 && $amount_of_tools3 > 0)) {
+            $t_msg3 = 'Tarvikerivi 3: tiedot puutteelliset!';
         }
 
         // Work_type_id 1 = suunnittelu, 2 = asennustyö, 3 = aputyö
-        
         if ($amount_of_work1 > 0) {
             $w_query1 = "INSERT INTO Billable_hour VALUES (DEFAULT, 1, '$selected_contract', '$currentdate', '$amount_of_work1', '$work_sale1');";
             $w_update1 = pg_query($w_query1);
-            
-            // asetetaan msg2-muuttuja lisäämisen onnistumisen mukaan
-            // lisätään virheilmoitukseen myös virheen syy (pg_last_error)
     
             if ($w_update1 && (pg_affected_rows($w_update1) > 0)) {
-                $w_msg1 = 'Työtunnit kirjattu!';
+                $w_msg1 = 'Työtunnit (suunnittelu) kirjattu!';
             }
             else {
-                $w_msg1 = 'Työtunteja ei lisätty: ' . pg_last_error();
+                $w_msg1 = 'Työtunteja (suunnittelu) ei lisätty: ' . pg_last_error();
             }
         }
 
         if ($amount_of_work2 > 0) {
             $w_query2 = "INSERT INTO Billable_hour VALUES (DEFAULT, 2, '$selected_contract', '$currentdate', '$amount_of_work2', '$work_sale2');";
             $w_update2 = pg_query($w_query2);
-            
-            // asetetaan msg2-muuttuja lisäämisen onnistumisen mukaan
-            // lisätään virheilmoitukseen myös virheen syy (pg_last_error)
     
             if ($w_update2 && (pg_affected_rows($w_update2) > 0)) {
-                $w_msg2 = 'Työtunnit kirjattu!';
+                $w_msg2 = 'Työtunnit (asennustyö) kirjattu!';
             }
             else {
-                $w_msg2 = 'Työtunteja ei lisätty: ' . pg_last_error();
+                $w_msg2 = 'Työtunteja (asennustyö) ei lisätty: ' . pg_last_error();
             }
         }
 
         if ($amount_of_work3 > 0) {
             $w_query3 = "INSERT INTO Billable_hour VALUES (DEFAULT, 3, '$selected_contract', '$currentdate', '$amount_of_work3', '$work_sale3');";
             $w_update3 = pg_query($w_query3);
-            
-            // asetetaan msg2-muuttuja lisäämisen onnistumisen mukaan
-            // lisätään virheilmoitukseen myös virheen syy (pg_last_error)
     
             if ($w_update3 && (pg_affected_rows($w_update3) > 0)) {
-                $w_msg3 = 'Työtunnit kirjattu!';
+                $w_msg3 = 'Työtunnit (aputyö) kirjattu!';
             }
             else {
-                $w_msg3 = 'Työtunteja ei lisätty: ' . pg_last_error();
+                $w_msg3 = 'Työtunteja (aputyö) ei lisätty: ' . pg_last_error();
             }
         }
 
     }
 
-    // Virheentarkastelu ilmoittaa virheestä vain kun yhtään riviä ei onnistuta lisäämään.
-
     else {
         if ($selected_contract == 0) {
             $err_msg = 'Asiakasta ei ole valittu!';
         }
-        /* else if ($selected_tool == 0) {
-            $viesti = 'Valitse tarvike!';
-        }
-        else if ($amount_of_tools <= 0) {
-            $viesti = 'Lisättävien tarvikkeiden määrän oltava enemmän kuin 0.';
-        } */
         else {
             $err_msg = 'Annetut tiedot puutteelliset - tarkista, ole hyvä!';
         }
