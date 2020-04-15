@@ -4,7 +4,7 @@
 <html>
 
   <body>
-    / Etusivu / Projektit /  Lisää uusi työkohde
+    <p>/ Etusivu / Projektit /  Lisää uusi työkohde</p>
     <h2>Lisää uusi työkohde</h2>
 
     <!--- Dropdown-list asiakkaista--->
