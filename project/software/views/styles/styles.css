@@ -17,6 +17,7 @@ table, th, td {
 
 select {
     margin: 0.5em;
+    width: 200px;
 }
 
 input {
@@ -24,5 +25,5 @@ input {
 }
 
 .textbox {
-    width: 200px;
+    width: 300px;
 }
