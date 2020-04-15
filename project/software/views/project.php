@@ -3,7 +3,7 @@
 
 <html>
   <body>
-
+    <p>/ Etusivu / Projektit</p>
     <h2>Tiedot</h2>
     <?php 
       print_r($customers[0]); 
@@ -38,6 +38,7 @@
         }
       ?></tbody>
     </table>
+    <button><a href='./add_project_contract.php'>Lisää uusi työkohde</a></button>
 
   </body>
 </html>

@@ -3,7 +3,7 @@
 
 <html>
   <body>
-
+    <p>/ Etusivu</p>
     <h2>Ylläpito</h2>
     <?php 
     echo"<button> <a href='./tool.php'> Hallinnoi varastoa </a> </button>";

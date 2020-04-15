@@ -38,6 +38,7 @@ td {
 
 button {
     background-color: #f0f0b0;
+    margin: 5px;
 }
 
 .mainDiv {
@@ -66,16 +67,7 @@ a:hover, a:active {
     border-radius: 0.25em;
 }
 
-select {
-    margin: 0.5em;
-    width: 200px;
-}
-
-input {
-    margin: 0.5em;
-}
-
-.textbox {
-    width: 300px;
+.murupolku {
+    width: 10px;
 }
 

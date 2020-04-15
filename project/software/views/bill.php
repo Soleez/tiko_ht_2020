@@ -3,6 +3,7 @@
 
 <html>
   <body>
+    <p>/ Etusivu / Projektit / Sopimukset / Lasku</p>
     <div class = "mainDiv">
  
      <h2>Laskun tiedot</h2>

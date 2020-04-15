@@ -1,9 +1,10 @@
-<?php include(__DIR__.'/../controllers/Tapahtuma1.php'); ?>
+<?php include(__DIR__.'/../controllers/Add_project_contract.php'); ?>
 <?php include(__DIR__.'/general/header.php'); ?>
 
 <html>
 
   <body>
+    / Etusivu / Projektit /  Lisää uusi työkohde
     <h2>Lisää uusi työkohde</h2>
 
     <!--- Dropdown-list asiakkaista--->
