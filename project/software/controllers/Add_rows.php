@@ -73,7 +73,7 @@ if (isset($_POST['formSubmit1']))
         if ($selected_tool1 != 0 && $amount_of_tools1 > 0) {
 
             $t_query1 = "INSERT INTO Sold_tool VALUES (DEFAULT, '$selected_tool1', '$amount_of_tools1', '$selected_contract', '$currentdate', '$tool_sale1');";
-            $t_update1 = pg_query($t_query1);
+            $t_update1 = update($t_query1);
 
             // asetetaan t_msg1-muuttuja lisäämisen onnistumisen mukaan
             // lisätään virheilmoitukseen myös virheen syy (pg_last_error)
@@ -92,7 +92,7 @@ if (isset($_POST['formSubmit1']))
         if ($selected_tool2 != 0 && $amount_of_tools2 > 0) {
 
             $t_query2 = "INSERT INTO Sold_tool VALUES (DEFAULT, '$selected_tool2', '$amount_of_tools2', '$selected_contract', '$currentdate', '$tool_sale2');";
-            $t_update2 = pg_query($t_query2);
+            $t_update2 = update($t_query2);
     
             if ($t_update2 && (pg_affected_rows($t_update2) > 0)) {
                 $t_msg2 = 'Tarvikerivi 2 kirjattu!';
@@ -108,7 +108,7 @@ if (isset($_POST['formSubmit1']))
         if ($selected_tool3 != 0 && $amount_of_tools3 > 0) {
 
             $t_query3 = "INSERT INTO Sold_tool VALUES (DEFAULT, '$selected_tool3', '$amount_of_tools3', '$selected_contract', '$currentdate', '$tool_sale3');";
-            $t_update3 = pg_query($t_query3);
+            $t_update3 = update($t_query3);
     
             if ($t_update3 && (pg_affected_rows($t_update3) > 0)) {
                 $t_msg3 = 'Tarvikerivi 3 kirjattu!';
@@ -124,7 +124,7 @@ if (isset($_POST['formSubmit1']))
         // Work_type_id 1 = suunnittelu, 2 = asennustyö, 3 = aputyö
         if ($amount_of_work1 > 0) {
             $w_query1 = "INSERT INTO Billable_hour VALUES (DEFAULT, 1, '$selected_contract', '$currentdate', '$amount_of_work1', '$work_sale1');";
-            $w_update1 = pg_query($w_query1);
+            $w_update1 = update($w_query1);
     
             if ($w_update1 && (pg_affected_rows($w_update1) > 0)) {
                 $w_msg1 = 'Työtunnit (suunnittelu) kirjattu!';
@@ -136,7 +136,7 @@ if (isset($_POST['formSubmit1']))
 
         if ($amount_of_work2 > 0) {
             $w_query2 = "INSERT INTO Billable_hour VALUES (DEFAULT, 2, '$selected_contract', '$currentdate', '$amount_of_work2', '$work_sale2');";
-            $w_update2 = pg_query($w_query2);
+            $w_update2 = update($w_query2);
     
             if ($w_update2 && (pg_affected_rows($w_update2) > 0)) {
                 $w_msg2 = 'Työtunnit (asennustyö) kirjattu!';
@@ -148,7 +148,7 @@ if (isset($_POST['formSubmit1']))
 
         if ($amount_of_work3 > 0) {
             $w_query3 = "INSERT INTO Billable_hour VALUES (DEFAULT, 3, '$selected_contract', '$currentdate', '$amount_of_work3', '$work_sale3');";
-            $w_update3 = pg_query($w_query3);
+            $w_update3 = update($w_query3);
     
             if ($w_update3 && (pg_affected_rows($w_update3) > 0)) {
                 $w_msg3 = 'Työtunnit (aputyö) kirjattu!';
