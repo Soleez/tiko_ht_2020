@@ -4,7 +4,7 @@
     include(__DIR__.'/../main.php');
     // Tuodaan session, jonka saadaan muistiin rajaukset where ehtoon
     include(__DIR__.'/../classes/Session.php');
-    include(__DIR__.'../views/tapahtuma1.php');
+    include(__DIR__.'../views/add_project_contract.php');
 
     // avataan funktiolla tietokantayhteys
     openConnection();
@@ -33,7 +33,7 @@
         $amount_of_payments = intval($_POST['amount_of_payments']);
 
         // Tietojen tarkistus
-        $valid_info = selected_customer > 0 && strlen(trim($project_name)) > 0  && strlen(trim($project_name)) <= 60 && strlen(trim($project_address)) 
+        $valid_info = $selected_customer > 0 && strlen(trim($project_name)) > 0  && strlen(trim($project_name)) <= 60 && strlen(trim($project_address)) 
         <= 60 && $bool_tax_credit <> "" && $contract_type > 0;
 
         if ($valid_info) {

@@ -8,7 +8,7 @@
     <h2>Lisää uusi työkohde</h2>
 
     <!--- Dropdown-list asiakkaista--->
-    <form method="POST" action="tapahtuma1.php">
+    <form method="POST" action="add_project_contract.php">
     <table>
 	    <tr>
           <td>Asiakas</td>
