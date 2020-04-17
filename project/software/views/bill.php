@@ -4,7 +4,6 @@
 <html>
   <body>
     <div class = "mainDiv">
- 
      <h2>Laskun tiedot</h2>
      <?php 
        echo("Urakoitsija: " . $contractor[2] . "<br/>");
@@ -151,7 +150,10 @@
 
 
      <?php
-      if($bill[4] === '1') {
+      /** Näytetään laskun lähetysnäppäin jos ehdot täyttyvät
+        * Jos laskun status = 1 (laskutamatta) ja contract_type = 1 tai 2 (tuntilaskutteinen tai urakka) 
+        */
+      if(($bill[5] == "1") && (($contract[2] == "1") || ($contract[2] == "2"))){
 
         echo"</br>";
         if(isset($_POST['sendBill'])) { 

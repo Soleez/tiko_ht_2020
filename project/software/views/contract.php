@@ -62,7 +62,10 @@
                     ."'> <div> Laskulle tunnisteella " 
                     . $bills[$billRow]['bill_id'] 
                     . "</div> </a> </td>";
-                  echo"<td>" . $bills[$billRow]['bill_sending_date'] . "</td>";
+                  echo"<td>" 
+                    // En saanut tähän Null arvon tarkista toimimaan oikein, nyt NULL = on 1970 luvulla
+                    . date("d.m.Y", strtotime($bills[$billRow]['bill_sending_date'])) 
+                    . "</td>";
                   echo"<td>" . $bills[$billRow]['bill_due_date'] . "</td>";
                   echo"<td>" . $bills[$billRow]['total_sum'] . "</td>";
                   echo"<td>" . $bills[$billRow]['bill_status_name'] . "</td>";
