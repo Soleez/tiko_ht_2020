@@ -3,7 +3,6 @@
 
 <html>
   <body>
-    <p>/ Etusivu / Projektit / Sopimukset / Lasku</p>
     <div class = "mainDiv">
  
      <h2>Laskun tiedot</h2>
@@ -149,6 +148,24 @@
        Kotitalousvähennys vuoden alusta: <br />
        Lopullinen hinta: <?php echo($toolsum[0] + $worksum[0]); ?><br/>
      </div>
+
+
+     <?php
+      if($bill[4] === '1') {
+
+        echo"</br>";
+        if(isset($_POST['sendBill'])) { 
+          sendBill($bill[0]);
+          echo "Lasku lähetetty"; 
+        } 
+      
+        echo" 
+        <form method='post'> 
+          <input type='submit' name='sendBill' value='Lähetä lasku'/> 
+        </form> ";
+      }
+    ?> 
+
     </div>
   </body>
 </html>

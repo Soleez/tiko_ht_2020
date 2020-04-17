@@ -3,7 +3,6 @@
 
 <html>
   <body>
-    <p>/ Etusivu / Projektit / Sopimukset</p>
     <div class = "mainDiv">
       <h2>Laskun tiedot</h2>
       <?php 
@@ -17,10 +16,9 @@
       <h2>Projektiin liittyvät sopimukset</h2>
       <table>
         <thead><tr>
-          <th> Sopimuksen tunniste </th>
+          <th> Työtuntien ja tarvikkeiden kirjaus </th>
           <th> Sopimustyyppi </th>
           <th> Sopimuksen voimassaolo </th>
-          <th> Tuntien ja tarvikkeiden kirjaus </th>
         </tr></thead>
         <tbody><?php 
           $billLink = './bill.php';
@@ -28,13 +26,13 @@
           // Haetaan taulukon arvot rivi kerrallaan
           for ($row = 0; $row < count($contracts); $row++ ) {
             echo "<tr>";
-              echo"<td>" . $contracts[$row]['contract_id'] . "</td>";
-              echo"<td>" . $contracts[$row]['contract_type_name'] . "</td>";
-              echo"<td>" . $contracts[$row]['bool_in_use'] . "</td>";
               echo"<td> <a href='$addLink"
               ."?contract=". $contracts[$row]['contract_id'] 
-              ."'> <div>" . "Työtuntien ja tarvikkeiden kirjaus" 
+              ."'> <div> Sopimukselle tunnisteella "
+              . $contracts[$row]['contract_id']
               . "</div> </a> </td>";
+              echo"<td>" . $contracts[$row]['contract_type_name'] . "</td>";
+              echo"<td>" . $contracts[$row]['bool_in_use'] . "</td>";
             echo "</tr>";
           }
           ?></tbody>
@@ -43,7 +41,7 @@
       <h2>Projektiin liittyvät laskut</h2>
       <table>
         <thead><tr>
-          <th> Laskun tunniste </th>
+          <th> Laskun tiedot ja lähetys </th>
           <th> Lähetyspäivä </th>
           <th> Eräpäivä </th>
           <th> Kokonaissumma </th>
@@ -61,7 +59,8 @@
                   echo"<td> <a href='$billLink"
                     ."?contract=". $contracts[$row]['contract_id'] 
                     ."&bill=". $bills[$billRow]['bill_id'] 
-                    ."'> <div>" . $bills[$billRow]['bill_id'] 
+                    ."'> <div> Laskulle tunnisteella " 
+                    . $bills[$billRow]['bill_id'] 
                     . "</div> </a> </td>";
                   echo"<td>" . $bills[$billRow]['bill_sending_date'] . "</td>";
                   echo"<td>" . $bills[$billRow]['bill_due_date'] . "</td>";

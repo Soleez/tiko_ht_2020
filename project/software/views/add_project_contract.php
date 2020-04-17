@@ -2,9 +2,7 @@
 <?php include(__DIR__.'/general/header.php'); ?>
 
 <html>
-
   <body>
-    <p>/ Etusivu / Projektit /  Lisää uusi työkohde</p>
     <h2>Lisää uusi työkohde</h2>
 
     <!--- Dropdown-list asiakkaista--->
