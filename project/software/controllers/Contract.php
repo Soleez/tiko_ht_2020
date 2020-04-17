@@ -21,8 +21,6 @@
   $project = getProject();
   // haetaan sopimuksen tiedot
   $contract = getContract();
-  // haetaan sopimuksen tiedot
-  $bill = getBill();
   
 
   // Laskulle kuuluvat tunnit tietokannasta

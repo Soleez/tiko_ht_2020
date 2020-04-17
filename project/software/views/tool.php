@@ -2,7 +2,6 @@
 <?php include(__DIR__.'/general/header.php'); ?>
 <html>
   <body>
-    <p>/ Etusivu / Työkalut</p>
     <h2>Työkalut tietokannassa</h2>
     <table>
       <thead><tr>

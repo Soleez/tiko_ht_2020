@@ -3,7 +3,6 @@
 
 <html>
   <body>
-    <p>/ Etusivu / Projektit / Sopimukset / Lasku</p>
     <div class = "mainDiv">
  
      <h2>Laskun tiedot</h2>
@@ -152,16 +151,20 @@
 
 
      <?php
-      if(isset($_POST['button1'])) { 
-        sendBill($bill[0]);
-        echo "Lasku lähetetty"; 
-      } 
-     ?> 
+      if($bill[4] === '1') {
 
-     <form method="post"> 
-        <input type="submit" name="button1" value="Lähetä lasku"/> 
-    </form> 
-
+        echo"</br>";
+        if(isset($_POST['sendBill'])) { 
+          sendBill($bill[0]);
+          echo "Lasku lähetetty"; 
+        } 
+      
+        echo" 
+        <form method='post'> 
+          <input type='submit' name='sendBill' value='Lähetä lasku'/> 
+        </form> ";
+      }
+    ?> 
 
     </div>
   </body>

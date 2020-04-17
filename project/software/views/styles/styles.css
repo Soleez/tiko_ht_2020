@@ -41,7 +41,7 @@ button {
     margin: 5px;
 }
 
-.mainDiv {
+div.mainDiv {
     padding: 0.5em;
     margin: 0.25em;
     background-color: rgba(255, 255, 255, 0.719);
@@ -51,7 +51,7 @@ button {
     border-radius: 0.5em;
 }
 
-a:link, a:visited {
+a:link.tablelink, a:visited.tablelink {
     background-color: #e4e4b1d5;
     color: rgba(19, 19, 19, 0.89);
     display: inline-block;
@@ -61,7 +61,7 @@ a:link, a:visited {
     border-radius: 0.5em;
 }
   
-a:hover, a:active {
+a:hover.tablelink, a:active.tablelink {
     background-color: #ffff7e48;
     text-decoration: underline;
     border-radius: 0.25em;
@@ -70,4 +70,3 @@ a:hover, a:active {
 .murupolku {
     width: 10px;
 }
-

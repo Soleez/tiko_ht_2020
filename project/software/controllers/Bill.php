@@ -33,7 +33,7 @@
   // haetaan funktion avulla
   $hours = getTable($hoursQuery);
 
-  // Haetaan laskujen tietoja
+  // Haetaan laskujen tietoja vw_bills viewstä, session antaman bill_id:n perusteella
   $billsQuery = pg_query("SELECT * FROM vw_bills
     WHERE contract_id = {$bill[0]}
   ;");

@@ -9,18 +9,6 @@
   // avataan funktiolla tietokantayhteys
   openConnection();
 
-  /** Jätän otto sulle loput korjaukseen, varmisitn vain että tuo sessio toimii
-    * alla oleva vardump() die funktiot auttavat eniten PHP:ssa arvojen debuggaamisessa.
-    *
-    * var_dump($_GET['contract']); die;
-    *
-    * Lisäsin NULL tarkistuksen, tuohon Contractin asetukseen, sillä $_GET yrittää hakea sopimusta
-    * URL:sta, mutta se on NULL lomakkeen postauksen jälkeen. rivi 25
-    * 
-    * Lisäksi nuo Contractin Getterit palauttavat taulukon, joten asetan taulukon ensimmäisen arvon
-    * selected_contract muuttujaan. rivi 36
-    */
-
   // haetaan urlista
   if( isset($_GET['contract'])) {
     setContract($_GET['contract']);
