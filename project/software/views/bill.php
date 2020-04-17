@@ -149,6 +149,20 @@
        Kotitalousvähennys vuoden alusta: <br />
        Lopullinen hinta: <?php echo($toolsum[0] + $worksum[0]); ?><br/>
      </div>
+
+
+     <?php
+      if(isset($_POST['button1'])) { 
+        sendBill($bill[0]);
+        echo "Lasku lähetetty"; 
+      } 
+     ?> 
+
+     <form method="post"> 
+        <input type="submit" name="button1" value="Lähetä lasku"/> 
+    </form> 
+
+
     </div>
   </body>
 </html>

@@ -69,6 +69,26 @@
   $worksumQuery = pg_query("SELECT * FROM worksum_function({$contract[0]});");
   $worksum = getRow($worksumQuery);  
 
+
+  /** Luodaan funktio, jolla lasku saadaan lähtettyä
+    * Eräpäivä asettuu aina kolmen viikon päähän
+    */
+  function sendBill($id) {
+    // Laskulle kuuluvat tunnit tietokannasta
+    $sendBill = pg_query("UPDATE bill
+      SET
+        bill_status_id = 2,
+        bill_sending_date = CURRENT_DATE,
+        bill_due_date = (CURRENT_DATE + 21),
+        date_modified = clock_timestamp()
+        -- total_sum = ({$toolsum[0]} + {$worksum[0]})
+    WHERE bill_id = {$id}
+    ");
+
+    // haetaan funktion avulla
+    update($sendBill);
+  }
+
   // suljetaan funktiolla tietokantayhteys
   closeConnection();
   
