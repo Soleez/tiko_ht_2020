@@ -9,26 +9,6 @@
   // avataan funktiolla tietokantayhteys
   openConnection();
   
-  
-  // Tarvitaankohan näitä? Jätin mukaan vielä tässä vaiheessa.
-
-  // haetaan urakoitisijan tiedot
-  $contractor = getContractor();
-  // haetaan sopimuksen tiedot
-  $customer = getCustomer();
-  // haetaan sopimuksen tiedot
-  $project = getProject();
-  // haetaan sopimuksen tiedot
-  $contract = getContract();
-  // haetaan sopimuksen tiedot
-  $bill = getBill();
-  
-
-  /*
-  $sessionNow = new Session;
-  $sopimus = $sessionNow->$contract;
-  var_dump($sessionNow); die;
-  */
 
   // Nimetty yksikössä $tool, koska $tools oli jo käytössä muualla.
 

@@ -3,9 +3,7 @@
 
 <html>
   <body>
-    <p>/ Etusivu / Projektit / Sopimukset / Lasku</p>
     <div class = "mainDiv">
- 
      <h2>Laskun tiedot</h2>
      <?php 
        echo("Urakoitsija: " . $contractor[2] . "<br/>");
@@ -149,6 +147,27 @@
        Kotitalousvähennys vuoden alusta: <br />
        Lopullinen hinta: <?php echo($toolsum[0] + $worksum[0]); ?><br/>
      </div>
+
+
+     <?php
+      /** Näytetään laskun lähetysnäppäin jos ehdot täyttyvät
+        * Jos laskun status = 1 (laskutamatta) ja contract_type = 1 tai 2 (tuntilaskutteinen tai urakka) 
+        */
+      if(($bill[5] == "1") && (($contract[2] == "1") || ($contract[2] == "2"))){
+
+        echo"</br>";
+        if(isset($_POST['sendBill'])) { 
+          sendBill($bill[0]);
+          echo "Lasku lähetetty"; 
+        } 
+      
+        echo" 
+        <form method='post'> 
+          <input type='submit' name='sendBill' value='Lähetä lasku'/> 
+        </form> ";
+      }
+    ?> 
+
     </div>
   </body>
 </html>

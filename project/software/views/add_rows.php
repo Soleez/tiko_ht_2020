@@ -2,9 +2,7 @@
 <?php include(__DIR__.'/general/header.php'); ?>
 
 <html>
-
   <body>
-    <p>/ Etusivu / Projektit / Sopimukset / Lisää tarvikkeita ja työtunteja</p>
     <h2>Lisää tarvikkeita ja työtunteja sopimukselle</h2>
     <div>Kirjataan tälle päivälle <?php echo date("Y-m-d"); ?>.</div>
 
