@@ -39,8 +39,8 @@ INSERT INTO Bill_status(bill_status_id, bill_status_name, status_notes) VALUES
 
 INSERT INTO Bill_type(bill_type_id, bill_type_name, handling_fee) VALUES
 (1, 'lasku', 5),
-(2, 'maksumuistutus', null),
-(3, 'karhu', null);
+(2, 'maksumuistutus', 5),
+(3, 'karhu', 5);
 
 INSERT INTO Vat_type(vat_type_id, vat_type_name, vat_rate) VALUES
 (1, 'työ', 24),
