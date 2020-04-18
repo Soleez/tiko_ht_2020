@@ -49,6 +49,7 @@
       return $row;
     }
   }
+  
   /** Luodaan tietokantafunktion, jolla päivitetään $query tietokantaan. */
   function update($query) {
     if (!$query) {
