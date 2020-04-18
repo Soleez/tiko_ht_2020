@@ -19,9 +19,7 @@
   $customer = getCustomer();
   // haetaan sopimuksen tiedot
   $project = getProject();
-  // haetaan sopimuksen tiedot
-  $contract = getContract();
-  
+
 
   // Laskulle kuuluvat tunnit tietokannasta
   $contractQuery = pg_query("SELECT * FROM contract
@@ -31,6 +29,7 @@
   ");
   // haetaan funktion avulla
   $contracts = getTable($contractQuery);
+
 
   // Laskulle kuuluvat tunnit tietokannasta
   $billQuery = pg_query("SELECT * FROM bill
@@ -46,6 +45,21 @@
 
   // haetaan funktion avulla
   $bills = getTable($billQuery);
+
+  // haetaan uusin sopimus ja lasku
+  $latestContract = $contracts[count($contracts) -1];
+  $latestBill = $bills[count($bills) -1];
+
+  // jos bills kyselyn tulos on tyhjä toteutetaan sinne
+  if(!$latestBill) {
+
+
+
+    var_dump($bills); die;
+  }
+  else {
+    var_dump($latestBill['bill_status_name']); die;
+  }
 
   // suljetaan funktiolla tietokantayhteys
   closeConnection();
