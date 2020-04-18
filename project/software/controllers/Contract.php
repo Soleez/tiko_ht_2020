@@ -50,15 +50,20 @@
   $latestContract = $contracts[count($contracts) -1];
   $latestBill = $bills[count($bills) -1];
 
-  // jos bills kyselyn tulos on tyhjä toteutetaan sinne
-  if(!$latestBill) {
-
-
-
-    var_dump($bills); die;
-  }
-  else {
-    var_dump($latestBill['bill_status_name']); die;
+  // jos bills kyselyn tulos on tyhjä
+  if((!$latestBill) /* && ($latestContract['contract_type_id'] == '') */) {
+    $insertBillQuery = "INSERT INTO Bill (
+        bill_id, contract_id, billing_address, bill_type_id, bill_status_id, date_added ) 
+      VALUES (
+        DEFAULT, 
+        {$latestContract[contract_id]}, 
+        '{$customer[3]}', 
+        1, 
+        1,
+        CURRENT_DATE
+      );
+    ";
+    update($insertBillQuery);
   }
 
   // suljetaan funktiolla tietokantayhteys
