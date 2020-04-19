@@ -10,16 +10,17 @@ returns table(
     bill_due_date date,
     previous_bill_id BIGINT,
     handling_fee NUMERIC(10,2),
+    bill_number INT,
     tier INT
 )
 as $suorita$
 BEGIN
     return query
     with recursive bl(bill_id, contract_id, total_sum, billing_address, 
-        bill_status_id, bill_due_date, previous_bill_id, handling_fee, tier) as (
+        bill_status_id, bill_due_date, previous_bill_id, handling_fee, bill_number,tier) as (
         select b.bill_id, cast(b.contract_id as bigint), b.total_sum, 
             b.billing_address,  b.bill_status_id, b.bill_due_date, 
-            b.previous_bill_id, bt.handling_fee,1
+            b.previous_bill_id, bt.handling_fee, b.bill_number, 1
         from (Bill b 
             join Contract on b.contract_id = Contract.contract_id) 
             join Bill_type bt on bt.bill_type_id = b.bill_type_id
@@ -27,7 +28,7 @@ BEGIN
         union
         select b.bill_id, cast(b.contract_id as bigint), b.total_sum, 
             b.billing_address, b.bill_status_id, b.bill_due_date, 
-            bl.previous_bill_id, bt.handling_fee, bl.tier + 1
+            bl.previous_bill_id, bt.handling_fee, b.bill_number,bl.tier + 1
         from ((Bill b 
             join bl on b.previous_bill_id = bl.bill_id) 
             join Contract on b.contract_id = Contract.contract_id)  
@@ -46,8 +47,11 @@ insert into Bill values
 (default, 4, 590, 'osote3', 1, 2, null, null, '2020-04-30', '2020-03-20');
 
 insert into Bill values 
-(DEFAULT, 3, 3003, 'osote1', 1, 2, null, null, '2020-02-20', '2020-02-02', null),
-(default, 2, 402, 'osote2', 2, 2, null, null, '2020-04-15', '2020-03-20', 6);
+(DEFAULT, 3, 3003, 'osote1', 1, 2, null, null, '2020-02-20', '2020-02-02', null, default),
+(default, 2, 402, 'osote2', 2, 2, null, null, '2020-04-15', '2020-03-20', 7, 2);
 
 insert into Bill values
-(default, 3, 3003, 'osote1', 2, 2, null, null, '2020-03-25', '2020-02-25', 8);
+(default, 3, 3003, 'osote1', 2, 2, null, null, '2020-03-25', '2020-02-25', 9, 2);
+
+insert into Bill values
+(default, 3, 200, 'osote2', 1, 2, null, null, '2020-02-03', '2020-01-03');

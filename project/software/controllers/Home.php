@@ -51,13 +51,13 @@
             $billCount++;
           }
           else {
-            $msg = "Maksun lähetys epäonnistui". pg_last_error();
+            $msg = "Laskun lähetys epäonnistui". pg_last_error();
           }
-          $msg = "Muistutusmaksuja lähetetty $billCount kappaletta.";
+          $msg = "Muistutuslaskuja lähetetty $billCount kappale(tta).";
         }
       }
       else {
-        $msg = "Ei lähetettäviä muistutusmaksuja.";
+        $msg = "Ei lähetettäviä muistutuslaskuja.";
       }
     }
     else {
@@ -79,7 +79,7 @@
       // bill_id, contract_id, total_sum, billing_address, bill_status_id, 
       // bill_due_date, previous_bill_id, handling_fee, tier
       $billsTable = getTable($billsQuery);
-      if (count($billsTable)>1) {
+      if ($billsTable[0]['bill_id'] != null) {
         $billCount = 0;
         for ($row = 0; $row < count($billsTable); $row++) {
           // Bill-taulun sarakkeet
@@ -88,31 +88,48 @@
           // bill_sending_date, previous_bill_id
           $bill_id = $billsTable[$row]['bill_id'];
           $address = $billsTable[$row]['billing_address'];
+          
           // Edellisen laskun loppusumma(sis. laskutuslisän) + uuden laskun 
           // laskutuslisä + viivästyskorko 16% (vuosikorko)
           $tmp_date = $billsTable[$row]['bill_due_date'];
-          $sum = $billsTable[$row]['total_sum'] + 
-            $billsTable[$row]['handling_fee'] + ;
-          $contract_id = $billsTable[$row]['contract_id'];
-          $reminderBill = ("INSERT INTO Bill VALUES 
-            (DEFAULT,
-            $contract_id, 
-            $sum,
-            '$address', 2, default, current_date,
-            null, current_date+30, current_date, $bill_id)");
-          $result = update($reminderBill);
-          $testi = $billsTable[$row]['bill_id'];
-          if ($result) {
-            $billCount++;
+          $penaltyintr_res = update("SELECT * FROM 
+                                    count_penalty_interest_function(CAST('$tmp_date' as date));");
+          if ($penaltyintr_res) {
+            $penaltyintr = getRow($penaltyintr_res);
+            // Summa josta viivästysmaksu lasketaan
+            $orig_total = $billsTable[$row]['total_sum'] - 5;
+            $handling_fee_count = $billsTable[$row]['bill_number'];
+            // Viivästysmaksun määrä
+            $surcharge = $orig_total*$penaltyintr[0];
+
+            $sum = $billsTable[$row]['total_sum'] + 
+              $billsTable[$row]['handling_fee']*$handling_fee_count
+               + $surcharge;
+
+            $contract_id = $billsTable[$row]['contract_id'];
+            $reminderBill = ("INSERT INTO Bill VALUES 
+              (DEFAULT,
+              $contract_id, 
+              $sum,
+              '$address', 3, 2, current_date,
+              null, current_date+30, current_date, $bill_id, 3)");
+            $result = update($reminderBill);
+            $testi = $billsTable[$row]['bill_id'];
+            if ($result) {
+              $billCount++;
+            }
+            else {
+              $msg = "Laskun lähetys epäonnistui". pg_last_error();
+            }
           }
           else {
-            $msg = "Maksun lähetys epäonnistui". pg_last_error();
+            $msg = "Viivästyskoron lasku epäonnistui." . pg_last_error();
           }
-          $msg = "Muistutusmaksuja lähetetty $billCount kappaletta.";
+          $msg = $msg."Karhulaskuja lähetetty $billCount kappale(tta).";
         }
       }
       else {
-        $msg = "Ei lähetettäviä muistutusmaksuja.";
+        $msg = $msg."Ei lähetettäviä karhulaskuja.";
       }
     }
     else {
