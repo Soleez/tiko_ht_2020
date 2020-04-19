@@ -33,7 +33,7 @@
     if ($billsQuery) {  
       // bill_id, contract_id, total_sum, billing_address, bill_status_id, bill_due_date, previous_bill_id, tier
       $billsTable = getTable($billsQuery);
-      if (count($billsTable)>1) {
+      if ($billsTable[0]['bill_id'] != null) {
         $billCount = 0;
         for ($row = 0; $row < count($billsTable); $row++) {
           // bill_id, contract_id, total_sum, billing_address, bill_type_id, 
@@ -44,13 +44,9 @@
           $sum = $billsTable[$row]['total_sum'];
           $contract_id = $billsTable[$row]['contract_id'];
           $reminderBill = ("INSERT INTO Bill VALUES 
-            (DEFAULT,
-            $contract_id, 
-            $sum,
-            '$address', 2, default, current_date,
-            null, current_date+30, current_date, $bill_id)");
+            (DEFAULT, $contract_id, $sum, '$address', 2, 2, current_date,
+            null, current_date+30, current_date, $bill_id, 2)");
           $result = update($reminderBill);
-          $testi = $billsTable[$row]['bill_id'];
           if ($result) {
             $billCount++;
           }
@@ -68,7 +64,7 @@
       echo("Kysely epäonnistui.");
     }
   }
-
+  
   // Karhulasku
   if(isset($_POST['karhulaskuButton'])) { 
     $billsQuery = update("SELECT * from recursive_bills_function()
@@ -78,18 +74,25 @@
         where previous_bill_id is not null) 
       and bill_due_date < current_date and bill_status_id = 2;");
 
-    if ($billsQuery) {  
-      // bill_id, contract_id, total_sum, billing_address, bill_status_id, bill_due_date, previous_bill_id, tier
+    if ($billsQuery) {
+      // billsTable sarakkeet  
+      // bill_id, contract_id, total_sum, billing_address, bill_status_id, 
+      // bill_due_date, previous_bill_id, handling_fee, tier
       $billsTable = getTable($billsQuery);
       if (count($billsTable)>1) {
         $billCount = 0;
         for ($row = 0; $row < count($billsTable); $row++) {
+          // Bill-taulun sarakkeet
           // bill_id, contract_id, total_sum, billing_address, bill_type_id, 
           // bill_status_id, date_added, date_modified, bill_due_date,
           // bill_sending_date, previous_bill_id
           $bill_id = $billsTable[$row]['bill_id'];
           $address = $billsTable[$row]['billing_address'];
-          $sum = CAST($billsTable[$row]['total_sum'] as numeric(10,2)) + $billsTable[$row]['handling_fee'];
+          // Edellisen laskun loppusumma(sis. laskutuslisän) + uuden laskun 
+          // laskutuslisä + viivästyskorko 16% (vuosikorko)
+          $tmp_date = $billsTable[$row]['bill_due_date'];
+          $sum = $billsTable[$row]['total_sum'] + 
+            $billsTable[$row]['handling_fee'] + ;
           $contract_id = $billsTable[$row]['contract_id'];
           $reminderBill = ("INSERT INTO Bill VALUES 
             (DEFAULT,

@@ -19,8 +19,6 @@
       echo($msg);
     }
     ?>
-   
-   
 
     <h2>Kirjaudu urakoitsijana</h2>
     <table>
