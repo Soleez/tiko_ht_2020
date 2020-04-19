@@ -3,6 +3,7 @@
 
 <html>
   <body>
+
     <h2>Tiedot</h2>
     <?php 
       print_r($customers[0]); 

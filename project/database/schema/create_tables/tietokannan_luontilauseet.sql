@@ -106,6 +106,7 @@ CREATE TABLE Bill (
     total_sum NUMERIC(10,2),
     billing_address VARCHAR (60) NOT NULL,
     bill_type_id INT NOT NULL default 1,
+    bill_number INT NOT NULL default 1,
     bill_status_id INT NOT NULL default 1,
     date_added DATE,
     date_modified DATE,
