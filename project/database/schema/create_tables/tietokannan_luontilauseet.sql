@@ -112,6 +112,7 @@ CREATE TABLE Bill (
     bill_due_date DATE,
     bill_sending_date DATE,
     previous_bill_id BIGINT,
+    bill_number INT default 1,
     PRIMARY KEY (bill_id),
     FOREIGN KEY (contract_id) REFERENCES Contract,
     FOREIGN KEY (bill_type_id) REFERENCES Bill_type,

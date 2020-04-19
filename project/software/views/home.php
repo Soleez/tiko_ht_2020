@@ -4,9 +4,20 @@
 <html>
   <body>
     <h2>Ylläpito</h2>
+    
     <?php 
     echo"<button> <a href='./tool.php'> Hallinnoi varastoa </a> </button>";
-    echo"<button> <a href='./home.php'> Suorita laskujen lähetys </a> </button>";
+    echo"<button> <a href='./home.php'> Suorita laskujen lähetys </a> </button>"; 
+    ?> 
+      
+    <form method="post"> 
+      <button type="submit" name="muistutuslaskuButton">Lähetä muistutuslaskut</button>
+      <button type="submit" name="karhulaskuButton">Lähetä karhulaskut</button> 
+    </form> 
+    <?php
+    if(isset($msg)) {
+      echo($msg);
+    }
     ?>
 
     <h2>Kirjaudu urakoitsijana</h2>
