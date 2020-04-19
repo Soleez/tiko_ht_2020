@@ -53,7 +53,7 @@
   /** Luodaan tietokantafunktion, jolla päivitetään $query tietokantaan. */
   function update($query) {
     if (!$query) {
-      echo "Virhe kyselyssä.\.n";
+      echo "Virhe kyselyssä.\n";
       return array();
     }
     else {

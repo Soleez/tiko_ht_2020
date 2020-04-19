@@ -53,7 +53,8 @@
   // jos bills kyselyn tulos on tyhjä
   if((!$latestBill) /* && ($latestContract['contract_type_id'] == '') */) {
     $insertBillQuery = "INSERT INTO Bill (
-        bill_id, contract_id, billing_address, bill_type_id, bill_status_id, date_added ) 
+        bill_id, contract_id, billing_address, bill_type_id, bill_status_id, date_added
+      ) 
       VALUES (
         DEFAULT, 
         {$latestContract[contract_id]}, 

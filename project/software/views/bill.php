@@ -157,7 +157,7 @@
 
         echo"</br>";
         if(isset($_POST['sendBill'])) { 
-          sendBill($bill[0]);
+          sendBill($bill[0], $totalsum);
           echo "Lasku lähetetty"; 
         } 
       

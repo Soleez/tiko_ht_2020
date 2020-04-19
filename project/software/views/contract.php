@@ -47,6 +47,7 @@
           <th> Kokonaissumma </th>
           <th> Laskun tila </th>
           <th> Laskun tyyppi </th> 
+          <th> Sopimustyyppi </th> 
           <th> Sopimuksen tunniste </th> 
         </tr></thead>
         <tbody><?php 
@@ -70,6 +71,7 @@
                   echo"<td>" . $bills[$billRow]['total_sum'] . "</td>";
                   echo"<td>" . $bills[$billRow]['bill_status_name'] . "</td>";
                   echo"<td>" . $bills[$billRow]['bill_type_name'] . "</td>";
+                  echo"<td>" . $contracts[$row]['contract_type_name'] . "</td>";
                   echo"<td>" . $contracts[$row]['contract_id'] . "</td>";
                 echo "</tr>";
               }

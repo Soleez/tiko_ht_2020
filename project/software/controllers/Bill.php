@@ -35,7 +35,8 @@
 
   // Haetaan laskujen tietoja vw_bills viewstä, session antaman bill_id:n perusteella
   $billsQuery = pg_query("SELECT * FROM vw_bills
-    WHERE contract_id = {$bill[0]}
+    WHERE contract_id = {$contract[0]} AND
+          bill_id = {$bill[0]}
   ;");
   $bills = getTable($billsQuery);
 
@@ -69,19 +70,21 @@
   $worksumQuery = pg_query("SELECT * FROM worksum_function({$contract[0]});");
   $worksum = getRow($worksumQuery);  
 
+  // lasketaan loppusumma
+  $totalsum = $toolsum[0] + $worksum[0];
 
   /** Luodaan funktio, jolla lasku saadaan lähtettyä
     * Eräpäivä asettuu aina kolmen viikon päähän
     */
-  function sendBill($id) {
+  function sendBill($id, $totalsum) {
     // Laskulle kuuluvat tunnit tietokannasta
     $sendBill = pg_query("UPDATE bill
       SET
         bill_status_id = 2,
         bill_sending_date = CURRENT_DATE,
         bill_due_date = (CURRENT_DATE + 21),
-        date_modified = clock_timestamp()
-        -- total_sum = ({$toolsum[0]} + {$worksum[0]})
+        date_modified = clock_timestamp(),
+        total_sum = {$totalsum}
     WHERE bill_id = {$id}
     ");
 
