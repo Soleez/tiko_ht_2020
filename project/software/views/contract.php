@@ -27,8 +27,10 @@
           for ($row = 0; $row < count($contracts); $row++ ) {
             echo "<tr>";
               echo"<td> <a href='$addLink"
-              ."?contract=". $contracts[$row]['contract_id'] 
-              ."'> <div> Sopimukselle tunnisteella "
+              ."?customer=". $customer[0] 
+              ."&project=". $project[0] 
+              ."&contract=". $contracts[$row]['contract_id'] 
+              ."'> <div> Kirjaa sopimukselle tunnisteella "
               . $contracts[$row]['contract_id']
               . "</div> </a> </td>";
               echo"<td>" . $contracts[$row]['contract_type_name'] . "</td>";

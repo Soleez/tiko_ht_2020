@@ -4,7 +4,12 @@
 <html>
   <body>
     <h2>Lisää tarvikkeita ja työtunteja sopimukselle</h2>
-    <div>Kirjataan tälle päivälle <?php echo date("Y-m-d"); ?>.</div>
+    <div>
+      Asiakas: <?php echo $customer[2];?></br>
+      Projekti: <?php echo $project[2];?></br>
+      Sopimus: <?php echo $contract[0];?></br>
+      Päiväys: <?php echo date("d.m.Y"); ?></br></br>
+    </div>
 
     <form method="POST" action="add_rows.php">
       <div>

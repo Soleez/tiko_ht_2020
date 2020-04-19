@@ -10,11 +10,22 @@
   openConnection();
 
   // haetaan urlista
+  if( isset($_GET['customer'])) {
+    setCustomer($_GET['customer']);
+  }
+
   if( isset($_GET['contract'])) {
     setContract($_GET['contract']);
   }
 
-  // haetaan sopimuksen tiedot
+  if( isset($_GET['project'])) {
+    setProject($_GET['project']);
+  }
+
+  // haetaan asiakkaan, sopimuksen ja projektin tiedot
+  $contractor = getContractor();
+  $customer = getCustomer();
+  $project = getProject();
   $contract = getContract();
 
   // Haetaan työkalut
