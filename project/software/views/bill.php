@@ -14,6 +14,8 @@
        echo("Sopimuksen tyyppi: " . $bills[0]['contract_type_name'] . "<br/>");
        echo("Laskun tyyppi: " . $bills[0]['bill_type_name'] . "<br/>");
        echo("Laskun tila: " . $bills[0]['bill_status_name'] . "<br/>");
+       echo("Laskun lähetyspäivä: " . $bills[0]['bill_sending_date'] . "<br/>");
+       echo("Laskun eräpäivä: " . $bills[0]['bill_due_date'] . "<br/>");
      ?>
  
      <h2>Tunnit</h2>
@@ -31,7 +33,6 @@
          ?>
          <th> Hinta ennen alennuksia </th>
          <th> Verot </th>
-         <th> Hinta ilman veroa alennusten kanssa </th>
          <th> Lopullinen hinta </th>
        </tr></thead>
        <tbody><?php 
@@ -50,7 +51,6 @@
                echo"<td>" . $hours[$row]['vat_rate'] . "</td>";
                echo"<td>" . $hours[$row]['total_before_sale'] . "</td>";
                echo"<td>" . $hours[$row]['tax_only'] . "</td>";
-               echo"<td>" . $hours[$row]['price_wo_tax_w_sale'] . "</td>";
                echo"<td>" . $hours[$row]['total_sum'] . "</td>";
              }
              else {
@@ -70,7 +70,6 @@
            ?>
            <td><?php echo($worksumNoSale[0]); ?></td>
            <td><?php echo($worktaxsum[0]); ?></td>
-           <td><?php echo($worksum[0] - $worktaxsum[0]); ?></td>
            <td><?php echo($worksum[0]); ?></td>
          </tr>
        
@@ -92,7 +91,6 @@
          ?>
          <th> Hinta ennen alennuksia </th>
          <th> Verot </th>
-         <th> Hinta ilman veroa alennusten kanssa </th>
          <th> Lopullinen hinta </th>
        </tr></thead>
        <tbody><?php
@@ -107,7 +105,6 @@
                echo"<td>" . $tools[$row]['vat_rate'] . "</td>";
                echo"<td>" . $tools[$row]['total_before_sale'] . "</td>";
                echo"<td>" . $tools[$row]['tax_only'] . "</td>";
-               echo"<td>" . $tools[$row]['price_wo_tax_w_sale'] . "</td>";
                echo"<td>" . $tools[$row]['total_sum'] . "</td>";
              }
              else {
@@ -128,7 +125,6 @@
            ?>
            <td><?php echo($toolsumNoSale[0]); ?></td>
            <td><?php echo($tooltaxsum[0]); ?></td>
-           <td><?php echo($toolsum[0] - $tooltaxsum[0]); ?></td>
            <td><?php echo($toolsum[0]); ?></td>
          </tr>
        <tbody>
@@ -136,16 +132,16 @@
  
      <h2> Yhteensä </h2>
      <div>
-       Alkuperäinen hinta: <?php echo($toolsumNoSale[0] + $worksumNoSale[0]); ?><br/>
-       Verot: <?php echo($tooltaxsum[0] + $worktaxsum[0]); ?><br/>
+       Alkuperäinen hinta: <?php echo number_format(($toolsumNoSale[0] + $worksumNoSale[0]), 2, '.', ' '); ?><br/>
+       Verot: <?php echo number_format(($tooltaxsum[0] + $worktaxsum[0]), 2, '.', ' '); ?><br/> 
        Kotitalousvähennykseen kelpaava osuus:
        <?php if ($customer[4] != true) { echo("Asiakas ei ole kotitalousvähennyskelpoinen"); } 
          else if ($project[4] != true) { echo("Työkohde ei ole kotitalousvähennyskelpoinen"); }
-         else { echo($worksum[0] * 0.40); }
+         else { echo number_format(($worksum[0] * 0.40), 2, '.', ' '); }
        ?>
        <br/>
-       Kotitalousvähennys vuoden alusta: <br />
-       Lopullinen hinta: <?php echo($toolsum[0] + $worksum[0]); ?><br/>
+       Kotitalousvähennys vuoden alusta: toteuttamatta vielä? <br />
+       Lopullinen hinta: <?php echo number_format(($toolsum[0] + $worksum[0]), 2, '.', ' '); ?><br/>
      </div>
 
 

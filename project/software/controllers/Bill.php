@@ -16,13 +16,13 @@
   
   // haetaan urakoitisijan tiedot
   $contractor = getContractor();
-  // haetaan sopimuksen tiedot
+  // haetaan asiakkaan tiedot
   $customer = getCustomer();
-  // haetaan sopimuksen tiedot
+  // haetaan kohteen tiedot
   $project = getProject();
   // haetaan sopimuksen tiedot
   $contract = getContract();
-  // haetaan sopimuksen tiedot
+  // haetaan laskun tiedot
   $bill = getBill();
   
 

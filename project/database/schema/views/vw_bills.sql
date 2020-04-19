@@ -12,7 +12,11 @@ AS
     Bill.bill_id,
     Bill.total_sum,
     Bill.billing_address,
+    Bill.bill_due_date,
+    Bill.bill_sending_date,
+    Bill_status.bill_status_id,
     Bill_status.bill_status_name,
+    Bill_type.bill_type_id,
     Bill_type.bill_type_name
     FROM bill
     LEFT OUTER JOIN contract 
