@@ -92,6 +92,31 @@
     update($sendBill);
   }
 
+  // Muuttaa urakkatarjouksen urakaksi.
+  function acceptBid($id) {
+    $acceptBid = pg_query("UPDATE contract
+      SET
+        contract_type_id = 2
+    WHERE contract_id = {$id}
+    ");
+
+    // haetaan funktion avulla
+    update($acceptBid);
+  }
+
+  // Muuttaa hinta-arvion tuntilaskutteiseksi sopimukseksi.
+  function acceptBid2($id) {
+    $acceptBid2 = pg_query("UPDATE contract
+      SET
+        contract_type_id = 1
+    WHERE contract_id = {$id}
+    ");
+
+    // haetaan funktion avulla
+    update($acceptBid2);
+  }
+
+
   // suljetaan funktiolla tietokantayhteys
   closeConnection();
   

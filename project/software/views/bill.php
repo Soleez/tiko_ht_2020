@@ -162,6 +162,36 @@
           <input type='submit' name='sendBill' value='Lähetä lasku'/> 
         </form> ";
       }
+      /** Näytetään urakkatarjouksen hyväksymisnäppäin jos ehdot täyttyvät
+        * Jos laskun status = 1 (laskutamatta) ja contract_type = 3 (urakkatarjous) 
+        */
+      if(($bill[5] == "1") && ($contract[2] == "3")){
+
+        echo"</br>";
+        if(isset($_POST['acceptBid'])) {
+          acceptBid($contract[0]);
+          echo "Urakkatarjous hyväksytty ja muutettu urakkasopimukseksi"; 
+        } 
+      
+        echo" 
+        <form method='post'> 
+          <input type='submit' name='acceptBid' value='Hyväksy urakkatarjous'/> 
+        </form> ";
+      }
+      // Vastaava logiikka hinta-arviolle
+      if(($bill[5] == "1") && ($contract[2] == "4")){
+
+        echo"</br>";
+        if(isset($_POST['acceptBid2'])) {
+          acceptBid2($contract[0]);
+          echo "Hinta-arvio hyväksytty ja muutettu tuntilaskutteiseksi sopimukseksi"; 
+        } 
+      
+        echo" 
+        <form method='post'> 
+          <input type='submit' name='acceptBid2' value='Hyväksy hinta-arvio'/> 
+        </form> ";
+      }
     ?> 
 
     </div>
