@@ -40,18 +40,3 @@ BEGIN
 END;
 $suorita$
 language plpgsql;
-
-insert into Bill values
-(DEFAULT, 1, 300, 'osote1', 1, 2, null, null, '2020-01-20', '2019-11-30'),
-(default, 2, 400, 'osote2', 1, 2, null, null, '2020-03-18', '2020-01-01'),
-(default, 4, 590, 'osote3', 1, 2, null, null, '2020-04-30', '2020-03-20');
-
-insert into Bill values 
-(DEFAULT, 3, 3003, 'osote1', 1, 2, null, null, '2020-02-20', '2020-02-02', null, default),
-(default, 2, 402, 'osote2', 2, 2, null, null, '2020-04-15', '2020-03-20', 7, 2);
-
-insert into Bill values
-(default, 3, 3003, 'osote1', 2, 2, null, null, '2020-03-25', '2020-02-25', 9, 2);
-
-insert into Bill values
-(default, 3, 200, 'osote2', 1, 2, null, null, '2020-02-03', '2020-01-03');

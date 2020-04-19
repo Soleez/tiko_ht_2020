@@ -41,7 +41,7 @@
           // bill_sending_date, previous_bill_id
           $bill_id = $billsTable[$row]['bill_id'];
           $address = $billsTable[$row]['billing_address'];
-          $sum = $billsTable[$row]['total_sum'];
+          $sum = $billsTable[$row]['total_sum'] + $billsTable[$row]['handling_fee'];
           $contract_id = $billsTable[$row]['contract_id'];
           $reminderBill = ("INSERT INTO Bill VALUES 
             (DEFAULT, $contract_id, $sum, '$address', 2, 2, current_date,
