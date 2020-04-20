@@ -14,7 +14,7 @@
     $contractor = getContractor();
 
     // Haetaan asiakkaat
-    $customersQuery = pg_query("SELECT customer_id, customer_name FROM Customer;");
+    $customersQuery = pg_query("SELECT customer_id, customer_name FROM Customer WHERE contractor_id=$contractor[0];");
     $customers = getTable($customersQuery);
 
     // Haetaan sopimustyypi
