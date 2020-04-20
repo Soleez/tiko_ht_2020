@@ -70,7 +70,15 @@
                     . date("d.m.Y", strtotime($bills[$billRow]['bill_sending_date'])) 
                     . "</td>";
                   echo"<td>" . $bills[$billRow]['bill_due_date'] . "</td>";
-                  echo"<td>" . $bills[$billRow]['total_sum'] . "</td>";
+                  $total_sum = $bills[$billRow]['total_sum'];
+                  if ($total_sum == null) {
+                    $c_id = $bills[$billRow]['contract_id'];
+                    $worksum = getRow(update("SELECT * FROM worksum_function($c_id);"))[0];
+                    $toolsum = getRow(update("SELECT * FROM toolsum_function($c_id);"))[0];
+                    echo pg_last_error();
+                    $total_sum = $worksum + $toolsum;
+                  }
+                  echo"<td>" . $total_sum . "</td>";
                   echo"<td>" . $bills[$billRow]['bill_status_name'] . "</td>";
                   echo"<td>" . $bills[$billRow]['bill_type_name'] . "</td>";
                   echo"<td>" . $contracts[$row]['contract_type_name'] . "</td>";
