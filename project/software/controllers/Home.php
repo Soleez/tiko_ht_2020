@@ -53,8 +53,8 @@
           else {
             $msg = "Laskun lähetys epäonnistui". pg_last_error();
           }
-          $msg = "Muistutuslaskuja lähetetty $billCount kappale(tta).";
         }
+        $msg = "Muistutuslaskuja lähetetty $billCount kappale(tta).";
       }
       else {
         $msg = "Ei lähetettäviä muistutuslaskuja.";
@@ -125,8 +125,8 @@
           else {
             $msg = "Viivästyskoron lasku epäonnistui." . pg_last_error();
           }
-          $msg = $msg."Karhulaskuja lähetetty $billCount kappale(tta).";
         }
+        $msg = "Karhulaskuja lähetetty $billCount kappale(tta).";
       }
       else {
         $msg = $msg."Ei lähetettäviä karhulaskuja.";
