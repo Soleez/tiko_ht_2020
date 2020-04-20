@@ -178,20 +178,6 @@
           <input type='submit' name='acceptBid' value='Hyväksy urakkatarjous'/> 
         </form> ";
       }
-      // Vastaava logiikka hinta-arviolle
-      if(($bill[5] == "1") && ($contract[2] == "4")){
-
-        echo"</br>";
-        if(isset($_POST['acceptBid2'])) {
-          acceptBid2($contract[0]);
-          echo "Hinta-arvio hyväksytty ja muutettu tuntilaskutteiseksi sopimukseksi"; 
-        } 
-      
-        echo" 
-        <form method='post'> 
-          <input type='submit' name='acceptBid2' value='Hyväksy hinta-arvio'/> 
-        </form> ";
-      }
     ?> 
 
     </div>
