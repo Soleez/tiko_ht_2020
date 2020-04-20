@@ -26,6 +26,9 @@
 
         // Tiedot lomakkeelta
         $selected_customer = intval($_POST['customer']); 
+        $customer_name = pg_escape_string($_POST['cName']);
+        $customer_address = pg_escape_string($_POST['cAddress']); 
+        $bool_tax_credit_customer = pg_escape_string($_POST['bool_tax_credit_customer']);
         $project_name = pg_escape_string($_POST['name']);
         $project_address = pg_escape_string($_POST['address']);
         $bool_tax_credit = pg_escape_string($_POST['bool_tax_credit']);
@@ -33,10 +36,30 @@
         $amount_of_payments = intval($_POST['amount_of_payments']);
 
         // Tietojen tarkistus
-        $valid_info = $selected_customer > 0 && strlen(trim($project_name)) > 0  && strlen(trim($project_name)) <= 60 && strlen(trim($project_address)) 
-        <= 60 && $bool_tax_credit <> "" && $contract_type > 0;
+        $valid_info = ($selected_customer > 0 || (strlen(trim($customer_name)) > 0 && strlen(trim($customer_address)) >0 && $bool_tax_credit_customer <> ""))
+             && strlen(trim($project_name)) > 0  && strlen(trim($project_name)) <= 60 && strlen(trim($project_address)) 
+            <= 60 && $bool_tax_credit <> "" && $contract_type > 0;
 
         if ($valid_info) {
+            if ($selected_customer == 0) {
+                $customer_query = "INSERT INTO Customer VALUES (DEFAULT, $contractor[0], '$customer_name', '$customer_address', 
+                '$bool_tax_credit_customer');";
+                $customer_query_res = update($customer_query);
+                if ($customer_query_res) {
+                
+                    $res = update("SELECT currval('Customer_customer_id_seq');");
+                    if ($res) {
+                        $selected_customer = getRow($res)[0];
+                    }
+                    else {
+                        echo pg_last_error();
+                    }
+                }
+                else {
+                    echo $customer_query;
+                }
+                
+            }
             if ($bool_tax_credit == '') {
                 $query = "INSERT INTO Project VALUES (DEFAULT, $selected_customer, '$project_name', '$project_address', null);";
             }

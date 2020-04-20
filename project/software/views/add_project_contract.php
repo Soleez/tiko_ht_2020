@@ -24,6 +24,20 @@
           </select>
           </td>
       </tr>
+
+      <tr>
+        <td>Lisää uusi asiakas</td>
+        <td>
+          <label for="cName">Asiakkaan nimi: </label><input type="text" id="cName" name="cName"/>
+          <label for="cAddress">Asiakkaan osoite: </label><input type="text" id="cAddress" name="cAddress"/>
+          <label for="bool_tax_credit_customer">Kotitalousvähennys kelpoinen: </label>
+          <select id="bool_tax_credit_customer" name="bool_tax_credit_customer">
+              <option value="" disable selected hidden>Valitse</option>
+              <option value="t">kyllä</option>
+              <option value="f">ei</option>
+          </select>
+        </td>
+      </tr>
     
 	    <tr>
     	    <td>Työkohteen nimi:</td>
