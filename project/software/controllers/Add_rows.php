@@ -36,13 +36,6 @@
   $worktypesQuery = pg_query("SELECT work_type_id, work_type_name FROM Work_type;");
   $worktypes = getTable($worktypesQuery);
 
-  // Haetaan sopimukselle kuuluvat laskut
-  $activeBillQuery = pg_query("SELECT * FROM bill
-        WHERE contract_id = {$contract[0]} 
-            AND bill_status = 1
-        ;
-  ");
-
   $selected_contract = intval($contract[0]);
     
 // Kun lisättävät tiedot annettu

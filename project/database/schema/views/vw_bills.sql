@@ -1,6 +1,5 @@
 CREATE OR REPLACE VIEW vw_bills
 AS
-
     SELECT Contractor.Contractor_id, 
     Customer.customer_name, 
     Customer.customer_id,
@@ -18,13 +17,7 @@ AS
     Bill_status.bill_status_id,
     Bill_status.bill_status_name,
     Bill_type.bill_type_id,
-    Bill_type.bill_type_name,
-    toolsum_wo_discount_function(Contract.contract_id) AS toolsum_wo_discount,
-    tool_tax_sum_function(Contract.contract_id) AS tool_tax_sum,
-    worksum_wo_discount_function(Contract.contract_id) AS worksum_wo_discount,
-    work_tax_sum_function(Contract.contract_id) AS work_tax_sum,
-    toolsum_function(Contract.contract_id) AS toolsum,
-    worksum_function(Contract.contract_id) AS worksum
+    Bill_type.bill_type_name
     FROM bill
     LEFT OUTER JOIN contract 
         ON contract.contract_id = Bill.contract_id
@@ -40,4 +33,3 @@ AS
         ON bill_type.bill_type_id = bill.bill_type_id
     LEFT OUTER JOIN contract_type
         ON contract_type.contract_type_id = contract.contract_type_id;
-
