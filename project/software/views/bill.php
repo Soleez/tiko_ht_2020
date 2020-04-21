@@ -133,19 +133,28 @@
  
      <h2> Yhteensä </h2>
      <div>
-       Alkuperäinen hinta: <?php echo number_format(($toolsumNoSale[0] + $worksumNoSale[0]), 2, '.', ' '); ?><br/>
-       Verot: <?php echo number_format(($tooltaxsum[0] + $worktaxsum[0]), 2, '.', ' '); ?><br/> 
+       <!-- Jaetaan amount_of_payments:illä jos se on yli 1 ja ei ole kyseessä urakkatarjous -->
+       Alkuperäinen hinta: <?php if ($contract[2] != "3" && $bills[0]['amount_of_payments'] > 1) { echo number_format((($toolsumNoSale[0] + $worksumNoSale[0]) / $bills[0]['amount_of_payments']), 2, '.', ' '); } 
+       else { echo number_format(($toolsumNoSale[0] + $worksumNoSale[0]), 2, '.', ' '); } ?><br/>
+
+       Verojen osuus: <?php if ($contract[2] != "3" && $bills[0]['amount_of_payments'] > 1) { echo number_format((($tooltaxsum[0] + $worktaxsum[0]) / $bills[0]['amount_of_payments']), 2, '.', ' '); }
+        else { echo number_format(($tooltaxsum[0] + $worktaxsum[0]), 2, '.', ' '); } ?><br/> 
+
        Kotitalousvähennykseen kelpaava osuus:
        <?php if ($customer[4] != true) { echo("asiakas ei ole kotitalousvähennyskelpoinen"); } 
          else if ($project[4] != true) { echo("työkohde ei ole kotitalousvähennyskelpoinen"); }
+         else if ($contract[2] != "3" && $bills[0]['amount_of_payments'] > 1) { echo number_format(($worksum[0] * 0.40 / $bills[0]['amount_of_payments']), 2, '.', ' ');}
          else { echo number_format(($worksum[0] * 0.40), 2, '.', ' '); }
-       ?>
-       <br/>
-       <?php if ($bills[0]['bill_type_id'] == 2) { echo("Laskutuslisä: 5.00<br/>"); }
-        else if ($bills[0]['bill_type_id'] == 3) { echo("Laskutuslisä: 10.00<br/>"); } ?>
+       ?><br/>
+
+       <?php if ($bills[0]['bill_type_id'] == 2 || $bills[0]['bill_type_id'] == 3) { echo("Laskutuslisä: " . number_format(($bill[11]*5.00), 2, '.', ' ') . "<br/>"); } ?>
+
        <?php if ($bills[0]['bill_type_id'] == 3) { echo("Viivästyskorko: " . number_format(($bills[0]["total_sum"] - 10 - $toolsum[0] - $worksum[0]), 2, '.', ' ') . "<br/>"); } ?>
-       Lopullinen hinta: <?php if ($bills[0]['bill_type_id'] == 1) { echo number_format(($toolsum[0] + $worksum[0]), 2, '.', ' '); }
+
+       Lopullinen hinta: <?php if ($contract[2] != "3" && $bills[0]['amount_of_payments'] > 1) {echo number_format(($bills[0]["total_sum"]), 2, '.', ' '); }
+        else if ($bills[0]['bill_type_id'] == 1) { echo number_format(($toolsum[0] + $worksum[0]), 2, '.', ' '); }
         else {echo number_format(($bills[0]["total_sum"]), 2, '.', ' '); } ?><br/>
+
      </div>
 
 
@@ -182,8 +191,8 @@
         </form>";
 
         if(isset($_POST['acceptBid'])) {
-          acceptBid($contract[0], $bills[0]["amount_of_payments"], $bill[0], $totalSum);
-          echo "<br/><br/>Urakkatarjous hyväksytty ja muutettu urakkasopimukseksi. Laskut luotu."; 
+          acceptBid($contract[0], $bills[0]["amount_of_payments"], $bill[0], $totalsum, $bill[3]);
+          echo "<br/>Urakkatarjous hyväksytty ja muutettu urakkasopimukseksi. Laskut luotu."; 
         } 
       }
     ?> 

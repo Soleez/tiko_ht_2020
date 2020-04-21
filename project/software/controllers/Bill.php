@@ -93,11 +93,14 @@
   }
 
   // Muuttaa urakkatarjouksen urakaksi.
-  function acceptBid($id, $payments, $billId, $totalSum) {
+  function acceptBid($id, $payments, $billId, $totalSum, $address) {
     $acceptBid = pg_query("UPDATE contract
       SET contract_type_id = 2
       WHERE contract_id = {$id};
     ");
+
+    // Lasketaan ositettu laskujen summa.
+    $sum_per_bill = (float)$totalSum / (float)$payments;
 
     // Luodaan 1. lasku
     $acceptBid .= pg_query("UPDATE bill
@@ -106,15 +109,18 @@
         bill_sending_date = CURRENT_DATE,
         bill_due_date = (CURRENT_DATE + 21),
         date_modified = clock_timestamp(),
-        total_sum = {$totalsum}/{$payments}
+        total_sum = {$sum_per_bill}
       WHERE bill_id = {$billId};
     ");
 
-    // Lisätään uusia laskuja.
+    // Lisätään uusia laskuja alkaen laskusta 2.
     for ($row = 2; $row <= $payments; $row++) {
       $row_date_string = 'bill_no_' . $row;
       $row_date = date($_POST[$row_date_string]);
-      echo "test " . $row_date . "<br/>";
+      // echo "päiväys: " . $row_date . "<br/>";
+
+      $acceptBid .= pg_query("INSERT INTO Bill
+      VALUES (DEFAULT, $id, $sum_per_bill, '$address', DEFAULT, DEFAULT, CURRENT_DATE, CURRENT_DATE, '$row_date', null, null, DEFAULT);");
     }
 
     // haetaan funktion avulla
