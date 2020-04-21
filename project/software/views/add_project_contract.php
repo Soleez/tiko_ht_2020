@@ -6,30 +6,29 @@
     <h2>Lisää uusi työkohde</h2>
 
     <!--- Dropdown-list asiakkaista--->
-    <form method="POST" action="add_project_contract.php">
+    <form method="POST">
     <table>
-	    <tr>
-          <td>Asiakas</td>
-          <td>
-          <select id="customer" name="customer">
-              <option value="" disable selected hidden>Valitse</option>
-              <?php 
-              // Asetetaan kyselyn arvot rivi kerrallaan optioneiksi
-              for ($row = 0; $row < count($customers); $row++ ) {
-              ?>
-              <option value="<?php echo $customers[$row]['customer_id'];?>"><?php echo $customer_name = $customers[$row]['customer_name']; ?></option>
-              <?php
-              }
-              ?>
-          </select>
-          </td>
-      </tr>
-
       <tr>
-        <td>Lisää uusi asiakas</td>
+        <td>Valitse asiakas:</td>
+        <td>Lisää uusi asiakas:</td> 
+      </tr>
+      <tr>
         <td>
-          <label for="cName">Asiakkaan nimi: </label><input type="text" id="cName" name="cName"/>
-          <label for="cAddress">Asiakkaan osoite: </label><input type="text" id="cAddress" name="cAddress"/>
+          <select id="customer" name="customer">
+            <option value="" >Valitse</option>
+            <?php 
+            // Asetetaan kyselyn arvot rivi kerrallaan optioneiksi
+            for ($row = 0; $row < count($customers); $row++ ) {
+            ?>
+            <option value="<?php echo $customers[$row]['customer_id'];?>"><?php echo $customer_name = $customers[$row]['customer_name']; ?></option>
+            <?php
+            }
+            ?>
+          </select>
+        </td>
+        <td>
+          <label for="cName">Asiakkaan nimi: </label><input type="text" id="cName" name="cName" class="textbox"/><br>
+          <label for="cAddress">Asiakkaan osoite: </label><input type="text" id="cAddress" name="cAddress" class="textbox"/><br>
           <label for="bool_tax_credit_customer">Kotitalousvähennys kelpoinen: </label>
           <select id="bool_tax_credit_customer" name="bool_tax_credit_customer">
               <option value="" disable selected hidden>Valitse</option>
@@ -38,7 +37,10 @@
           </select>
         </td>
       </tr>
-    
+     
+    </table>
+
+    <table>
 	    <tr>
     	    <td>Työkohteen nimi:</td>
     	    <td><input type="text" name="name" value="" placeholder="max 60 merkkiä" class="textbox"/></td>
@@ -75,7 +77,7 @@
 	    </tr>
       <tr>
     	    <td>Laskujen lukumäärä:</td>
-    	    <td><input type="text" name="amount_of_payments" value="" placeholder="0" class="textbox"/></td>
+    	    <td><input type="number" min="1" max="20"  name="amount_of_payments" value="" placeholder="0" class="textbox"/></td>
 	    </tr>
     </table>
     

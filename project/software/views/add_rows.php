@@ -11,7 +11,7 @@
       Päiväys: <?php echo date("d.m.Y"); ?></br></br>
     </div>
 
-    <form method="POST" action="add_rows.php">
+    <form method="POST">
       <div>
         <table>
           <thead>
