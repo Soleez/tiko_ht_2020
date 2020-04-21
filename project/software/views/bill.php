@@ -147,9 +147,9 @@
          else { echo number_format(($worksum[0] * 0.40), 2, '.', ' '); }
        ?><br/>
 
-       <?php if ($bills[0]['bill_type_id'] == 2 || $bills[0]['bill_type_id'] == 3) { echo("Laskutuslisä: " . number_format(($bill[11]*5.00), 2, '.', ' ') . "<br/>"); } ?>
+       <?php if ($bills[0]['bill_type_id'] == 2 || $bills[0]['bill_type_id'] == 3) { echo("Laskutuslisä: " . number_format((($bill[11] - 1)*5.00), 2, '.', ' ') . "<br/>"); } ?>
 
-       <?php if ($bills[0]['bill_type_id'] == 3) { echo("Viivästyskorko: " . number_format(($bills[0]["total_sum"] - 10 - $toolsum[0] - $worksum[0]), 2, '.', ' ') . "<br/>"); } ?>
+       <?php if ($bills[0]['bill_type_id'] == 3) { echo("Viivästyskorko: " . number_format(($bills[0]["total_sum"] - (($bill[11] - 1)*5.00) - $toolsum[0] - $worksum[0]), 2, '.', ' ') . "<br/>"); } ?>
 
        Lopullinen hinta: <?php if ($contract[2] != "3" && $bills[0]['amount_of_payments'] > 1) {echo number_format(($bills[0]["total_sum"]), 2, '.', ' '); }
         else if ($bills[0]['bill_type_id'] == 1) { echo number_format(($toolsum[0] + $worksum[0]), 2, '.', ' '); }
