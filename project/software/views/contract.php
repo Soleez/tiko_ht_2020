@@ -78,7 +78,7 @@
                     echo pg_last_error();
                     $total_sum = $worksum + $toolsum;
                   }
-                  echo"<td>" . $total_sum . "</td>";
+                  echo"<td>" . number_format($total_sum, 2, '.', ' ') . "</td>";
                   echo"<td>" . $bills[$billRow]['bill_status_name'] . "</td>";
                   echo"<td>" . $bills[$billRow]['bill_type_name'] . "</td>";
                   echo"<td>" . $contracts[$row]['contract_type_name'] . "</td>";

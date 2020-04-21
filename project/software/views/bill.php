@@ -140,8 +140,11 @@
          else { echo number_format(($worksum[0] * 0.40), 2, '.', ' '); }
        ?>
        <br/>
-       Kotitalousvähennys vuoden alusta: toteuttamatta vielä? <br />
-       Lopullinen hinta: <?php echo number_format(($toolsum[0] + $worksum[0]), 2, '.', ' '); ?><br/>
+       <?php if ($bills[0]['bill_type_id'] == 2) { echo("Laskutuslisä: 5.00<br/>"); }
+        else if ($bills[0]['bill_type_id'] == 3) { echo("Laskutuslisä: 10.00<br/>"); } ?>
+       <?php if ($bills[0]['bill_type_id'] == 3) { echo("Viivästyskorko:" . number_format(($bills[0]["total_sum"] - 10 - $toolsum[0] - $worksum[0]), 2, '.', ' ') . "<br/>"); } ?>
+       Lopullinen hinta: <?php if ($bills[0]['bill_type_id'] == 1) { echo number_format(($toolsum[0] + $worksum[0]), 2, '.', ' '); }
+        else {echo number_format(($bills[0]["total_sum"]), 2, '.', ' '); } ?><br/>
      </div>
 
 
