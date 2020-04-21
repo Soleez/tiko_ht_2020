@@ -5,12 +5,9 @@
   <body>
     <h2>Ylläpito</h2>
     
-    <?php 
-    echo"<button> <a href='./tool.php'> Hallinnoi varastoa </a> </button>";
-    echo"<button> <a href='./home.php'> Suorita laskujen lähetys </a> </button>"; 
-    ?> 
-      
-    <form method="post"> 
+    <form method="post">
+      <button> <a href='./tool.php'> Hallinnoi varastoa </a> </button>
+      <button> <a href='./home.php'> Suorita laskujen lähetys </a> </button>
       <button type="submit" name="muistutuslaskuButton">Lähetä muistutuslaskut</button>
       <button type="submit" name="karhulaskuButton">Lähetä karhulaskut</button> 
     </form> 
@@ -20,7 +17,7 @@
     }
     ?>
 
-    <h2>Kirjaudu urakoitsijana</h2>
+    <h2>Kirjaudu urakoitsijana</h2><p>Valitse urakoitsija:</p>
     <table>
       <thead><tr>
         <th> Urakoitsija </th>

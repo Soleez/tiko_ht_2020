@@ -3,12 +3,10 @@
 
 <html>
   <body>
-    <div class = "mainDiv">
-      <h2>Laskun tiedot</h2>
-      <?php 
-        print_r($contracts[0]);
-        print_r($bills[0]);
-      ?>
+    <div>
+      <p>Tälle työkohteelle voit lisätä työkaluja ja työtunteja linkistä 'Kirjaa sopimukselle...'.</p>
+      <p>Raportin näet 'Projektiin liittyvät laskut'-kohdasta klikkaamalla 'Laskulle...'-linkkiä.</p>
+      <p></p>
     </div>
 
     <div class = "mainDiv">

@@ -78,6 +78,7 @@ a:hover.tablelink, a:active.tablelink {
     border-radius: 0.25em;
 }
 
-.murupolku {
-    width: 10px;
+#sisennys {
+    margin-left: 10px;;
 }
+
