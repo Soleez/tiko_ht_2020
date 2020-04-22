@@ -51,7 +51,7 @@ CREATE TABLE Contract (
     project_id BIGINT NOT NULL,
     contract_type_id INT NOT NULL,
     bool_in_use BOOLEAN,
-    amount_of_payments INT,
+    amount_of_payments INT default 1,
     PRIMARY KEY (contract_id),
     FOREIGN KEY (project_id) REFERENCES Project,
     FOREIGN KEY (contract_type_id) REFERENCES Contract_type

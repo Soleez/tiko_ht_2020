@@ -2,7 +2,7 @@
 -- Marika Lähteenmäki, Jani Mäkelä, Otto Thitz
 -- Testidata
 
--- R1 contract_id = 1; R2 contract_id = 2, R3 contract_id = 3, R4 contract_id = 4, R5 voi käyttää R4:sta 
+-- R1 contract_id = 1; R2 contract_id = 2, R3 contract_id = 3, R4 contract_id = 4, R5 contract_id = 10
 
 INSERT INTO Contractor(contractor_name, company_name, industry) VALUES
 ('Seppo Tärsky', 'Tmi Sähkötärsky', 'sähköala');
@@ -21,12 +21,13 @@ INSERT INTO Project(customer_id, project_name, project_address, bool_tax_credit)
 (1, 'Autotallin sähköt (R1)', 'Rapakatu 2, Tampere', true),
 (2, 'Mökin sähkötyöt (R2)', 'Kuusikuja 6', true),
 (2, 'Mökin sähkötyöt (R3)', 'Kuusikuja 6', true),
-(3, 'Keittiön sähköasennus (R4, R5)', 'Kaapankatu 7, Tampere', true),
+(3, 'Keittiön sähköasennus (R4)', 'Kaapankatu 7, Tampere', true),
 (4, 'Keittiön sähkötyöt', 'Hallituskatu 56, Tampere', true),
 (5, 'Kiukaan asennus', 'Laitostie 245, Tampere', true),
 (6, 'Myymälän sähkötyöt', 'Keskuskatu 23, Tampere', false),
 (7, 'Pihan valaistuksen sähkötyöt', 'Ruotsalaisentie 142, Tampere', true),
-(8, 'Keittiö- ja pesutilaremontin sähkötyöt', 'Satamakatu 3, Tampere', true);
+(8, 'Keittiö- ja pesutilaremontin sähkötyöt', 'Satamakatu 3, Tampere', true),
+(3, 'Keittiön sähköasennus (R5)', 'Kaapankatu 7, Tampere', true);
 
 INSERT INTO Contract_type(contract_type_id, contract_type_name) VALUES
 (1, 'tuntilaskutteinen'),
@@ -43,7 +44,8 @@ INSERT INTO Contract(project_id, contract_type_id, bool_in_use, amount_of_paymen
 (6, 1, true, 1),
 (7, 2, true, 1),
 (8, 1, true, 1),
-(9, 2, true, 1);
+(9, 2, true, 1),
+(10, 3, true, 2);
 
 INSERT INTO Bill_status(bill_status_id, bill_status_name, status_notes) VALUES
 (1, 'laskuttamatta', null),
@@ -89,7 +91,8 @@ INSERT INTO Bill(contract_id, total_sum, billing_address, bill_type_id, bill_sta
 (9, 721.40, 'Satamakatu 3, Tampere', 1, 2, null, null, '2020-05-30', '2020-04-30', null, default),
 (7, 1200.60, 'Saapaskuja 23, Tampere', 2, 2, null, null, '2019-08-26', '2019-07-25', 7, 2),
 (8, 391.40, 'Ruotsalaisentie 142, Tampere', 2, 2, null, null, '2020-05-20', '2020-04-19', 8, 2),
-(5, 857, 'Hallituskatu 56, Tampere', 2, 2, null, null, '2019-06-10', '2019-05-10', 5, 2);
+(5, 857, 'Hallituskatu 56, Tampere', 2, 2, null, null, '2019-06-10', '2019-05-10', 5, 2),
+(10, null, 'Kaapankatu 7, Tampere', 1, 1, '2020-03-15', null, null, null, null, default);
 
 INSERT INTO Billable_hour(work_type_id, contract_id, date_added, quantity, sale_percentage) VALUES
 (1, 1, '2020-04-10', 3, default),
@@ -113,7 +116,9 @@ INSERT INTO Billable_hour(work_type_id, contract_id, date_added, quantity, sale_
 (1, 9, '2020-04-10', 2, default),
 (2, 9, '2020-04-30', 6, default),
 (2, 9, '2020-04-30', 5, default),
-(3, 9, '2020-04-30', 3, default);
+(3, 9, '2020-04-30', 3, default),
+(1, 10, '2020-03-15', 5, 10),
+(2, 10, '2020-03-15', 20, 10);
 
 INSERT INTO Sold_tool(tool_id, quantity, contract_id, date_added, sale_percentage) VALUES
 (1, 1, 1, '2020-04-10', default),
@@ -141,6 +146,7 @@ INSERT INTO Sold_tool(tool_id, quantity, contract_id, date_added, sale_percentag
 (2, 20, 8, '2020-01-25', default),
 (6, 4, 8, '2020-01-25', default),
 (2, 10, 9, '2020-04-30', default),
-(4, 3, 9, '2020-04-30', default);
-
---INSERT INTO Payment(payment_amount, bill_id, payment_date) VALUES
+(4, 3, 9, '2020-04-30', default),
+(2, 25, 10, '2020-03-15', default),
+(4, 16, 10, '2020-03-15', default),
+(7, 2, 10, '2020-03-15', default);
