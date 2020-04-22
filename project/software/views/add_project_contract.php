@@ -62,7 +62,7 @@
 	    <tr>
     	    <td>Sopimustyyppi:</td>
     	    <td>
-            <select id="contract_type" name="contract_type">
+            <select id="contract_type" name="contract_type" onchange="restrictCount(this.value)">
               <option value=0 disable selected hidden>Valitse</option>
               <?php 
               // Asetetaan kyselyn arvot rivi kerrallaan optioneiksi
@@ -77,7 +77,7 @@
 	    </tr>
       <tr>
     	    <td>Laskujen lukumäärä:</td>
-    	    <td><input type="number" min="1" max="20"  name="amount_of_payments" value="" placeholder="0" class="textbox"/></td>
+    	    <td><input type="number" min="1" max="20"  name="amount_of_payments" id="amount_of_payments" value="1" class="textbox"/></td>
 	    </tr>
     </table>
     
@@ -86,4 +86,18 @@
     </form>
     
   </body>
+
+  <script>
+    function restrictCount(val) {
+      let amount = document.getElementById("amount_of_payments");
+      if (val==1 || val==4) {
+        amount.value = 1;
+        amount.disabled = true;
+      }
+      else {
+        amount.disabled = false;
+      }
+    }
+  </script>
+
 </html>
