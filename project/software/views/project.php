@@ -3,6 +3,7 @@
 
 <html>
   <body>
+    <div class="mainDiv">
     <h2>Projektit</h2>
     
       <p>Valitse haluamasi projekti tai lisää uusi työkohde.</p>
@@ -34,6 +35,6 @@
       ?></tbody>
     </table>
     <button><a href='./add_project_contract.php'>Lisää uusi työkohde</a></button>
-
+    </div>
   </body>
 </html>

@@ -76,6 +76,7 @@
        
        </tbody>
      </table>
+     
  
      <h2>Tarvikkeet</h2>
      <table>
@@ -175,10 +176,29 @@
           <input type='submit' name='sendBill' value='Lähetä lasku'/> 
         </form> ";
       }
+
+      /** Näytetään laskun lähetysnäppäin jos ehdot täyttyvät
+        * Jos laskun status = 2 (laskutettu) ja contract_type = 1 tai 2 (tuntilaskutteinen tai urakka) 
+        */
+      elseif(($bill[5] == "2") && (($contract[2] == "1") || ($contract[2] == "2"))){
+
+        echo"</br>";
+        if(isset($_POST['setBillAsPaid'])) { 
+          setBillAsPaid($customer, $bill, $project, $taxCredit);
+          echo "Lasku kuitattu maksetuksi"; 
+        } 
+        
+        echo" 
+        <form method='post'>
+          <input type='submit' name='setBillAsPaid' value='Kuittaa lasku maksetuksi'/> 
+        </form> ";
+      }
+        
+
       /** Näytetään urakkatarjouksen hyväksymisnäppäin jos ehdot täyttyvät
         * Jos laskun status = 1 (laskutamatta) ja contract_type = 3 (urakkatarjous) 
         */
-      if(($bill[5] == "1") && ($contract[2] == "3")){
+      elseif(($bill[5] == "1") && ($contract[2] == "3")){
         echo"</br><b> Urakkatarjouksen hyväksyntä ja laskujen luonti </b><br/><br/>";
       
         echo"Lasku 1 lähetetään heti ja eräpäivä on 21 päivän päästä.";
@@ -194,6 +214,9 @@
           acceptBid($contract[0], $bills[0]["amount_of_payments"], $bill[0], $totalsum, $bill[3]);
           echo "<br/>Urakkatarjous hyväksytty ja muutettu urakkasopimukseksi. Laskut luotu."; 
         } 
+      }
+      else {
+        /* Jos näppäimiä ei tarvita ei näytetä mitään s*/
       }
     ?> 
 
