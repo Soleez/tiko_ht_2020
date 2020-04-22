@@ -22,11 +22,11 @@ INSERT INTO Project(customer_id, project_name, project_address, bool_tax_credit)
 (2, 'Mökin sähkötyöt (R2)', 'Kuusikuja 6', true),
 (2, 'Mökin sähkötyöt (R3)', 'Kuusikuja 6', true),
 (3, 'Keittiön sähköasennus (R4)', 'Kaapankatu 7, Tampere', true),
-(4, 'Keittiön sähkötyöt', 'Hallituskatu 56, Tampere', true),
-(5, 'Kiukaan asennus', 'Laitostie 245, Tampere', true),
-(6, 'Myymälän sähkötyöt', 'Keskuskatu 23, Tampere', false),
-(7, 'Pihan valaistuksen sähkötyöt', 'Ruotsalaisentie 142, Tampere', true),
-(8, 'Keittiö- ja pesutilaremontin sähkötyöt', 'Satamakatu 3, Tampere', true),
+(4, 'Keittiön sähkötyöt (T4)', 'Hallituskatu 56, Tampere', true),
+(5, 'Kiukaan asennus (T3)', 'Laitostie 245, Tampere', true),
+(6, 'Myymälän sähkötyöt (T4)', 'Keskuskatu 23, Tampere', false),
+(7, 'Pihan valaistuksen sähkötyöt (T3)', 'Ruotsalaisentie 142, Tampere', true),
+(8, 'Keittiö- ja pesutilaremontin sähkötyöt (T3)', 'Satamakatu 3, Tampere', true),
 (3, 'Keittiön sähköasennus (R5)', 'Kaapankatu 7, Tampere', true);
 
 INSERT INTO Contract_type(contract_type_id, contract_type_name) VALUES
