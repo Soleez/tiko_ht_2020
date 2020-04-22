@@ -15,18 +15,6 @@
         </tr>
         <tr>
           <td>
-          <select id="bool_tax_credit" name="bool_tax_credit">
-              <option value="" disable selected hidden>Valitse</option>
-              <option value="t">kyllä</option>
-              <option value="f">ei</option>
-          </select>
-          </td>
-	    </tr>
-	    <tr>
-    	    <td>Sopimustyyppi:</td>
-    	    <td>
-            <select id="contract_type" name="contract_type" onchange="restrictCount(this.value)">
-              <option value=0 disable selected hidden>Valitse</option>
             <select id="customer" name="customer">
               <option value="" >Valitse</option>
               <?php 
@@ -39,17 +27,6 @@
               ?>
             </select>
           </td>
-	    </tr>
-      <tr>
-    	    <td>Laskujen lukumäärä:</td>
-    	    <td><input type="number" min="1" max="20"  name="amount_of_payments" id="amount_of_payments" value="1" class="textbox"/></td>
-	    </tr>
-    </table>
-    
-    <input type="submit" name="formSubmit1" value="Lisää työkohde"/>
-    <?php if (isset($viesti)) echo '<p>'.$viesti.'</p>'; ?>
-    </form>
-    
           <td>
             <label for="cName">Asiakkaan nimi: </label><input type="text" id="cName" name="cName" class="textbox"/><br>
             <label for="cAddress">Asiakkaan osoite: </label><input type="text" id="cAddress" name="cAddress" class="textbox"/><br>
@@ -86,7 +63,7 @@
 	      <tr>
       	    <td>Sopimustyyppi:</td>
       	    <td>
-              <select id="contract_type" name="contract_type">
+              <select id="contract_type" name="contract_type" onchange="restrictCount(this.value)">
                 <option value=0 disable selected hidden>Valitse</option>
                 <?php 
                 // Asetetaan kyselyn arvot rivi kerrallaan optioneiksi
@@ -101,7 +78,7 @@
 	      </tr>
         <tr>
       	    <td>Laskujen lukumäärä:</td>
-      	    <td><input type="number" min="1" max="20"  name="amount_of_payments" value="" placeholder="0" class="textbox"/></td>
+      	    <td><input type="number" min="1" max="20"  name="amount_of_payments" id="amount_of_payments" value="1" class="textbox"/></td>
 	      </tr>
       </table>
       
