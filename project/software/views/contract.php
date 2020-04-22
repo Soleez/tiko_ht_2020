@@ -18,25 +18,32 @@
           <th> Sopimustyyppi </th>
           <th> Sopimuksen voimassaolo </th>
         </tr></thead>
-        <tbody><?php 
-          $billLink = './bill.php';
-          $addLink = './add_rows.php';
-          // Haetaan taulukon arvot rivi kerrallaan
-          for ($row = 0; $row < count($contracts); $row++ ) {
-            echo "<tr>";
-              echo"<td> <a href='$addLink"
-              ."?customer=". $customer[0] 
-              ."&project=". $project[0] 
-              ."&contract=". $contracts[$row]['contract_id'] 
-              ."'> <div> Kirjaa sopimukselle tunnisteella "
-              . $contracts[$row]['contract_id']
-              . "</div> </a> </td>";
-              echo"<td>" . $contracts[$row]['contract_type_name'] . "</td>";
-              echo"<td>" . $contracts[$row]['bool_in_use'] . "</td>";
-            echo "</tr>";
+        <tbody>
+          <!-- Uusia rivejä voidaan kirjata vain mikäli 1.laskun tila on "laskuttamaton" -->
+          <?php if ($bills[0]['bill_status_id'] == 1) {
+            $billLink = './bill.php';
+            $addLink = './add_rows.php';
+            // Haetaan taulukon arvot rivi kerrallaan
+            for ($row = 0; $row < count($contracts); $row++ ) {
+              echo "<tr>";
+                echo"<td> <a href='$addLink"
+                ."?customer=". $customer[0] 
+                ."&project=". $project[0] 
+                ."&contract=". $contracts[$row]['contract_id'] 
+                ."'> <div> Kirjaa sopimukselle tunnisteella "
+                . $contracts[$row]['contract_id']
+                . "</div> </a> </td>";
+                echo"<td>" . $contracts[$row]['contract_type_name'] . "</td>";
+                echo"<td>" . $contracts[$row]['bool_in_use'] . "</td>";
+              echo "</tr>";
+            }
           }
-          ?></tbody>
-          </table>
+          else {
+            echo "<tr> <td colspan=3> Lisäkirjaukset eivät ole mahdollisia: sopimukselta on jo lähetetty ainakin 1 lasku. </td> </tr>";
+          }
+          ?>
+        </tbody>
+      </table>
   
       <h2>Projektiin liittyvät laskut</h2>
       <table>
