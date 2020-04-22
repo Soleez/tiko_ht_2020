@@ -25,7 +25,6 @@
   // haetaan laskun tiedot
   $bill = getBill();
   
-
   // Laskulle kuuluvat tunnit tietokannasta
   $hoursQuery = pg_query("SELECT * FROM vw_hours
     WHERE contract_id = {$contract[0]}
@@ -45,6 +44,7 @@
     WHERE contract_id = {$contract[0]}
   ;");
   $tools = getTable($toolsQuery);
+
 
   // Työkalujen summa ennen alennusta
   $toolsumNoSaleQuery = pg_query("SELECT * FROM toolsum_wo_discount_function({$contract[0]});");
@@ -72,6 +72,15 @@
 
   // lasketaan loppusumma
   $totalsum = $toolsum[0] + $worksum[0];
+  
+  // Muodostetaan verovähennyksen määrä, jos sitä tarvitaan
+  $taxCredit;
+  if($project[4] = 't' && $customer[4] == 't'){
+    $taxCreditQuery = pg_query("SELECT ROUND((worksum_function({$contract[0]}) * 0.4) /
+        (COALESCE((SELECT amount_of_payments FROM contract WHERE contract_id  = {$contract[0]} ), 1)),2);
+      ");
+    $taxCredit = getRow($taxCreditQuery);
+  }
 
   /** Luodaan funktio, jolla lasku saadaan lähtettyä
     * Eräpäivä asettuu aina kolmen viikon päähän
@@ -94,14 +103,24 @@
 
   /** Luodaan funktio, jolla lasku voidaan kuitata maksetuksi
     */
-    function setBillAsPaid($id) {
+    function setBillAsPaid($customer, $bill, $project, $taxCredit) {
       // Laskulle kuuluvat tunnit tietokannasta
       $setBillAsPaid = pg_query("UPDATE bill
         SET
           bill_status_id = 3,
           date_modified = clock_timestamp()
-      WHERE bill_id = {$id}
+      WHERE bill_id = {$bill[0]}
       ");
+      
+      // jos projektille kuuluu as kotitalousvähennys talletaan se tämän yhteydessä
+      if(isset($taxCredit)){
+        $saveTaxCredit = pg_query("INSERT INTO Tax_credit_for_household (
+          tax_credit_id, customer_id, billing_date, credit_amount, tax_credit_notes
+        ) VALUES ( 
+          DEFAULT, {$customer[0]}, clock_timestamp(), {$taxCredit[0]}, '{$project[2]}'
+        );");
+        update($saveTaxCredit);
+      }
   
       // haetaan funktion avulla
       update($setBillAsPaid);

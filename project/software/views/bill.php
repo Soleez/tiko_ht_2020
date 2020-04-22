@@ -76,6 +76,7 @@
        
        </tbody>
      </table>
+     
  
      <h2>Tarvikkeet</h2>
      <table>
@@ -183,7 +184,7 @@
 
         echo"</br>";
         if(isset($_POST['setBillAsPaid'])) { 
-          setBillAsPaid($bill[0]);
+          setBillAsPaid($customer, $bill, $project, $taxCredit);
           echo "Lasku kuitattu maksetuksi"; 
         } 
         
@@ -215,7 +216,7 @@
         } 
       }
       else {
-        echo"test";
+        /* Jos näppäimiä ei tarvita ei näytetä mitään s*/
       }
     ?> 
 
