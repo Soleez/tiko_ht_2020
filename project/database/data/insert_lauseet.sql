@@ -21,7 +21,7 @@ INSERT INTO Project(customer_id, project_name, project_address, bool_tax_credit)
 (1, 'Autotallin sähköt (R1)', 'Rapakatu 2, Tampere', true),
 (2, 'Mökin sähkötyöt (R2)', 'Kuusikuja 6', true),
 (2, 'Mökin sähkötyöt (R3)', 'Kuusikuja 6', true),
-(3, 'Keittiön sähköasennus (R4)', 'Kaapankatu 7, Tampere', true),
+(3, 'Keittiön sähköasennus (R4, R5)', 'Kaapankatu 7, Tampere', true),
 (4, 'Keittiön sähkötyöt', 'Hallituskatu 56, Tampere', true),
 (5, 'Kiukaan asennus', 'Laitostie 245, Tampere', true),
 (6, 'Myymälän sähkötyöt', 'Keskuskatu 23, Tampere', false),
@@ -35,10 +35,10 @@ INSERT INTO Contract_type(contract_type_id, contract_type_name) VALUES
 (4, 'hinta-arvio');
 
 INSERT INTO Contract(project_id, contract_type_id, bool_in_use, amount_of_payments) VALUES
-(1, 4, true, null),
-(2, 1, true, null),
-(3, 1, true, null),
-(4, 3, true, null),
+(1, 4, true, 1),
+(2, 1, true, 1),
+(3, 1, true, 1),
+(4, 3, true, 2),
 (5, 2, true, 1),
 (6, 1, true, 1),
 (7, 2, true, 1),
