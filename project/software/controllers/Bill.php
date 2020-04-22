@@ -92,6 +92,21 @@
     update($sendBill);
   }
 
+  /** Luodaan funktio, jolla lasku voidaan kuitata maksetuksi
+    */
+    function setBillAsPaid($id) {
+      // Laskulle kuuluvat tunnit tietokannasta
+      $setBillAsPaid = pg_query("UPDATE bill
+        SET
+          bill_status_id = 3,
+          date_modified = clock_timestamp()
+      WHERE bill_id = {$id}
+      ");
+  
+      // haetaan funktion avulla
+      update($setBillAsPaid);
+    }
+
   // Muuttaa urakkatarjouksen urakaksi.
   function acceptBid($id, $payments, $billId, $totalSum, $address) {
     $acceptBid = pg_query("UPDATE contract
