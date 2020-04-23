@@ -5,6 +5,7 @@
   <body>
     <div class="mainDiv">
       <h2>Lisää uusi työkohde</h2>
+      Valitse joko valmiiksi olemassa oleva asiakas pudotusvalikosta tai luo uusi asiakas.
   
       <!--- Dropdown-list asiakkaista--->
       <form method="POST">

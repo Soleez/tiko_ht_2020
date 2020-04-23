@@ -6,7 +6,7 @@
     <div class="mainDiv">
     <h2>Projektit</h2>
     
-      <p>Valitse haluamasi projekti tai lisää uusi työkohde.</p>
+      <p>Valitse haluamasi projekti tai lisää uusi työkohde (T1).</p>
     <table>
       <thead><tr>
         <th> Projektin nimi </th>

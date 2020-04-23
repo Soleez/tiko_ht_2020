@@ -5,6 +5,8 @@
   <body>
     <div class="mainDiv">
       <h2>Ylläpito</h2>
+
+      'Hallinnoi varastoa' näyttää työkalut varastossa. 'Lähetä muistutuslaskut' vastaa tapahtumaa T3, 'lähetä karhulaskut' tapahtumaa T4.
       
       <form method="post">
         <button> <a href='./tool.php'> Hallinnoi varastoa </a> </button>
@@ -19,7 +21,8 @@
       ?>
     </div>
     <div class="mainDiv">
-      <h2>Kirjaudu urakoitsijana</h2><p>Valitse urakoitsija:</p>
+      <h2>Kirjaudu urakoitsijana</h2><p>Valitse urakoitsija nähdäksesi työkohteet:</p>
+
       <table>
         <thead><tr>
           <th> Urakoitsija </th>

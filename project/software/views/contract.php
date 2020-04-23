@@ -4,8 +4,8 @@
 <html>
   <body>
     <div>
-      <p>Tälle työkohteelle voit lisätä työkaluja ja työtunteja linkistä 'Kirjaa sopimukselle...'.</p>
-      <p>Raportin näet 'Projektiin liittyvät laskut'-kohdasta klikkaamalla 'Laskulle...'-linkkiä.</p>
+      <p>Tälle työkohteelle voit lisätä työkaluja ja työtunteja linkistä 'Kirjaa sopimukselle...' (T2).</p>
+      <p>Raportit R1-R5 näet 'Projektiin liittyvät laskut'-kohdasta klikkaamalla 'Laskulle...'-linkkiä.</p>
       <p>Tällä sivulla myös luodaan automaattisesti uudet laskut projekteille. Jos projektilla ei ole yhtään laskua, päivitä sivu nähdäksesi luodun laskun.</p>
     </div>
 
