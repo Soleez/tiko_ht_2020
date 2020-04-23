@@ -6,7 +6,7 @@
     <div>
       <p>Tälle työkohteelle voit lisätä työkaluja ja työtunteja linkistä 'Kirjaa sopimukselle...'.</p>
       <p>Raportin näet 'Projektiin liittyvät laskut'-kohdasta klikkaamalla 'Laskulle...'-linkkiä.</p>
-      <p></p>
+      <p>Tällä sivulla myös luodaan automaattisesti uudet laskut projekteille. Jos projektilla ei ole yhtään laskua, päivitä sivu nähdäksesi luodun laskun.</p>
     </div>
 
     <div class = "mainDiv">
@@ -38,8 +38,11 @@
               echo "</tr>";
             }
           }
-          else {
+          else if ($bills[0]['bill_status_id'] == 2 || $bills[0]['bill_status_id'] == 3 || $bills[0]['bill_status_id'] == 4 || $bills[0]['bill_status_id'] == 5) {
             echo "<tr> <td colspan=3> Lisäkirjaukset eivät ole mahdollisia: sopimukselta on jo lähetetty ainakin 1 lasku. </td> </tr>";
+          }
+          else {
+            echo "<tr> <td colspan=3> Uusi lasku luotu. Kirjaukset mahdollisia, päivitä sivu nähdäksesi muutoksen. </td> </tr>";
           }
           ?>
         </tbody>
@@ -94,6 +97,7 @@
           }
         ?></tbody>
       </table>
+      
     <div>
   </body>
 </html>
