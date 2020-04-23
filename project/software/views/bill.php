@@ -134,17 +134,17 @@
  
      <h2> Yhteensä </h2>
      <div>
-       <!-- Jaetaan amount_of_payments:illä jos se on yli 1 ja ei ole kyseessä urakkatarjous -->
-       Alkuperäinen hinta: <?php if ($contract[2] != "3" && $bills[0]['amount_of_payments'] > 1) { echo number_format((($toolsumNoSale[0] + $worksumNoSale[0]) / $bills[0]['amount_of_payments']), 2, '.', ' '); } 
+       <!-- Jaetaan amount_of_payments:illä jos se on yli 1 ja sopimukselle on luotu jo yli 1 lasku. -->
+       Alkuperäinen hinta: <?php if ((count($billsContract) != 1) && $bills[0]['amount_of_payments'] > 1) { echo number_format((($toolsumNoSale[0] + $worksumNoSale[0]) / $bills[0]['amount_of_payments']), 2, '.', ' '); } 
        else { echo number_format(($toolsumNoSale[0] + $worksumNoSale[0]), 2, '.', ' '); } ?><br/>
 
-       Verojen osuus: <?php if ($contract[2] != "3" && $bills[0]['amount_of_payments'] > 1) { echo number_format((($tooltaxsum[0] + $worktaxsum[0]) / $bills[0]['amount_of_payments']), 2, '.', ' '); }
+       Verojen osuus: <?php if ((count($billsContract) != 1) && $bills[0]['amount_of_payments'] > 1) { echo number_format((($tooltaxsum[0] + $worktaxsum[0]) / $bills[0]['amount_of_payments']), 2, '.', ' '); }
         else { echo number_format(($tooltaxsum[0] + $worktaxsum[0]), 2, '.', ' '); } ?><br/> 
 
        Kotitalousvähennykseen kelpaava osuus:
        <?php if ($customer[4] != true) { echo("asiakas ei ole kotitalousvähennyskelpoinen"); } 
          else if ($project[4] != true) { echo("työkohde ei ole kotitalousvähennyskelpoinen"); }
-         else if ($contract[2] != "3" && $bills[0]['amount_of_payments'] > 1) { echo number_format(($worksum[0] * 0.40 / $bills[0]['amount_of_payments']), 2, '.', ' ');}
+         else if ((count($billsContract) != 1) && $bills[0]['amount_of_payments'] > 1) { echo number_format(($worksum[0] * 0.40 / $bills[0]['amount_of_payments']), 2, '.', ' ');}
          else { echo number_format(($worksum[0] * 0.40), 2, '.', ' '); }
        ?><br/>
 
@@ -152,7 +152,7 @@
 
        <?php if ($bills[0]['bill_type_id'] == 3) { echo("Viivästyskorko: " . number_format(($bills[0]["total_sum"] - (($bill[11] - 1)*5.00) - $toolsum[0] - $worksum[0]), 2, '.', ' ') . "<br/>"); } ?>
 
-       Lopullinen hinta: <?php if ($contract[2] != "3" && $bills[0]['amount_of_payments'] > 1) {echo number_format(($bills[0]["total_sum"]), 2, '.', ' '); }
+       Lopullinen hinta: <?php if ((count($billsContract) != 1) && $bills[0]['amount_of_payments'] > 1) {echo number_format(($bills[0]["total_sum"]), 2, '.', ' '); }
         else if ($bills[0]['bill_type_id'] == 1) { echo number_format(($toolsum[0] + $worksum[0]), 2, '.', ' '); }
         else {echo number_format(($bills[0]["total_sum"]), 2, '.', ' '); } ?><br/>
 
@@ -161,13 +161,14 @@
 
      <?php
       /** Näytetään laskun lähetysnäppäin jos ehdot täyttyvät
-        * Jos laskun status = 1 (laskutamatta) ja contract_type = 1 tai 2 (tuntilaskutteinen tai urakka) 
+        * Jos laskun status = 1 (laskutamatta) ja contract_type = 1 (tuntilaskutteinen) 
         */
-      if(($bill[5] == "1") && (($contract[2] == "1") || ($contract[2] == "2"))){
+      if(($bill[5] == "1") && ($contract[2] == "1")){
 
         echo"</br>";
-        if(isset($_POST['sendBill'])) { 
+        if(isset($_POST['sendBill'])) {
           sendBill($bill[0], $totalsum);
+          
           echo "Lasku lähetetty"; 
         } 
       
@@ -177,10 +178,29 @@
         </form> ";
       }
 
-      /** Näytetään laskun lähetysnäppäin jos ehdot täyttyvät
+      /** Näytetään monilaskuisen urakan laskuille mahdollisuus lähettä lasku heti, jos on vielä laskuttamatta. 
+       *  laskun stautus = 1 (laskuttamtta), contract_type = 2 ja sopimuksella olemassa yli 1 lasku.
+       * 
+       *  Erona ylempään kohtaan: tässä ei muuteta totalsumia, se on jo määritetty muualla.
+       */
+      if($bill[5] == "1" && $contract[2] == "2" && count($billsContract) > 1){
+        echo"</br>";
+        if(isset($_POST['sendBill2'])) {
+          sendBill2($bill[0]);
+          
+          echo "Lasku lähetetty" . $bill[0]; 
+        } 
+      
+        echo" 
+        <form method='post'>
+          <input type='submit' name='sendBill2' value='Lähetä lasku'/> 
+        </form> ";
+      }
+
+      /** Näytetään laskun hyväksymisnäppäin jos ehdot täyttyvät
         * Jos laskun status = 2 (laskutettu) ja contract_type = 1 tai 2 (tuntilaskutteinen tai urakka) 
         */
-      elseif(($bill[5] == "2") && (($contract[2] == "1") || ($contract[2] == "2"))){
+      elseif(($bill[5] == "2") && (($contract[2] == "1") || ($contract[2] == "2"))) {
 
         echo"</br>";
         if(isset($_POST['setBillAsPaid'])) { 
@@ -192,8 +212,29 @@
         <form method='post'>
           <input type='submit' name='setBillAsPaid' value='Kuittaa lasku maksetuksi'/> 
         </form> ";
+      }  
+
+      /** Näytetään urakan hyväksymisnäppäin jos ehdot täyttyvät
+        * Jos laskun status = 1 (laskutamatta) ja contract_type = 2 (urakka) ja urakkaan liittyy vain 1 lasku.
+        */
+
+      elseif ($bill[5] == "1" && $contract[2] == "2" && count($billsContract) == 1) {
+        echo"</br><b> Urakan laskutus ja myöhempien laskujen eräpäivien määritys </b><br/><br/>";
+      
+        echo"Lasku 1 lähetetään heti ja eräpäivä on 21 päivän päästä.";
+
+        echo "<form method='post'>";
+        for ($row = 2; $row <= $bills[0]["amount_of_payments"]; $row++) {
+          echo "Anna laskun " . $row . " eräpäivä: <input type='date' name='bill_no_" . $row . "' value='2021-01-01'/><br/>";
+        } 
+          echo "<input type='submit' name='acceptBid2' value='Laskuta urakka'/>
+        </form>";
+
+        if(isset($_POST['acceptBid2'])) {
+          acceptBid($contract[0], $bills[0]["amount_of_payments"], $bill[0], $totalsum, $bill[3]);
+          echo "<br/>Urakka laskutettu ja mahdolliset lisälaskut luotu."; 
+        }         
       }
-        
 
       /** Näytetään urakkatarjouksen hyväksymisnäppäin jos ehdot täyttyvät
         * Jos laskun status = 1 (laskutamatta) ja contract_type = 3 (urakkatarjous) 

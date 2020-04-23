@@ -10,7 +10,6 @@
       
       <form method="post">
         <button> <a href='./tool.php'> Hallinnoi varastoa </a> </button>
-        <button> <a href='./home.php'> Suorita laskujen lähetys </a> </button>
         <button type="submit" name="muistutuslaskuButton">Lähetä muistutuslaskut</button>
         <button type="submit" name="karhulaskuButton">Lähetä karhulaskut</button> 
       </form> 

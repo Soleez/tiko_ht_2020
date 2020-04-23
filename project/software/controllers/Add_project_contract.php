@@ -77,6 +77,11 @@
                 if ($id[0] >0) {
                     // Lisätään projektille uusi sopimus
                     $query3 = "INSERT INTO Contract VALUES (DEFAULT, $id[0], $contract_type, 't', $amount_of_payments);";
+
+                    // Jos projektin tyyppi on 1 tai 4, kirjataan amount_of_paymentsiin DEFAULT.
+                    if ($contract_type == 1 || $contract_type == 4) {
+                        $query3 = "INSERT INTO Contract VALUES (DEFAULT, $id[0], $contract_type, 't', DEFAULT);";
+                    }
                     $update2 = update($query3);
                     
                     if ($update2) {

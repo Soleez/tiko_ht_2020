@@ -39,12 +39,16 @@
   ;");
   $bills = getTable($billsQuery);
 
+  // Lasketaan olemassa olevat laskut sopimuksella. Käytetään laskujen määrän laskemiseen.
+  $billsContractQuery = pg_query("SELECT * FROM vw_bills
+    WHERE contract_id = {$contract[0]};");
+  $billsContract = getTable($billsContractQuery); 
+
   // Talletetan kysely muuttujaan
   $toolsQuery = pg_query("SELECT * FROM vw_tools
     WHERE contract_id = {$contract[0]}
   ;");
   $tools = getTable($toolsQuery);
-
 
   // Työkalujen summa ennen alennusta
   $toolsumNoSaleQuery = pg_query("SELECT * FROM toolsum_wo_discount_function({$contract[0]});");
@@ -100,6 +104,24 @@
     // haetaan funktion avulla
     update($sendBill);
   }
+
+  /** Luodaan funktio, jolla lasku saadaan lähtettyä muuttamatta laskun summmaa.
+    * Eräpäivä asettuu aina kolmen viikon päähän
+    */
+    function sendBill2($id) {
+      // Laskulle kuuluvat tunnit tietokannasta
+      $sendBill2 = pg_query("UPDATE bill
+        SET
+          bill_status_id = 2,
+          bill_sending_date = CURRENT_DATE,
+          bill_due_date = (CURRENT_DATE + 21),
+          date_modified = clock_timestamp()
+      WHERE bill_id = {$id}
+      ");
+  
+      // haetaan funktion avulla
+      update($sendBill2);
+    }
 
   /** Luodaan funktio, jolla lasku voidaan kuitata maksetuksi
     */
@@ -160,6 +182,37 @@
     // haetaan funktion avulla
     update($acceptBid);
   }
+
+  // Laskuttaa urakan.
+  function acceptBid2($id, $payments, $billId, $totalSum, $address) {
+    // Lasketaan ositettu laskujen summa.
+    $sum_per_bill = (float)$totalSum / (float)$payments;
+
+    // Luodaan 1. lasku
+    $acceptBid = pg_query("UPDATE bill
+      SET
+        bill_status_id = 2,
+        bill_sending_date = CURRENT_DATE,
+        bill_due_date = (CURRENT_DATE + 21),
+        date_modified = clock_timestamp(),
+        total_sum = {$sum_per_bill}
+      WHERE bill_id = {$billId};
+    ");
+
+    // Lisätään uusia laskuja alkaen laskusta 2.
+    for ($row = 2; $row <= $payments; $row++) {
+      $row_date_string = 'bill_no_' . $row;
+      $row_date = date($_POST[$row_date_string]);
+      // echo "päiväys: " . $row_date . "<br/>";
+
+      $acceptBid2 .= pg_query("INSERT INTO Bill
+      VALUES (DEFAULT, $id, $sum_per_bill, '$address', DEFAULT, DEFAULT, CURRENT_DATE, CURRENT_DATE, '$row_date', null, null, DEFAULT);");
+    }
+
+    // haetaan funktion avulla
+    update($acceptBid2);
+  }
+
 
   // suljetaan funktiolla tietokantayhteys
   closeConnection();
