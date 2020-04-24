@@ -188,7 +188,7 @@
         if(isset($_POST['sendBill2'])) {
           sendBill2($bill[0]);
           
-          echo "Lasku lähetetty" . $bill[0]; 
+          echo "Lasku lähetetty"; 
         } 
       
         echo" 
