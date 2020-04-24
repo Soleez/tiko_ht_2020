@@ -73,11 +73,10 @@
                     ."'> <div> Laskulle tunnisteella " 
                     . $bills[$billRow]['bill_id'] 
                     . "</div> </a> </td>";
-                  echo"<td>" 
-                    // En saanut tähän Null arvon tarkista toimimaan oikein, nyt NULL = on 1970 luvulla
-                    . date("d.m.Y", strtotime($bills[$billRow]['bill_sending_date'])) 
-                    . "</td>";
+                  echo"<td>" . $bills[$billRow]['bill_sending_date']. "</td>";
                   echo"<td>" . $bills[$billRow]['bill_due_date'] . "</td>";
+                  
+                  // lasketaan total sum jos se puuttuus
                   $total_sum = $bills[$billRow]['total_sum'];
                   if ($total_sum == null) {
                     $c_id = $bills[$billRow]['contract_id'];
@@ -86,6 +85,7 @@
                     echo pg_last_error();
                     $total_sum = $worksum + $toolsum;
                   }
+                  
                   echo"<td>" . number_format($total_sum, 2, '.', ' ') . "</td>";
                   echo"<td>" . $bills[$billRow]['bill_status_name'] . "</td>";
                   echo"<td>" . $bills[$billRow]['bill_type_name'] . "</td>";

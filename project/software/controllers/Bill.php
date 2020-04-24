@@ -77,7 +77,13 @@
   // lasketaan loppusumma
   $totalsum = $toolsum[0] + $worksum[0];
   
-  // Muodostetaan verovähennyksen määrä, jos sitä tarvitaan
+  /** Muodostetaan verovähennyksen määrä, jos se kuuluu projektille ja asiakkaalle 
+    * muuten annetaan sen olla null. Kysely hakee worksum_funktion kokonaissumman 
+    * ja laskee siitä verovähennyksen osuuden. Verovähennyksen osuus jaetaan sopimuksen
+    * laskujen määrän perusteella, joka määrittää, osamaksujen määrän, SELECT ei palauta
+    * mitään se käyttää arvoa jakolaskussa 1. Viimeisen sulkeen sisällä oleva 2 viittaa 
+    * RUOND functioon ja sillä saadaan loppusumma 2 desimaalin tarkkuuteen.
+    */
   $taxCredit;
   if($project[4] = 't' && $customer[4] == 't'){
     $taxCreditQuery = pg_query("SELECT ROUND((worksum_function({$contract[0]}) * 0.4) /
@@ -86,20 +92,38 @@
     $taxCredit = getRow($taxCreditQuery);
   }
 
+  /** tarkistaa lähetyspäivän ja palauttaa sen mukaan joko ennalta asettun päiväyksen
+    * tai nykyisen päiväyksen
+    */
+  function checkSendingDate($id) {
+    $sendingdateQuery = pg_query("SELECT COALESCE((SELECT bill_sending_date 
+      FROM bill where bill_id = {$id}), CURRENT_DATE);
+    ");
+    $sendingdate = getRow($sendingdateQuery);
+    return $sendingdate[0];
+  }
+
+
   /** Luodaan funktio, jolla lasku saadaan lähtettyä
     * Eräpäivä asettuu aina kolmen viikon päähän
     */
   function sendBill($id, $totalsum) {
+    // varmistetaan että löytyy lähetyspäivä
+    $sendingdate = checkSendingDate($id);
+    // lasketaan eräpäivä lähetyspäivän perusteella
+    $duedate = date('Y-m-d', strtotime($sendingdate. ' + 21 days'));
+
     // Laskulle kuuluvat tunnit tietokannasta
     $sendBill = pg_query("UPDATE bill
       SET
         bill_status_id = 2,
-        bill_sending_date = CURRENT_DATE,
-        bill_due_date = (CURRENT_DATE + 21),
+        bill_sending_date = '{$sendingdate}',
+        bill_due_date = '{$duedate}',
         date_modified = clock_timestamp(),
         total_sum = {$totalsum}
     WHERE bill_id = {$id}
     ");
+
 
     // haetaan funktion avulla
     update($sendBill);
@@ -122,6 +146,7 @@
       // haetaan funktion avulla
       update($sendBill2);
     }
+
 
   /** Luodaan funktio, jolla lasku voidaan kuitata maksetuksi
     */
@@ -176,7 +201,8 @@
       // echo "päiväys: " . $row_date . "<br/>";
 
       $acceptBid .= pg_query("INSERT INTO Bill
-      VALUES (DEFAULT, $id, $sum_per_bill, '$address', DEFAULT, DEFAULT, CURRENT_DATE, CURRENT_DATE, '$row_date', null, null, DEFAULT);");
+      VALUES (DEFAULT, $id, $sum_per_bill, '$address', DEFAULT, DEFAULT, 
+      CURRENT_DATE, CURRENT_DATE, '$row_date', null, null, DEFAULT);");
     }
 
     // haetaan funktion avulla
@@ -206,7 +232,8 @@
       // echo "päiväys: " . $row_date . "<br/>";
 
       $acceptBid2 .= pg_query("INSERT INTO Bill
-      VALUES (DEFAULT, $id, $sum_per_bill, '$address', DEFAULT, DEFAULT, CURRENT_DATE, CURRENT_DATE, '$row_date', null, null, DEFAULT);");
+      VALUES (DEFAULT, $id, $sum_per_bill, '$address', DEFAULT, DEFAULT, 
+      CURRENT_DATE, CURRENT_DATE, '$row_date', null, null, DEFAULT);");
     }
 
     // haetaan funktion avulla
